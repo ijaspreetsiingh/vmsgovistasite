@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMS GO VISTA - Premium Loader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .loader-container {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loader-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .loader-path {
+            fill: none;
+            stroke: #0A4D68;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+        }
+
+        .loader-accent {
+            fill: none;
+            stroke: #FF6B35;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 500;
+            stroke-dashoffset: 500;
+        }
+
+        /* Scene 1: Airplane */
+        .scene-airplane {
+            opacity: 0;
+        }
+
+        /* Scene 2: Car */
+        .scene-car {
+            opacity: 0;
+        }
+
+        /* Scene 3: Hotel */
+        .scene-hotel {
+            opacity: 0;
+        }
+
+        /* Scene 4: Hotel Details */
+        .scene-hotel-details {
+            opacity: 0;
+        }
+
+        /* Scene 5: Logo */
+        .scene-logo {
+            opacity: 0;
+        }
+
+        .logo-final {
+            opacity: 0;
+            transform: scale(1);
+        }
+
+        @keyframes drawAirplane {
+            0% {
+                stroke-dashoffset: 2000;
+                opacity: 1;
+            }
+            15% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            25% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            30% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+            100% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+        }
+
+        @keyframes drawCar {
+            0%, 25% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+            30% {
+                stroke-dashoffset: 2000;
+                opacity: 1;
+            }
+            45% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            55% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            60% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+            100% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+        }
+
+        @keyframes drawHotel {
+            0%, 55% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+            60% {
+                stroke-dashoffset: 2000;
+                opacity: 1;
+            }
+            75% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            80% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            85% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+            100% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+        }
+
+        @keyframes drawHotelDetails {
+            0%, 80% {
+                stroke-dashoffset: 500;
+                opacity: 0;
+            }
+            85% {
+                stroke-dashoffset: 500;
+                opacity: 1;
+            }
+            90% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            95% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 500;
+                opacity: 0;
+            }
+        }
+
+        @keyframes drawLogoIcon {
+            0%, 90% {
+                stroke-dashoffset: 2000;
+                opacity: 0;
+            }
+            95% {
+                stroke-dashoffset: 2000;
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeLogoFinal {
+            0%, 95% {
+                opacity: 0;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.03);
+            }
+        }
+
+        @keyframes loopReverse {
+            0%, 95% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .scene-airplane .loader-path {
+            animation: drawAirplane 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .scene-car .loader-path {
+            animation: drawCar 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .scene-hotel .loader-path {
+            animation: drawHotel 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .scene-hotel-details .loader-accent {
+            animation: drawHotelDetails 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .scene-logo .loader-path {
+            animation: drawLogoIcon 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .logo-final {
+            animation: fadeLogoFinal 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .logo-final img {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(10, 77, 104, 0.2));
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container">
+        <svg class="loader-svg" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+            <!-- Scene 1: Airplane -->
+            <g class="scene-airplane" transform="translate(400, 225)">
+                <path class="loader-path" d="M-80,-20 L-60,-30 L-40,-25 L-20,-35 L0,-30 L20,-40 L40,-35 L60,-30 L80,-25 L100,-20 L120,-15 L100,-10 L80,-5 L60,0 L40,5 L20,10 L0,15 L-20,20 L-40,15 L-60,10 L-80,5 L-100,0 L-80,-5 L-60,-10 L-40,-15 L-20,-20 L0,-25 L20,-20 L40,-15 L60,-10 L80,-5 L100,0 L80,5 L60,10 L40,15 L20,20 L0,25 L-20,20 L-40,15 L-60,10 L-80,5 Z M-30,-10 L30,-10 L30,10 L-30,10 Z M-50,0 L50,0" />
+            </g>
+
+            <!-- Scene 2: Car -->
+            <g class="scene-car" transform="translate(400, 225)">
+                <path class="loader-path" d="M-70,-10 L-50,-10 L-40,-25 L40,-25 L50,-10 L70,-10 L70,10 L50,10 L45,25 L-45,25 L-50,10 L-70,10 Z M-35,25 A15,15 0 1,0 -5,25 A15,15 0 1,0 -35,25 M35,25 A15,15 0 1,0 65,25 A15,15 0 1,0 35,25 M-70,-5 L-50,-5 M50,-5 L70,-5" />
+            </g>
+
+            <!-- Scene 3: Hotel Building -->
+            <g class="scene-hotel" transform="translate(400, 225)">
+                <path class="loader-path" d="M-60,-50 L60,-50 L60,50 L-60,50 Z M-60,-50 L0,-80 L60,-50 M-40,-30 L-40,0 L-20,0 L-20,-30 M0,-30 L0,0 L20,0 L20,-30 M40,-30 L40,0 L60,0 L60,-30 M-40,20 L-40,40 L-20,40 L-20,20 M0,20 L0,40 L20,40 L20,20 M40,20 L40,40 L60,40 L60,20 M-60,50 L60,50" />
+            </g>
+
+            <!-- Scene 4: Hotel Details (Accent) -->
+            <g class="scene-hotel-details" transform="translate(400, 225)">
+                <path class="loader-accent" d="M-30,-60 L-30,-50 M30,-60 L30,-50 M-50,-30 L-50,-20 M50,-30 L50,-20 M-50,10 L-50,20 M50,10 L50,20" />
+            </g>
+
+            <!-- Scene 5: Logo Icon -->
+            <g class="scene-logo" transform="translate(400, 225)">
+                <path class="loader-path" d="M0,-40 A40,40 0 1,0 0,40 A40,40 0 1,0 0,-40 M-15,-15 L0,0 L15,-15 M0,0 L0,25" />
+            </g>
+        </svg>
+
+        <!-- Final Logo Image -->
+        <div class="logo-final" style="position: absolute;">
+            <img src="loader-logo.png" alt="VMS GO VISTA">
+        </div>
+    </div>
+</body>
+</html>

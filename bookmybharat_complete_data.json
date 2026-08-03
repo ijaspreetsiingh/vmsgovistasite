@@ -1,0 +1,627 @@
+{
+  "source": "https://bookmybharat.com",
+  "scraped_on": "2026-07-31",
+  "total_packages": 16,
+  "domestic_count": 16,
+  "international_count": 0,
+  "packages": [
+    {
+      "id": 13,
+      "title": "Luxury Goa Tour Packages",
+      "type": "Domestic",
+      "category": "Goa",
+      "price": "₹22,000",
+      "duration": "4N / 5D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "hotel": "4 Star Luxury Hotel - Deluxe Room",
+      "url": "https://bookmybharat.com/tour-details/13",
+      "overview": "Indulge in an exclusive coastal escape. Curated for travelers who prefer comfort, privacy, and premium experiences.",
+      "itinerary": [
+        "Day 1: Arrival in Goa + Luxury Dinner Cruise - Double Deck Dinner Cruise (07:00 PM - 11:30 PM), Panjim & North Goa route, Open deck, 2.5 hours cruising, 3 live dance performances, Live DJ & Bollywood music",
+        "Day 2: North Goa Sightseeing (Private) - Fort Aguada, Candolim Beach, Baga Beach, Anjuna Beach, Vagator Beach",
+        "Day 3: South Goa Sightseeing (Private) - Miramar Beach, Old Goa Churches, Shree Mangeshi Temple, Balaji Temple",
+        "Day 4: Luxury Adventure & Water Sports - Jet Ski, Banana Ride, Bumper Ride, Boat Ride, Fishing, DJ music on board",
+        "Day 5: Departure - Private transfer to Airport/Railway Station"
+      ],
+      "inclusions": [
+        "Airport/Railway station pickup & drop",
+        "04 nights in 4 Star hotel",
+        "Daily buffet breakfast",
+        "North Goa sightseeing (Private)",
+        "South Goa sightseeing (Private)",
+        "Luxury dinner cruise",
+        "Water sports & adventure activities",
+        "Complimentary mineral water",
+        "Wi-Fi access",
+        "GST included"
+      ],
+      "exclusions": [
+        "Anything not mentioned in inclusions",
+        "Personal expenses",
+        "Optional activities & entry tickets"
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Best Honeymoon Goa Package for Couples",
+      "type": "Domestic",
+      "category": "Goa",
+      "price": "₹19,000",
+      "duration": "4N / 5D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "hotel": "4 Star Hotel - Deluxe Room",
+      "url": "https://bookmybharat.com/tour-details/14",
+      "overview": "Celebrate love in the land of sun, sand, and romance. Designed specially for couples.",
+      "itinerary": [
+        "Day 1: Arrival in Goa + Romantic Dinner Cruise - Double Deck Dinner Cruise, Panjim & North Goa route, 2.5 hours cruising, Live DJ & Bollywood music",
+        "Day 2: North Goa Sightseeing (Private) - Fort Aguada, Candolim, Baga, Anjuna, Vagator Beach",
+        "Day 3: South Goa Sightseeing (Private) - Miramar Beach, Old Goa Churches, Shree Mangeshi Temple",
+        "Day 4: Water Sports & Adventure Day - Jet Ski, Banana Ride, Bumper Ride, Boat Ride, Fishing",
+        "Day 5: Departure"
+      ],
+      "inclusions": [
+        "Airport/Railway station pickup & drop",
+        "04 nights in 4 Star hotel",
+        "Daily buffet breakfast",
+        "North Goa sightseeing (Private)",
+        "South Goa sightseeing (Private)",
+        "Romantic dinner cruise",
+        "Water sports & adventure activities",
+        "Wi-Fi access",
+        "GST included"
+      ],
+      "exclusions": [
+        "Anything not mentioned in inclusions",
+        "Personal expenses",
+        "Optional activities"
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Best Goa Holiday Package",
+      "type": "Domestic",
+      "category": "Goa",
+      "price": "₹9,999",
+      "duration": "3N / 4D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "hotel": "3 Star Hotel - Premium Room",
+      "url": "https://bookmybharat.com/tour-details/15",
+      "overview": "Experience the vibrant charm of Goa - beaches, culture, nightlife, and a memorable dinner cruise.",
+      "itinerary": [
+        "Day 1: Arrival + Mandovi Dinner Cruise - Buffet dinner, Live DJ, 2 traditional dancers & 3 Goan dance performances, 02 beer bottles per person",
+        "Day 2: North Goa Sightseeing (SIC) - Fort Aguada, Candolim, Baga, Anjuna, Vagator Beach",
+        "Day 3: South Goa Sightseeing (SIC) - Miramar Beach, Old Goa Churches, Shree Mangeshi Temple",
+        "Day 4: Departure"
+      ],
+      "inclusions": [
+        "Pickup & drop Goa Airport/Railway Station",
+        "03 nights with daily breakfast",
+        "North & South Goa sightseeing (SIC)",
+        "Mandovi Dinner Cruise",
+        "Complimentary mineral water",
+        "Wi-Fi access",
+        "GST included"
+      ],
+      "exclusions": [
+        "Anything not mentioned in inclusions",
+        "Personal expenses",
+        "Optional activities"
+      ]
+    },
+    {
+      "id": 61,
+      "title": "Kashmir Delight Tour Package – 6 Days / 5 Nights",
+      "type": "Domestic",
+      "category": "Kashmir",
+      "price": "₹15,999",
+      "duration": "5N / 6D",
+      "language": "English, Hindi",
+      "meals": "Breakfast and Dinner",
+      "hotel": "3-Star Hotels + Deluxe Houseboat",
+      "url": "https://bookmybharat.com/tour-details/61",
+      "overview": "3-Star Package | Private Travel | Ideal for Couples & Families",
+      "itinerary": [
+        "Day 1: Srinagar + Local Sightseeing - Nishat Bagh, Shalimar Bagh, Chashme Shahi, Tulip Garden (seasonal), Shikara Ride on Dal Lake, Hazratbal Shrine",
+        "Day 2: Excursion to Sonmarg - The Meadow of Gold, snow-covered peaks, meadows",
+        "Day 3: Excursion to Gulmarg - The Meadow of Flowers, optional Gondola Cable Car",
+        "Day 4: Doodhpathri + Houseboat Stay - Green meadows, milky-white river streams, Deluxe Houseboat on Dal Lake",
+        "Day 5: Pahalgam + Sightseeing - Aru Valley, Baisaran Valley (Mini Switzerland), Betaab Valley",
+        "Day 6: Departure - Transfer to Srinagar Airport"
+      ],
+      "inclusions": [
+        "Complimentary Shikara Ride",
+        "Daily Breakfast & Dinner",
+        "Private Cab for Entire Trip",
+        "3-Star Hotels + Deluxe Houseboat",
+        "Professional Driver-Cum-Guide"
+      ],
+      "exclusions": [
+        "Airfare / Train fare",
+        "Lunch & personal expenses",
+        "Gondola Cable Car Ride",
+        "Union vehicle charges at Pahalgam"
+      ]
+    },
+    {
+      "id": 63,
+      "title": "Kashmir Experience Tour Package",
+      "type": "Domestic",
+      "category": "Kashmir",
+      "price": "₹22,000",
+      "duration": "5N / 6D",
+      "language": "English, Hindi",
+      "meals": "Breakfast and Dinner",
+      "hotel": "3-Star Hotels + Deluxe Houseboat",
+      "url": "https://bookmybharat.com/tour-details/63",
+      "overview": "6 Days / 5 Nights | 3-Star Hotels | Private Trip",
+      "itinerary": [
+        "Day 1: Srinagar + Local Sightseeing - Mughal Gardens, Tulip Garden, Shikara Ride",
+        "Day 2: Manasbal Lake & Wular Lake Tour - Asia's largest freshwater lake, Deluxe Houseboat",
+        "Day 3: Srinagar → Sonmarg - Meadow of Gold, snow points, pony ride",
+        "Day 4: Sonmarg → Gulmarg - Meadow of Flowers, Gondola Cable Car",
+        "Day 5: Gulmarg → Pahalgam - Aru Valley, Baisaran Valley, Betaab Valley",
+        "Day 6: Departure - Pahalgam → Srinagar Airport"
+      ],
+      "inclusions": [
+        "Breakfast & Dinner daily",
+        "Shikara Ride on Dal Lake",
+        "3-Star Hotels + Deluxe Houseboat",
+        "Private cab for entire tour",
+        "Professional Driver-cum-guide"
+      ],
+      "exclusions": [
+        "Airfare / Train fare",
+        "Lunch & personal expenses",
+        "Gondola Cable Car Ride"
+      ]
+    },
+    {
+      "id": 65,
+      "title": "Katra – Kashmir Tour Package",
+      "type": "Domestic",
+      "category": "Kashmir",
+      "price": "₹18,000",
+      "duration": "6N / 7D",
+      "language": "English, Hindi",
+      "meals": "Breakfast and Dinner",
+      "hotel": "3-Star Hotels in Katra, Srinagar & Pahalgam",
+      "url": "https://bookmybharat.com/tour-details/65",
+      "overview": "7 Days / 6 Nights | 3-Star Hotels | Private Trip",
+      "itinerary": [
+        "Day 1: Katra + Vaishno Devi Darshan - Trek, pony, palki, or helicopter",
+        "Day 2: Katra → Srinagar Transfer - 7-8 hours scenic drive",
+        "Day 3: Srinagar Local Sightseeing - Mughal Gardens, Shikara ride, Hazratbal Shrine",
+        "Day 4: Excursion to Gulmarg - Meadow of Flowers, Gondola Ride",
+        "Day 5: Excursion to Sonmarg - Meadow of Gold, pony rides",
+        "Day 6: Srinagar → Pahalgam - Aru Valley, Baisaran Valley, Betaab Valley",
+        "Day 7: Departure - Drop at Jammu/Katra or Srinagar Airport"
+      ],
+      "inclusions": [
+        "Daily Breakfast & Dinner",
+        "Private cab for entire tour",
+        "3-Star hotels in Katra, Srinagar & Pahalgam",
+        "Complimentary Shikara Ride on Dal Lake",
+        "All tolls, taxes & parking included"
+      ],
+      "exclusions": [
+        "Airfare / Train fare",
+        "Lunch & personal expenses",
+        "Pony ride / ATV ride"
+      ]
+    },
+    {
+      "id": 67,
+      "title": "Best Andaman Package For 6 D / 5 N",
+      "type": "Domestic",
+      "category": "Andaman Nicobar",
+      "price": "₹85,000",
+      "duration": "5N / 6D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "url": "https://bookmybharat.com/tour-details/67",
+      "itinerary": [
+        "Day 1: Arrival + Cellular Jail Light & Sound Show + Corbyn Cove Beach",
+        "Day 2: Port Blair → Havelock - Radhanagar Beach, Kala Pather Beach",
+        "Day 3: Havelock - Elephant Beach by Boat + Complementary Snorkelling",
+        "Day 4: Havelock → Neil Island - Bharatpur Beach, Natural Coral Bridge, Laxmanpur Beach",
+        "Day 5: Neil Island → Port Blair",
+        "Day 6: Departure from Port Blair"
+      ],
+      "inclusions": [
+        "Daily breakfast (05 days)",
+        "All entry tickets",
+        "AC cruise to Havelock & Neil",
+        "Airport transfers",
+        "Elephant Beach trip + Snorkelling",
+        "Coconut water, Tea/Coffee",
+        "Photoshoot at beach",
+        "Cake"
+      ],
+      "exclusions": [
+        "Anything not listed in inclusion"
+      ]
+    },
+    {
+      "id": 68,
+      "title": "Best Andaman Package For 7 D / 6 N",
+      "type": "Domestic",
+      "category": "Andaman Nicobar",
+      "price": "₹65,000",
+      "duration": "6N / 7D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "url": "https://bookmybharat.com/tour-details/68",
+      "itinerary": [
+        "Day 1: Arrival + Cellular Jail + Corbyn Cove Beach",
+        "Day 2: Baratang Trip - ATR through dense forests, Jarawa tribe, Lime Stone Cave",
+        "Day 3: Port Blair → Havelock - Radhanagar Beach, Kala Pather Beach",
+        "Day 4: Havelock - Elephant Beach + Snorkelling",
+        "Day 5: Havelock → Neil Island - Bharatpur Beach, Natural Coral Bridge",
+        "Day 6: Neil Island → Port Blair",
+        "Day 7: Departure"
+      ],
+      "inclusions": [
+        "Daily breakfast (06 days)",
+        "All entry tickets",
+        "AC cruise to Havelock & Neil",
+        "Airport transfers",
+        "Elephant Beach + Snorkelling",
+        "Coconut water, Photoshoot, Cake"
+      ],
+      "exclusions": [
+        "Anything not mentioned in itinerary"
+      ]
+    },
+    {
+      "id": 69,
+      "title": "Andaman Delight – 5 Days, 4 Nights in Paradise",
+      "type": "Domestic",
+      "category": "Andaman Nicobar",
+      "price": "₹55,000",
+      "duration": "4N / 5D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "url": "https://bookmybharat.com/tour-details/69",
+      "itinerary": [
+        "Day 1: Arrival + Cellular Jail + Corbyn Cove Beach",
+        "Day 2: Port Blair → Havelock - Radhanagar Beach, Kala Pather",
+        "Day 3: Havelock - Elephant Beach + Snorkelling",
+        "Day 4: Havelock → Neil Island → Port Blair - Bharatpur Beach, Laxmanpur Beach",
+        "Day 5: Departure"
+      ],
+      "inclusions": [
+        "Daily breakfast (04 days)",
+        "All entry tickets",
+        "AC cruise",
+        "Airport transfers",
+        "Elephant Beach + Snorkelling",
+        "Coconut water, Photoshoot, Cake"
+      ],
+      "exclusions": [
+        "Anything not mentioned in inclusions"
+      ]
+    },
+    {
+      "id": 71,
+      "title": "Andaman Honeymoon Escape – 6D/5N of Love & Luxury",
+      "type": "Domestic",
+      "category": "Andaman Nicobar",
+      "price": "₹60,000",
+      "duration": "5N / 6D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "url": "https://bookmybharat.com/tour-details/71",
+      "itinerary": [
+        "Day 1: Arrival + Cellular Jail + Corbyn Cove Beach",
+        "Day 2: Port Blair → Havelock - Radhanagar Beach, Kala Pather",
+        "Day 3: Havelock - Elephant Beach + Snorkelling",
+        "Day 4: Havelock → Neil Island - Bharatpur Beach, Natural Coral Bridge, Laxmanpur Beach",
+        "Day 5: Neil Island → Port Blair",
+        "Day 6: Departure"
+      ],
+      "inclusions": [
+        "Daily breakfast (05 days)",
+        "All entry tickets",
+        "AC cruise",
+        "Welcome Drink",
+        "Honeymoon Room Decoration",
+        "Candle Light Dinner",
+        "Airport transfers",
+        "Elephant Beach + Snorkelling",
+        "Coconut water, Photoshoot, Cake"
+      ],
+      "exclusions": [
+        "Anything not mentioned in inclusions"
+      ]
+    },
+    {
+      "id": 73,
+      "title": "Classic Kerala Holiday – Culture, Nature & Relaxation",
+      "type": "Domestic",
+      "category": "Kerala",
+      "price": "₹23,500",
+      "duration": "4N / 5D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "hotel": "4-Star Hotels + Deluxe Houseboat",
+      "url": "https://bookmybharat.com/tour-details/73",
+      "overview": "Total Package Price: ₹23,500 PP (Includes Hotels, Sightseeing, & Transfers)",
+      "itinerary": [
+        "Day 1: Welcome to Kerala - Kochi Arrival → Scenic Drive to Munnar - En-route Valara Waterfalls, Cheeyappara Waterfalls, Blossom Hydel Park",
+        "Day 2: Munnar Full-Day Adventure & Sightseeing - Meesapulimala Trek, Echo Point, Top Station, Eravikulam National Park, Tea Museum, Tea Gardens",
+        "Day 3: Munnar → Thekkady (Periyar Wildlife Sanctuary) - Periyar Wildlife Sanctuary, Boat Ride on Periyar Lake (optional), Spice Plantation Tour, Kathakali/Kalaripayattu (optional)",
+        "Day 4: Thekkady → Alleppey - Deluxe Houseboat Experience - Traditional welcome drink, Cruise through backwaters, Authentic Kerala meals on board",
+        "Day 5: Departure from Kerala - Transfer to Cochin Airport/Railway Station"
+      ],
+      "accommodation": {
+        "munnar": {
+          "nights": 2,
+          "category": "4-Star Hotel",
+          "room": "Deluxe Room",
+          "meal": "CP (Breakfast Only)"
+        },
+        "thekkady": {
+          "nights": 1,
+          "category": "4-Star Hotel",
+          "room": "Deluxe Room",
+          "meal": "CP (Breakfast Only)"
+        },
+        "alleppey": {
+          "nights": 1,
+          "category": "Deluxe Houseboat",
+          "room": "Private Room",
+          "meal": "All Meals"
+        }
+      },
+      "inclusions": [
+        "02 Nights in Munnar",
+        "01 Night in Thekkady",
+        "01 Night in Alleppey Deluxe Houseboat",
+        "Breakfast & Dinner at Hotels",
+        "All Meals in Houseboat",
+        "All Transfers & Sightseeing in AC Sedan Cab",
+        "Pick-up & Drop at Cochin",
+        "Toll, Parking, Driver Allowance",
+        "Taxes on Hotels & Transport"
+      ],
+      "exclusions": [
+        "Anything not mentioned in inclusions",
+        "Personal expenses (laundry, shopping, phone, etc.)",
+        "Entry tickets to sightseeing places",
+        "Optional activities (boat ride, cultural shows, etc.)",
+        "Early check-in / Late check-out"
+      ]
+    },
+    {
+      "id": 75,
+      "title": "Romantic Kerala Escape – Backwaters & Hill Breezes",
+      "type": "Domestic",
+      "category": "Kerala",
+      "price": "₹26,000",
+      "duration": "5N / 6D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "hotel": "4-Star Hotels",
+      "url": "https://bookmybharat.com/tour-details/75",
+      "overview": "Experience the best of Kerala - vibrant cities, misty hill stations, wildlife sanctuaries, and serene backwaters.",
+      "itinerary": [
+        "Day 1: Welcome to Kerala - Arrival in Cochin - Fort Kochi, Chinese Fishing Nets, Mattancherry Palace, Jew Town & Paradesi Synagogue, Marine Drive",
+        "Day 2: Cochin to Munnar - Mattupetty Dam, Kundala Dam & Lake, Eco Point, Tea Museum",
+        "Day 3: Munnar - Adventure, Nature & Wildlife - Meesapulimala Region, Echo Point & Top Station, Eravikulam National Park, Tea Plantations",
+        "Day 4: Munnar → Thekkady (Periyar Wildlife Sanctuary) - Spice Plantation Tour, Periyar Tiger Reserve, Boat Ride (optional), Local Spice Markets",
+        "Day 5: Thekkady → Alleppey (Backwater Paradise) - Scenic backwaters, Coconut-lined canals, Village life, Shikara cruise (if hotel stay)",
+        "Day 6: Departure - Transfer to Cochin Airport/Railway Station"
+      ],
+      "accommodation": {
+        "cochin": {
+          "nights": 1,
+          "category": "4 Star Hotel",
+          "room": "Deluxe Room - King Size Bed"
+        },
+        "munnar": {
+          "nights": 2,
+          "category": "4 Star Hotel",
+          "room": "Balcony Room (Non-AC)"
+        },
+        "thekkady": {
+          "nights": 1,
+          "category": "4 Star Hotel",
+          "room": "Club Room AC with Balcony"
+        },
+        "alleppey": {
+          "nights": 1,
+          "category": "4 Star Hotel",
+          "room": "Grand Royal Room with Balcony"
+        }
+      },
+      "inclusions": [
+        "01 Night Cochin",
+        "02 Nights Munnar",
+        "01 Night Thekkady",
+        "01 Night Alleppey",
+        "Daily Breakfast at Hotels",
+        "All Meals at Alleppey Houseboat (if applicable)",
+        "All transfers & sightseeing by AC Sedan Cab",
+        "Pick-up from Cochin & Drop at Cochin",
+        "Toll, parking, driver allowance"
+      ],
+      "exclusions": [
+        "Any service not mentioned in inclusions",
+        "Tips, personal expenses, shopping",
+        "Entry tickets & optional activities",
+        "Camera fees, boating charges"
+      ]
+    },
+    {
+      "id": 76,
+      "title": "Best of Kerala – Hill Stations, Wildlife & Backwaters",
+      "type": "Domestic",
+      "category": "Kerala",
+      "price": "₹26,000",
+      "duration": "5N / 6D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "hotel": "4-Star Hotels",
+      "url": "https://bookmybharat.com/tour-details/76",
+      "overview": "Discover the true essence of God's Own Country - culture, nature, adventure, and relaxation.",
+      "itinerary": [
+        "Day 1: Welcome to Kerala - Arrival in Cochin - Fort Kochi, Chinese Fishing Nets, Mattancherry Palace, Jew Town & Paradesi Synagogue, Marine Drive",
+        "Day 2: Munnar Sightseeing - Mattupetty Dam, Kundala Dam & Lake, Eco Point, Tea Museum",
+        "Day 3: Munnar Adventure & Nature Exploration - Meesapulimala Region, Echo Point & Top Station, Eravikulam National Park, Tea Plantations",
+        "Day 4: Munnar → Thekkady (Wildlife & Spice Trails) - Periyar National Park, Boat Ride on Periyar Lake (optional), Spice Plantation Tour",
+        "Day 5: Thekkady → Alleppey - Houseboat Experience - Serene backwaters, Coconut-lined canals, Village life",
+        "Day 6: Departure - Transfer to Cochin Airport/Railway Station"
+      ],
+      "accommodation": {
+        "cochin": {
+          "nights": 1,
+          "category": "4 Star Hotel",
+          "room": "Deluxe Room, King Size Bed"
+        },
+        "munnar": {
+          "nights": 2,
+          "category": "4 Star Hotel",
+          "room": "Balcony Room (Non-AC)"
+        },
+        "thekkady": {
+          "nights": 1,
+          "category": "4 Star Hotel",
+          "room": "Club Room AC with Balcony"
+        },
+        "alleppey": {
+          "nights": 1,
+          "category": "4 Star Hotel",
+          "room": "Grand Royal Room with Balcony"
+        }
+      },
+      "inclusions": [
+        "01 Night Cochin",
+        "02 Nights Munnar",
+        "01 Night Thekkady",
+        "01 Night Alleppey",
+        "Daily Breakfast at Hotels",
+        "All Meals at Alleppey Houseboat (if applicable)",
+        "All transfers & sightseeing by A/C Sedan Cab",
+        "Pick-up from Cochin & Drop at Cochin",
+        "Toll, parking, and driver allowances"
+      ],
+      "exclusions": [
+        "Any service not mentioned under inclusions",
+        "Tips, porterage, and personal expenses",
+        "Entry fees, boating charges, optional activities"
+      ]
+    },
+    {
+      "id": 77,
+      "title": "Kerala Bliss Tour – Mountains, Wildlife & Waters",
+      "type": "Domestic",
+      "category": "Kerala",
+      "price": "₹22,500",
+      "duration": "4N / 5D",
+      "language": "English, Hindi",
+      "meals": "Only Breakfast",
+      "hotel": "4-Star Hotels + Houseboat",
+      "url": "https://bookmybharat.com/tour-details/77",
+      "overview": "Kerala Deluxe Package - Experience the very best of God's Own Country with misty hills of Munnar, rich wildlife of Thekkady, and serene backwaters of Alleppey.",
+      "itinerary": [
+        "Day 1: Welcome to Kerala - Cochin to Munnar - Cheeyappara Waterfalls, Valara Waterfalls, Lush green tea gardens",
+        "Day 2: Munnar Sightseeing - Mattupetty Dam, Kundala Dam, Eco Point, Tea Museum",
+        "Day 3: Munnar to Thekkady - Spice Plantation Tour, Periyar Lake boat ride (optional), Local spice market",
+        "Day 4: Thekkady to Alleppey - Houseboat Experience - Cruising through tranquil backwaters, All meals on houseboat",
+        "Day 5: Cochin Departure - Transfer to Airport/Railway Station"
+      ],
+      "accommodation": {
+        "munnar": {
+          "category": "4 Star Hotel"
+        },
+        "thekkady": {
+          "category": "4 Star Hotel"
+        },
+        "alleppey": {
+          "category": "4 Star Houseboat"
+        }
+      },
+      "inclusions": [
+        "2 Nights accommodation in Munnar",
+        "1 Night accommodation in Thekkady",
+        "1 Night accommodation in Alleppey / Houseboat",
+        "Daily breakfast at hotels",
+        "All meals included on houseboat",
+        "All transfers and sightseeing by private vehicle",
+        "Toll taxes, parking charges, and driver allowances"
+      ],
+      "exclusions": [
+        "Any meals not mentioned in the inclusions",
+        "Entry fees to monuments or attractions",
+        "Personal expenses of any nature",
+        "Government Service Tax (GST) @ 5%"
+      ]
+    },
+    {
+      "id": 79,
+      "title": "LADAKH TOUR PACKAGE – 5 NIGHTS / 6 DAYS",
+      "type": "Domestic",
+      "category": "Leh Ladakh",
+      "price": "₹18,999",
+      "duration": "5N / 6D",
+      "url": "https://bookmybharat.com/tour-details/79",
+      "itinerary": [
+        "Day 1: Arrival in Leh | Acclimatization",
+        "Day 2: Leh Local Sightseeing - Shanti Stupa, Leh Palace, Hall of Fame, Magnetic Hill, Gurudwara Pathar Sahib, Sangam Point",
+        "Day 3: Leh → Nubra Valley via Khardung La (125 km) - Diskit Monastery, Maitreya Buddha, Hunder Sand Dunes",
+        "Day 4: Nubra Valley → Pangong Lake (150 km) - Scenic landscapes",
+        "Day 5: Pangong Lake → Leh (140 km) - Chang La Pass, Thiksey Monastery, Shey Palace",
+        "Day 6: Departure from Leh"
+      ],
+      "inclusions": [
+        "Accommodation double sharing",
+        "Daily Breakfast & Dinner",
+        "Airport pickup & drop",
+        "Shared vehicle transfers",
+        "Inner Line Permit",
+        "Driver allowance, fuel, toll & parking"
+      ],
+      "exclusions": [
+        "Airfare / Train fare",
+        "Lunch & personal expenses",
+        "Camel ride, ATV ride",
+        "Travel insurance"
+      ]
+    },
+    {
+      "id": 80,
+      "title": "LADAKH TOUR PACKAGE – 6 NIGHTS / 7 DAYS",
+      "type": "Domestic",
+      "category": "Leh Ladakh",
+      "price": "₹22,000",
+      "duration": "6N / 7D",
+      "url": "https://bookmybharat.com/tour-details/80",
+      "itinerary": [
+        "Day 1: Arrival in Leh | Acclimatization",
+        "Day 2: Leh Local Sightseeing - Shanti Stupa, Leh Palace, Hall of Fame, Magnetic Hill",
+        "Day 3: Leh → Nubra Valley via Khardung La - Diskit Monastery, Hunder Sand Dunes",
+        "Day 4: Nubra Valley Sightseeing - Turtuk Village, Panamik Hot Springs",
+        "Day 5: Nubra Valley → Pangong Lake via Shyok Route",
+        "Day 6: Pangong Lake → Leh via Chang La - Thiksey Monastery, Shey Palace",
+        "Day 7: Departure from Leh"
+      ],
+      "inclusions": [
+        "Accommodation double sharing",
+        "Daily Breakfast & Dinner",
+        "Airport pickup & drop",
+        "Shared vehicle transfers",
+        "Inner Line Permit",
+        "Driver allowance, fuel, toll & parking"
+      ],
+      "exclusions": [
+        "Airfare / Train fare",
+        "Lunch & personal expenses",
+        "Camel ride, ATV ride",
+        "Travel insurance"
+      ]
+    }
+  ]
+}

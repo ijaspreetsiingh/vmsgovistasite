@@ -1,0 +1,2031 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.svg">
+    <link rel="preload" href="assets/herol3.png" as="image">
+    <title>Our Services — VMS Go Vista</title>
+    <!-- PERFORMANCE: Preconnect & DNS-prefetch -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    
+    <!-- PERFORMANCE: Critical CSS (render-blocking) -->
+    <link rel="stylesheet" href="assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/bromo-theme.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
+    <link rel="stylesheet" href="assets/fonts/custom-font.css">
+    <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/plugins/metismenu.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/animate.css">
+    <link rel="stylesheet" href="assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+    
+    <!-- Google Fonts (sync to prevent FOUT / font-size shift) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..600;1,400..500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/page-transition.css">
+    <style>
+        /* Page-specific overrides */
+
+        /* ===== STICKY HEADER ===== */
+        .bromo-header.header--sticky.sticky {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            background: rgb(255 255 255 / 36%);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            animation: bromoStickyIn .3s ease;
+        }
+
+        .bromo-book-btn a:hover .bromo-arrow {
+            background: #003A59;
+            color: #fff;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-logo span {
+            color: #003A59;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-logo-icon {
+            background: #003A59;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-logo-icon svg path,
+        .bromo-header.header--sticky.sticky .bromo-logo-icon svg circle {
+            fill: #fff;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-nav {
+            background: rgba(0, 58, 89, 0.06);
+            border-color: rgba(0, 58, 89, 0.1);
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-nav a {
+            color: rgba(0, 58, 89, 0.8);
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-nav a:hover,
+        .bromo-header.header--sticky.sticky .bromo-nav a.active {
+            background: #003A59;
+            color: #fff;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-book-btn a {
+            background: rgba(0, 58, 89, 0.06);
+            border-color: rgba(0, 58, 89, 0.12);
+            color: #003A59;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-book-btn a:hover {
+            background: #003A59;
+            color: #fff;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-book-btn a .bromo-arrow {
+            background: #003A59;
+            color: #fff;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-book-btn a:hover .bromo-arrow {
+            background: #fff;
+            color: #003A59;
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-mobile-menu {
+            background: rgba(0, 58, 89, 0.06);
+            border-color: rgba(0, 58, 89, 0.1);
+        }
+
+        .bromo-header.header--sticky.sticky .bromo-mobile-menu span {
+            color: #003A59;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky {
+            background: rgba(13, 17, 23, 0.9);
+            border-bottom-color: rgba(255, 255, 255, 0.06);
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-logo span {
+            color: #e6edf3;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-logo-icon {
+            background: #e6edf3;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-logo-icon svg path,
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-logo-icon svg circle {
+            fill: #0d1117;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-nav {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-nav a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-nav a:hover,
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-nav a.active {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-book-btn a {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+            color: #e6edf3;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-book-btn a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-book-btn a .bromo-arrow {
+            background: #e6edf3;
+            color: #0d1117;
+        }
+
+        body.dark-mode .bromo-header.header--sticky.sticky .bromo-book-btn a:hover .bromo-arrow {
+            background: #fff;
+            color: #0d1117;
+        }
+
+        /* ===== STICKY HEADER — MOBILE LAYOUT FIX ===== */
+        @media (max-width: 991px) {
+            .bromo-header.header--sticky.sticky {
+                display: flex;
+                justify-content: space-between;
+                grid-template-columns: none;
+            }
+        }
+
+        @keyframes bromoStickyIn {
+            0% { transform: translateY(-15px) }
+            100% { transform: none }
+        }
+
+        /* ===== VMS FOOTER — COOLDOCK STYLE ===== */
+        .vms-footer {
+            position: relative;
+            background: whitesmoke;
+            padding: 0;
+            overflow: hidden;
+            font-family: var(--font-body);
+        }
+
+        .vms-footer-toppill {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            background: #003A59;
+            border-radius: 999px;
+            padding: 8px 8px 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            box-shadow: 0 8px 30px rgba(0, 58, 89, 0.25);
+        }
+
+        .vms-footer-toppill .tp-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .vms-footer-toppill .tp-logo-box {
+            width: 22px;
+            height: 22px;
+            background: #fff;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vms-footer-toppill .tp-logo-box svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .vms-footer-toppill .tp-nav {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .vms-footer-toppill .tp-nav a {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .vms-footer-toppill .tp-nav a:hover {
+            color: #fff;
+        }
+
+        .vms-footer-toppill .tp-download {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .vms-footer-toppill .tp-download:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .vms-footer-nominee {
+            position: absolute;
+            top: 120px;
+            right: 0;
+            z-index: 4;
+            background: #003A59;
+            color: #fff;
+            padding: 20px 8px;
+            border-radius: 8px 0 0 8px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .vms-footer-content {
+            position: relative;
+            z-index: 3;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-top: 80px;
+            padding-bottom: 40px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .vms-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .vms-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vms-logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #003A59;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .vms-logo-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .vms-logo-text {
+            font-size: 19px;
+            font-weight: 700;
+            color: #003A59;
+            letter-spacing: -0.3px;
+        }
+
+        .vms-tagline {
+            font-size: 22px;
+            font-weight: 700;
+            color: #003A59;
+            margin: 6px 0 4px;
+            letter-spacing: -0.4px;
+            line-height: 1.3;
+            font-family: var(--font-body) !important;
+        }
+
+        .vms-desc {
+            font-size: 13.5px;
+            color: #555;
+            line-height: 1.65;
+            margin: 0 0 8px;
+            max-width: 340px;
+        }
+
+        .vms-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(0, 58, 89, 0.14);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 58, 89, 0.28);
+            color: #003A59;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 10px 10px 10px 24px;
+            border-radius: 999px;
+            text-decoration: none;
+            margin-top: 4px;
+            transition: background .22s, color .22s, border-color .22s;
+            width: fit-content;
+        }
+
+        .vms-cta-btn:hover {
+            background: #003A59;
+            color: #fff;
+        }
+
+        .vms-cta-btn .vms-btn-arrow {
+            width: 32px;
+            height: 32px;
+            background: #003A59;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 13px;
+            flex-shrink: 0;
+            transition: background .22s, color .22s;
+        }
+
+        .vms-cta-btn:hover .vms-btn-arrow {
+            background: #fff;
+            color: #003A59;
+        }
+
+        .vms-footer-bottom {
+            position: relative;
+            z-index: 3;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px 0;
+            border-top: 1px solid rgba(0, 58, 89, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .vms-credit {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12.5px;
+            color: #666;
+        }
+
+        .vms-author {
+            color: #555;
+            font-weight: 400;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .vms-author-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #003A59;
+            display: inline-block;
+        }
+
+        .vms-footer-col h5 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #003A59;
+            margin: 0 0 18px;
+        }
+
+        .vms-footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .vms-footer-links li {
+            margin-bottom: 11px;
+        }
+
+        .vms-footer-links a {
+            font-size: 13.5px;
+            color: #555;
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .vms-footer-links a:hover {
+            color: #003A59;
+        }
+
+        body.dark-mode .vms-footer {
+            background: #0d1117;
+        }
+
+        body.dark-mode .vms-logo-text,
+        body.dark-mode .vms-tagline,
+        body.dark-mode .vms-footer-col h5,
+        body.dark-mode .vms-footer-links a {
+            color: #e6edf3;
+        }
+
+        body.dark-mode .vms-desc,
+        body.dark-mode .vms-credit {
+            color: #8b949e;
+        }
+
+        body.dark-mode .vms-author {
+            color: #e6edf3;
+        }
+
+        body.dark-mode .vms-cta-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
+            color: #e6edf3;
+        }
+
+        body.dark-mode .vms-cta-btn:hover {
+            background: #003A59;
+            color: #fff;
+        }
+
+        body.dark-mode .vms-cta-btn .vms-btn-arrow {
+            background: #e6edf3;
+            color: #0d1117;
+        }
+
+        body.dark-mode .vms-cta-btn:hover .vms-btn-arrow {
+            background: #fff;
+            color: #003A59;
+        }
+
+        body.dark-mode .vms-logo-icon {
+            background: #003A59;
+            color: #fff;
+        }
+
+        body.dark-mode .vms-footer-toppill {
+            background: #003A59;
+        }
+
+        body.dark-mode .vms-footer-toppill .tp-logo {
+            color: #fff;
+        }
+
+        body.dark-mode .vms-footer-toppill .tp-logo-box {
+            background: #fff;
+        }
+
+        body.dark-mode .vms-footer-toppill .tp-nav a {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        body.dark-mode .vms-footer-toppill .tp-nav a:hover {
+            color: #fff;
+        }
+
+        body.dark-mode .vms-footer-toppill .tp-download {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        body.dark-mode .vms-footer-nominee {
+            background: #003A59;
+            color: #fff;
+        }
+
+        @media(max-width:1199px) {
+            .vms-footer-toppill { display: none; }
+            .vms-footer-nominee { display: none; }
+            .vms-footer-content { padding: 60px 32px 32px; gap: 40px; }
+        }
+
+        @media(max-width:991px) {
+            .vms-footer-content { grid-template-columns: 1fr 1fr; gap: 32px; padding: 40px 28px 80px; }
+            .vms-brand { grid-column: span 2; }
+        }
+
+        @media(max-width:575px) {
+            .vms-footer-content { grid-template-columns: 1fr; gap: 26px; padding: 28px 22px 60px; }
+            .vms-brand { grid-column: span 1; }
+        }
+
+        /* ===== VIDEO WATERMARK SECTION ===== */
+        @keyframes vmsBgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .vms-video-section {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 520px;
+            overflow: hidden;
+            margin-top: -210px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: vmsBgShift 15s ease infinite;
+        }
+
+        .vms-video-section video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .vms-video-gradient {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(180deg, whitesmoke 0%, rgba(245, 245, 245, 0.92) 12%, rgba(245, 245, 245, 0.35) 22%, rgba(245, 245, 245, 0.08) 32%, rgba(0, 0, 0, 0.2) 48%, rgba(0, 0, 0, 0.5) 78%, #000 100%);
+        }
+
+        .vms-big-text {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            z-index: 2;
+            text-align: center;
+            font-size: clamp(120px, 18vw, 180px);
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            font-family: 'Sunsive', sans-serif;
+            margin: 0;
+            padding: 0 20px;
+            white-space: nowrap;
+        }
+
+        body.dark-mode .vms-video-gradient {
+            background: linear-gradient(180deg, #0d1117 0%, rgba(13, 17, 23, 0.92) 12%, rgba(13, 17, 23, 0.35) 22%, rgba(13, 17, 23, 0.08) 32%, rgba(0, 0, 0, 0.2) 48%, rgba(0, 0, 0, 0.5) 78%, #000 100%);
+        }
+
+        body.dark-mode .vms-big-text {
+            color: #fff;
+        }
+
+        @media(max-width:991px) {
+            .vms-video-section { height: 360px; margin-top: -120px; }
+            .vms-big-text { font-size: clamp(16px, 4vw, 24px); bottom: 40px; }
+        }
+
+        @media(max-width:575px) {
+            .vms-video-section { height: 280px; margin-top: -90px; }
+            .vms-big-text { font-size: clamp(14px, 5vw, 20px); bottom: 24px; }
+        }
+
+        /* ===== THEME OVERRIDES — VMS Go Vista ===== */
+        .section-title-area .sub-title {
+            color: #003A59 !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        .section-title-area h2,
+        .section-title-area .section-title {
+            color: #003A59 !important;
+        }
+
+        /* Breadcrumb */
+        .rts-breadcrumb-area .title {
+            color: #fff !important;
+        }
+
+        .rts-breadcrumb-area .nav-bread-crumb a {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .rts-breadcrumb-area .nav-bread-crumb a.current {
+            color: #fff !important;
+        }
+
+        /* CTA Section — PROFESSIONAL REDESIGN */
+        .bromo-cta-section {
+            padding: 0 20px;
+        }
+        .bromo-cta-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 1400px;
+            height: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 32px;
+        }
+        .bromo-cta-bg::after {
+            background: linear-gradient(135deg, rgba(0,20,40,0.82) 0%, rgba(0,40,60,0.65) 40%, rgba(0,30,50,0.75) 100%) !important;
+        }
+        .bromo-cta-content {
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+        }
+        .bromo-cta-content .cta-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.18);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 24px;
+        }
+        .bromo-cta-content .cta-eyebrow i {
+            font-size: 10px;
+            color: #003A59;
+        }
+        .bromo-cta-content h2 {
+            color: #fff !important;
+            font-size: clamp(32px, 4vw, 52px) !important;
+            font-weight: 800 !important;
+            line-height: 1.12 !important;
+            margin-bottom: 20px !important;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            letter-spacing: -0.5px;
+        }
+        .bromo-cta-content .cta-desc {
+            color: rgba(255,255,255,0.8) !important;
+            font-size: 16px !important;
+            line-height: 1.7 !important;
+            max-width: 520px !important;
+            margin-bottom: 32px !important;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.2);
+        }
+        .bromo-cta-content .cta-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .bromo-cta-content .cta-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 50px;
+            background: #003A59;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid #003A59;
+            transition: all .3s ease;
+        }
+        .bromo-cta-content .cta-btn-primary:hover {
+            background: #002B43;
+            border-color: #002B43;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,58,89,0.45);
+        }
+        .bromo-cta-content .cta-btn-primary i {
+            font-size: 13px;
+            transition: transform .3s;
+        }
+        .bromo-cta-content .cta-btn-primary:hover i {
+            transform: translate(2px, -2px);
+        }
+        .bromo-cta-content .cta-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 28px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255,255,255,0.3);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all .3s ease;
+        }
+        .bromo-cta-content .cta-btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+        @media (max-width: 991px) {
+            .bromo-cta-wrap { height: auto; min-height: 480px; }
+            .bromo-cta-content { padding: 48px 36px; align-items: center; text-align: center; }
+            .bromo-cta-content .cta-desc { margin-left: auto; margin-right: auto; }
+            .bromo-cta-content .cta-buttons { justify-content: center; }
+        }
+        @media (max-width: 575px) {
+            .bromo-cta-content { padding: 36px 20px; }
+            .bromo-cta-content .cta-buttons { flex-direction: column; width: 100%; }
+            .bromo-cta-content .cta-btn-primary,
+            .bromo-cta-content .cta-btn-secondary { justify-content: center; width: 100%; }
+        }
+
+        /* ===== SERVICES PAGE SPECIFIC STYLES ===== */
+
+        /* Service Hero Section */
+        .services-hero-area {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        /* Main Services Grid */
+        .rts-service-area {
+            background: var(--color-bg-1);
+        }
+
+        body.dark-mode .rts-service-area {
+            background: #0d1117;
+        }
+
+        .rts-service-area .service-wrapper {
+            background: #fff !important;
+            border: 1px solid rgba(0, 58, 89, 0.06);
+            border-radius: 16px;
+            padding: 36px 28px;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rts-service-area .service-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #003A59, #C9A567);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .rts-service-area .service-wrapper:hover::before {
+            transform: scaleX(1);
+        }
+
+        .rts-service-area .service-wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 48px rgba(0, 58, 89, 0.10);
+        }
+
+        .rts-service-area .service-wrapper .icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: rgba(0, 58, 89, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .rts-service-area .service-wrapper:hover .icon {
+            background: #003A59;
+            transform: scale(1.05);
+        }
+
+        .rts-service-area .service-wrapper .icon i {
+            font-size: 28px;
+            color: #003A59;
+            transition: color 0.3s ease;
+        }
+
+        .rts-service-area .service-wrapper:hover .icon i {
+            color: #fff;
+        }
+
+        .rts-service-area .service-wrapper .title {
+            color: #003A59 !important;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .rts-service-area .service-wrapper .desc {
+            color: #666 !important;
+            font-size: 14.5px;
+            line-height: 1.65;
+            margin-bottom: 16px;
+        }
+
+        /* Services subtitle paragraph */
+        .services-subtitle {
+            color: #666;
+            max-width: 560px;
+            margin: 12px auto 0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Responsive service section */
+        @media (max-width: 991px) {
+            .rts-service-area .service-wrapper .title { font-size: 17px; }
+            .rts-service-area .service-wrapper .desc { font-size: 14px; }
+        }
+        @media (max-width: 767px) {
+            .rts-service-area .service-wrapper .title { font-size: 16px; }
+            .rts-service-area .service-wrapper .desc { font-size: 13.5px; }
+            .rts-service-area .service-wrapper .icon i { font-size: 26px; }
+            .section-title-area h2, .section-title-area .section-title { font-size: 32px !important; }
+            .services-subtitle { font-size: 14px; }
+        }
+        @media (max-width: 575px) {
+            .rts-service-area .service-wrapper .title { font-size: 15px; }
+            .rts-service-area .service-wrapper .desc { font-size: 13px; }
+            .rts-service-area .service-wrapper .icon i { font-size: 24px; }
+            .section-title-area h2, .section-title-area .section-title { font-size: 26px !important; }
+            .services-subtitle { font-size: 13px; }
+        }
+
+        .service-learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #003A59;
+            text-decoration: none;
+            transition: gap 0.3s ease, color 0.3s ease;
+        }
+
+        .service-learn-more i {
+            font-size: 11px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-learn-more:hover {
+            gap: 14px;
+            color: #002B43;
+        }
+
+        .service-learn-more:hover i {
+            transform: translate(2px, -2px);
+        }
+
+        body.dark-mode .rts-service-area .service-wrapper {
+            background: #161b22 !important;
+            border-color: #30363d !important;
+        }
+
+        body.dark-mode .rts-service-area .service-wrapper .title {
+            color: #e6edf3 !important;
+        }
+
+        body.dark-mode .rts-service-area .service-wrapper .desc {
+            color: #8b949e !important;
+        }
+
+        body.dark-mode .rts-service-area .service-wrapper .icon {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        body.dark-mode .rts-service-area .service-wrapper .icon i {
+            color: #58a6ff;
+        }
+
+        body.dark-mode .rts-service-area .service-wrapper:hover .icon {
+            background: #58a6ff;
+        }
+
+        body.dark-mode .rts-service-area .service-wrapper:hover .icon i {
+            color: #0d1117;
+        }
+
+        body.dark-mode .service-learn-more {
+            color: #58a6ff;
+        }
+
+        /* Why Choose Us (Services variant) */
+        .services-why-choose {
+            background: var(--color-bg-1);
+        }
+
+        body.dark-mode .services-why-choose {
+            background: #0d1117;
+        }
+
+        .services-why-choose .swc-card {
+            background: #fff;
+            border: 1px solid rgba(0, 58, 89, 0.06);
+            border-radius: 20px;
+            padding: 32px 28px;
+            text-align: center;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+            height: 100%;
+        }
+
+        .services-why-choose .swc-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(0, 58, 89, 0.08);
+        }
+
+        .services-why-choose .swc-card .swc-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(0, 58, 89, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .services-why-choose .swc-card:hover .swc-icon {
+            background: #003A59;
+            transform: scale(1.08);
+        }
+
+        .services-why-choose .swc-card .swc-icon i {
+            font-size: 30px;
+            color: #003A59;
+            transition: color 0.3s ease;
+        }
+
+        .services-why-choose .swc-card:hover .swc-icon i {
+            color: #fff;
+        }
+
+        .services-why-choose .swc-card h4 {
+            color: #003A59;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .services-why-choose .swc-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        body.dark-mode .services-why-choose .swc-card {
+            background: #161b22;
+            border-color: #30363d;
+        }
+
+        body.dark-mode .services-why-choose .swc-card h4 {
+            color: #e6edf3;
+        }
+
+        body.dark-mode .services-why-choose .swc-card p {
+            color: #8b949e;
+        }
+
+        body.dark-mode .services-why-choose .swc-card .swc-icon {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        body.dark-mode .services-why-choose .swc-card .swc-icon i {
+            color: #58a6ff;
+        }
+
+        body.dark-mode .services-why-choose .swc-card:hover .swc-icon {
+            background: #58a6ff;
+        }
+
+        body.dark-mode .services-why-choose .swc-card:hover .swc-icon i {
+            color: #0d1117;
+        }
+
+        /* Process Section */
+        .services-process {
+            background: var(--color-bg-1);
+        }
+
+        body.dark-mode .services-process {
+            background: #0d1117;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 36px;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background: linear-gradient(90deg, #003A59, transparent);
+        }
+
+        body.dark-mode .process-step:not(:last-child)::after {
+            background: linear-gradient(90deg, #58a6ff, transparent);
+        }
+
+        .process-step .step-num {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(0, 58, 89, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #003A59;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .process-step:hover .step-num {
+            background: #003A59;
+            color: #fff;
+            transform: scale(1.08);
+        }
+
+        body.dark-mode .process-step .step-num {
+            background: rgba(255, 255, 255, 0.06);
+            color: #58a6ff;
+        }
+
+        body.dark-mode .process-step:hover .step-num {
+            background: #58a6ff;
+            color: #0d1117;
+        }
+
+        .process-step h5 {
+            color: #003A59;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        body.dark-mode .process-step h5 {
+            color: #e6edf3;
+        }
+
+        .process-step p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        body.dark-mode .process-step p {
+            color: #8b949e;
+        }
+
+        @media (max-width: 991px) {
+            .process-step:not(:last-child)::after { display: none; }
+        }
+
+        /* Section spacing */
+        .rts-section-gap-services {
+            padding: 100px 0;
+        }
+
+        @media (max-width: 991px) {
+            .rts-section-gap-services {
+                padding: 70px 0;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .rts-section-gap-services {
+                padding: 50px 0;
+            }
+        }
+
+        /* ============================================================
+           INTERNAL FONT SIZE FIX — Service Page
+           Strong overrides with !important to beat ALL external CSS
+           ============================================================ */
+        /* === BASE DESKTOP (1200px+) === */
+        .section-title-area h2,
+        .section-title-area .section-title {
+            font-size: 48px !important;
+            font-weight: 700 !important;
+            line-height: 1.15 !important;
+            color: #003A59 !important;
+            font-family: var(--font-primary) !important;
+        }
+        .section-title-area .sub-title {
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: #003A59 !important;
+            letter-spacing: 1.5px !important;
+            text-transform: uppercase !important;
+        }
+        .services-subtitle {
+            font-size: 16px !important;
+            color: #666 !important;
+            line-height: 1.7 !important;
+            max-width: 560px !important;
+            margin: 12px auto 0 !important;
+        }
+        .rts-service-area .service-wrapper .title {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: #003A59 !important;
+            font-family: var(--font-primary) !important;
+            line-height: 1.3 !important;
+            margin-bottom: 10px !important;
+        }
+        .rts-service-area .service-wrapper .desc {
+            font-size: 15px !important;
+            font-weight: 400 !important;
+            color: #666 !important;
+            line-height: 1.7 !important;
+            margin-bottom: 16px !important;
+        }
+        .rts-service-area .service-wrapper .icon i {
+            font-size: 34px !important;
+            color: #003A59 !important;
+        }
+        .services-why-choose .swc-card h4 {
+            font-size: 18px !important;
+            font-weight: 700 !important;
+            color: #003A59 !important;
+        }
+        .services-why-choose .swc-card p {
+            font-size: 15px !important;
+            font-weight: 400 !important;
+            color: #666 !important;
+            line-height: 1.6 !important;
+        }
+        .process-step h5 {
+            font-size: 17px !important;
+            font-weight: 700 !important;
+            color: #003A59 !important;
+        }
+        .process-step p {
+            font-size: 14px !important;
+            color: #666 !important;
+            line-height: 1.6 !important;
+        }
+        .vms-big-text {
+            font-family: 'Sunsive', sans-serif !important;
+            font-size: clamp(120px, 18vw, 180px) !important;
+            font-weight: 700 !important;
+            bottom: 40px !important;
+        }
+        .vms-footer-col h5 {
+            font-size: 15px !important;
+            font-weight: 700 !important;
+            color: #003A59 !important;
+        }
+        .vms-footer-links a {
+            font-size: 14px !important;
+        }
+        .vms-logo-text {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: #003A59 !important;
+        }
+        .vms-tagline {
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #003A59 !important;
+        }
+        /* === LAPTOP (1024px–1199px) === */
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            .section-title-area h2,
+            .section-title-area .section-title {
+                font-size: 42px !important;
+            }
+            .rts-service-area .service-wrapper .title {
+                font-size: 19px !important;
+            }
+            .rts-service-area .service-wrapper .desc {
+                font-size: 14.5px !important;
+            }
+            .services-why-choose .swc-card h4 {
+                font-size: 17px !important;
+            }
+            .services-why-choose .swc-card p {
+                font-size: 14px !important;
+            }
+            .vms-tagline {
+                font-size: 22px !important;
+            }
+            .vms-big-text {
+                font-size: clamp(100px, 15vw, 160px) !important;
+                bottom: 30px !important;
+            }
+        }
+        /* === TABLET (≤991px) === */
+        @media (max-width: 991px) {
+            .section-title-area h2,
+            .section-title-area .section-title {
+                font-size: 38px !important;
+            }
+            .rts-service-area .service-wrapper .title {
+                font-size: 18px !important;
+            }
+            .rts-service-area .service-wrapper .desc {
+                font-size: 14.5px !important;
+            }
+            .services-why-choose .swc-card h4 {
+                font-size: 17px !important;
+            }
+            .services-why-choose .swc-card p {
+                font-size: 14px !important;
+            }
+            .vms-big-text {
+                font-size: clamp(16px, 4vw, 24px) !important;
+                bottom: 40px !important;
+            }
+        }
+        /* === SMALL TABLET (≤767px) === */
+        @media (max-width: 767px) {
+            .section-title-area h2,
+            .section-title-area .section-title {
+                font-size: 32px !important;
+            }
+            .rts-service-area .service-wrapper .title {
+                font-size: 17px !important;
+            }
+            .rts-service-area .service-wrapper .desc {
+                font-size: 14px !important;
+            }
+            .rts-service-area .service-wrapper .icon i {
+                font-size: 28px !important;
+            }
+            .services-subtitle {
+                font-size: 14px !important;
+            }
+            .services-why-choose .swc-card h4 {
+                font-size: 16px !important;
+            }
+            .services-why-choose .swc-card p {
+                font-size: 13.5px !important;
+            }
+            .process-step h5 {
+                font-size: 15px !important;
+            }
+            .process-step p {
+                font-size: 13px !important;
+            }
+            .vms-tagline {
+                font-size: 20px !important;
+            }
+        }
+        /* === MOBILE (≤575px) === */
+        @media (max-width: 575px) {
+            .section-title-area h2,
+            .section-title-area .section-title {
+                font-size: 26px !important;
+            }
+            .rts-service-area .service-wrapper .title {
+                font-size: 16px !important;
+            }
+            .rts-service-area .service-wrapper .desc {
+                font-size: 13px !important;
+            }
+            .rts-service-area .service-wrapper .icon i {
+                font-size: 24px !important;
+            }
+            .services-subtitle {
+                font-size: 13px !important;
+            }
+            .services-why-choose .swc-card h4 {
+                font-size: 15px !important;
+            }
+            .services-why-choose .swc-card p {
+                font-size: 13px !important;
+            }
+            .process-step h5 {
+                font-size: 14px !important;
+            }
+            .process-step p {
+                font-size: 12.5px !important;
+            }
+            .vms-big-text {
+                font-size: clamp(14px, 5vw, 20px) !important;
+                bottom: 24px !important;
+            }
+            .vms-tagline {
+                font-size: 18px !important;
+            }
+            .vms-logo-text {
+                font-size: 18px !important;
+            }
+            .vms-footer-col h5 {
+                font-size: 14px !important;
+            }
+            .vms-footer-links a {
+                font-size: 13px !important;
+            }
+        }
+
+        /* Button */
+        .rts-btn.btn-primary {
+            background: #003A59 !important;
+            color: #fff !important;
+            border: none !important;
+            transition: background .22s;
+        }
+
+        .rts-btn.btn-primary:hover {
+            background: #002B43 !important;
+        }
+
+        body.dark-mode .section-title-area h2,
+        body.dark-mode .section-title-area .section-title {
+            color: #e6edf3 !important;
+        }
+
+        body.dark-mode .section-title-area .sub-title {
+            color: #58a6ff !important;
+        }
+
+        body.dark-mode .bromo-cta-content h2 {
+            color: #fff !important;
+        }
+
+        body.dark-mode .bromo-cta-content p {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        body.dark-mode .bromo-cta-bg::after {
+            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,10,20,0.7) 40%, rgba(0,5,15,0.8) 100%) !important;
+        }
+
+        body.dark-mode .bromo-cta-content .cta-btn-primary {
+            background: #C9A567;
+            border-color: #C9A567;
+            color: #003A59;
+        }
+
+        body.dark-mode .bromo-cta-content .cta-btn-primary:hover {
+            background: #b8944f;
+            border-color: #b8944f;
+            color: #fff;
+        }
+
+        body.dark-mode .bromo-cta-content .cta-btn-secondary {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+
+    </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.min.js"></script>
+    <script>
+        window.addEventListener('error', function (e) {
+            if (e.filename && (e.filename.indexOf('longview') > -1 || e.filename.indexOf('datadog') > -1 || e.filename.indexOf('browser-sdk') > -1)) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+    </script>
+</head>
+
+<body class="home-bg with-sidebar">
+
+    <!-- preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <span style="--i:1;"></span>
+            <span style="--i:2;"></span>
+            <span style="--i:3;"></span>
+            <span style="--i:4;"></span>
+            <span style="--i:5;"></span>
+            <span style="--i:6;"></span>
+            <span style="--i:7;"></span>
+            <span style="--i:8;"></span>
+            <span style="--i:9;"></span>
+            <span style="--i:10;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:15;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:17;"></span>
+            <span style="--i:18;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:20;"></span>
+            <div class="loader-plane"></div>
+        </div>
+    </div>
+    <!-- preloader end -->
+
+    <!-- ===== BROMORISE HEADER ===== -->
+    <header class="bromo-header header--sticky" id="bromoHeader">
+        <a href="." class="bromo-logo">
+            <span class="bromo-logo-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" fill="#111" />
+                    <circle cx="17" cy="7" r="2.2" fill="#111" />
+                </svg>
+            </span>
+            <span>vmsgovista</span>
+        </a>
+        <nav class="bromo-nav">
+            <a href=".">Home</a>
+            <a href="package">Packages</a>
+            <a href="service" class="active">Services</a>
+            <a href="about">About Us</a>
+            <a href="contact">Contact</a>
+        </nav>
+        <div class="bromo-book-btn">
+            <a href="contact">
+                Book now
+                <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
+            </a>
+        </div>
+        <div class="bromo-mobile-menu" id="menu-btn" aria-label="Open menu">
+            <span class="bromo-burger"><i></i><i></i><i></i></span>
+        </div>
+    </header>
+
+    <!-- ===== MOBILE NAVIGATION ===== -->
+    <div class="bromo-mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <div class="bromo-mobile-nav" id="mobileNav">
+        <div class="bromo-mobile-nav-top">
+            <a href="." class="bromo-mobile-nav-logo">
+                <img src="assets/3d logo.png" alt="VMS Go Vista">
+            </a>
+            <button class="bromo-mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="bromo-mobile-nav-links">
+            <a href="."><i class="fa-solid fa-house"></i><span>Home</span></a>
+            <a href="package"><i class="fa-solid fa-suitcase"></i><span>Packages</span></a>
+            <a href="service" class="active"><i class="fa-solid fa-concierge-bell"></i><span>Services</span></a>
+            <a href="about"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a>
+            <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        </nav>
+        <div class="bromo-mobile-nav-foot">
+            <a href="contact" class="bromo-mobile-nav-cta">
+                <span>Book Now</span>
+                <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
+            </a>
+            <div class="bromo-mobile-nav-contact">
+                <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
+                <a href="mailto:hello@vmsgovista.com"><i class="fa-solid fa-envelope"></i> hello@vmsgovista.com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BREADCRUMB HERO ===== -->
+    <div class="rts-breadcrumb-area one" data-bg-src="assets/herol3.webp">
+        <div class="container h-100">
+            <div class="breadcrumb-area-wrapper">
+                <div class="nav-bread-crumb">
+                    <a href=".">Home</a>
+                    <span><i class="fa-regular fa-chevron-right"></i></span>
+                    <a href="#" class="current">Services</a>
+                </div>
+                <h1 class="title">OUR SERVICES</h1>
+            </div>
+        </div>
+    </div>
+    <!-- rts breadcrumb area end -->
+
+    <!-- ===== SERVICES GRID SECTION ===== -->
+    <section class="rts-service-area rts-section-gap-services">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title-area text-center mb-5">
+                        <p class="sub-title">What We Offer</p>
+                        <h2 class="section-title">Complete Travel Solutions</h2>
+                        <p class="services-subtitle">
+                            From flights to local experiences — we handle every detail so you can focus on making memories.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <!-- Service 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-plane"></i></div>
+                        <h4 class="title">Flight Bookings</h4>
+                        <p class="desc">Domestic & international flights at the best prices. We compare across airlines to find you the most convenient and affordable options for every journey.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-hotel"></i></div>
+                        <h4 class="title">Hotel Reservations</h4>
+                        <p class="desc">Curated stays from luxury resorts to boutique homestays. Each property is handpicked for comfort, location, and value to match your travel style.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-route"></i></div>
+                        <h4 class="title">Custom Itineraries</h4>
+                        <p class="desc">Tailor-made travel plans designed around your interests, budget, and timeline. Every itinerary is crafted personally by our travel experts.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 4 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-car"></i></div>
+                        <h4 class="title">Transport Rentals</h4>
+                        <p class="desc">Comfortable, reliable transport for your entire trip — from airport transfers to inter-city travel. Choose from sedans, SUVs, or tempo travellers.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 5 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-map-marked-alt"></i></div>
+                        <h4 class="title">Tour Packages</h4>
+                        <p class="desc">Pre-designed holiday packages to India's top destinations — Kashmir, Kerala, Goa, Rajasthan, Manali, and more. All-inclusive with no hidden costs.</p>
+                        <a href="package" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 6 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-passport"></i></div>
+                        <h4 class="title">Visa Assistance</h4>
+                        <p class="desc">End-to-end visa guidance for international travel. Our team helps with documentation, applications, and processing to ensure a smooth experience.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY CHOOSE US (Services variant) ===== -->
+    <section class="services-why-choose rts-section-gap-services">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title-area text-center mb-5">
+                        <p class="sub-title">Why Travel With Us</p>
+                        <h2 class="section-title">Built on Trust & Passion</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="swc-card">
+                        <div class="swc-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h4>100% Secure Booking</h4>
+                        <p>Your payments and personal information are protected with enterprise-grade encryption. Book with complete peace of mind.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="swc-card">
+                        <div class="swc-icon"><i class="fa-solid fa-headset"></i></div>
+                        <h4>24/7 Support</h4>
+                        <p>Our dedicated support team is available around the clock to assist you before, during, and after your journey — anytime, anywhere.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="swc-card">
+                        <div class="swc-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                        <h4>Best Price Guarantee</h4>
+                        <p>We constantly monitor prices to offer you the most competitive rates. If you find a lower price elsewhere, we'll match it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS / PROCESS SECTION ===== -->
+    <section class="services-process rts-section-gap-services">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title-area text-center mb-5">
+                        <p class="sub-title">Simple Process</p>
+                        <h2 class="section-title">How It Works</h2>
+                        <p style="color:#666; max-width:520px; margin:12px auto 0; font-size:15px; line-height:1.7;">
+                            Getting started is easy. Just three simple steps to your dream journey.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="process-step">
+                        <div class="step-num">01</div>
+                        <h5>Tell Us Your Plan</h5>
+                        <p>Share your destination, dates, preferences, and budget. The more details, the better we can tailor your experience.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="process-step">
+                        <div class="step-num">02</div>
+                        <h5>Get a Curated Quote</h5>
+                        <p>Our travel experts design a personalized itinerary with transparent pricing — no hidden charges, no surprises.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="process-step">
+                        <div class="step-num">03</div>
+                        <h5>Pack & Go!</h5>
+                        <p>Once you confirm, we handle all the arrangements. Just pack your bags and get ready for an unforgettable journey.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="bromo-cta-section">
+        <div class="bromo-cta-wrap">
+            <div class="bromo-cta-bg" style="background-image:url('assets/images/banner/bg-08.webp');"></div>
+            <div class="bromo-cta-content">
+                <span class="cta-eyebrow"><i class="fa-solid fa-paper-plane"></i> Let's Travel Together</span>
+                <h2>Ready for Your<br>Next Adventure?</h2>
+                <p class="cta-desc">Let VMS GO VISTA PVT LTD turn your travel dreams into unforgettable experiences — from weekend getaways to international holidays, honeymoons, and corporate trips.</p>
+                <div class="cta-buttons">
+                    <a href="contact" class="cta-btn-primary">
+                        Get a Free Quote
+                        <i class="fa-regular fa-arrow-up-right"></i>
+                    </a>
+                    <a href="tel:+919876543210" class="cta-btn-secondary">
+                        <i class="fa-solid fa-phone"></i> Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER — COOLDOCK STYLE ===== -->
+    <footer class="vms-footer">
+
+        <!-- Top floating pill -->
+        <div class="vms-footer-toppill">
+            <div class="tp-logo"></div>
+        </div>
+
+        <!-- Content grid -->
+        <div class="vms-footer-content">
+            <!-- Brand Column -->
+            <div class="vms-brand">
+                <div class="vms-logo">
+                    <div class="vms-logo-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" stroke-linejoin="round" />
+                            <circle cx="17" cy="7" r="2" />
+                        </svg>
+                    </div>
+                    <span class="vms-logo-text">VMS Go Vista</span>
+                </div>
+                <h3 class="vms-tagline">Your smart travel companion</h3>
+                <p class="vms-desc">VMS Go Vista brings tours, destinations, deals, weather, quick bookings and more useful travel tools into one beautiful platform beside your dream journey.</p>
+                <a href="package" class="vms-cta-btn">
+                    Explore Packages
+                    <span class="vms-btn-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
+                </a>
+            </div>
+
+            <!-- Menu Column -->
+            <div class="vms-footer-col">
+                <h5>Menu</h5>
+                <ul class="vms-footer-links">
+                    <li><a href=".">Home</a></li>
+                    <li><a href="package">Packages</a></li>
+                    <li><a href="service">Services</a></li>
+                    <li><a href="./#faq">FAQ</a></li>
+                    <li><a href="#">Updates</a></li>
+                </ul>
+            </div>
+
+            <!-- Navigation Column -->
+            <div class="vms-footer-col">
+                <h5>Navigation</h5>
+                <ul class="vms-footer-links">
+                    <li><a href="contact">Contact</a></li>
+                    <li><a href="#">Share feedback</a></li>
+                    <li><a href="#">Roadmap</a></li>
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Terms of service</a></li>
+                    <li><a href="#">Customer portal</a></li>
+                </ul>
+            </div>
+
+            <!-- Services Column -->
+            <div class="vms-footer-col">
+                <h5>Our Services</h5>
+                <ul class="vms-footer-links">
+                    <li><a href="package?destination=Kashmir">Kashmir Tours</a></li>
+                    <li><a href="package?destination=Kerala">Kerala Packages</a></li>
+                    <li><a href="package?destination=Goa">Goa Adventures</a></li>
+                    <li><a href="package?destination=Jaipur">Rajasthan Heritage</a></li>
+                    <li><a href="package?destination=Manali">Manali Trips</a></li>
+                    <li><a href="package?destination=Agra">Agra Tours</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom bar with copyright -->
+        <div class="vms-footer-bottom">
+            <p class="vms-credit">&copy;
+                <script>document.write(new Date().getFullYear())</script> VMS Go Vista &middot; All rights reserved
+            </p>
+            <div class="vms-credit">
+                <span>Crafted with dedication by</span>
+                <span class="vms-author">
+                    <span class="vms-author-avatar"></span>
+                    VMS Go Vista Team
+                </span>
+            </div>
+        </div>
+
+        <!-- Video Section with travel footage -->
+        <div class="vms-video-section">
+            <video autoplay muted loop playsinline poster="">
+                <source src="assets/video6.mp4" type="video/mp4">
+            </video>
+            <div class="vms-video-gradient"></div>
+            <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista</div>
+        </div>
+    </footer>
+
+    <!-- mobile sidebar -->
+    <div id="side-bar" class="side-bar header-two header-eight">
+        <button class="close-icon-menu"><i class="fa-sharp fa-thin fa-xmark"></i></button>
+        <a class="logo" href="."><img src="assets/images/logo/02.svg" alt=""></a>
+        <!-- mobile menu area start -->
+        <div class="mobile-menu-main">
+            <nav class="nav-main mainmenu-nav mt--30">
+                <ul class="mainmenu metismenu" id="mobile-menu-active">
+                    <li>
+                        <a href="." class="main">Home</a>
+                    </li>
+                    <li>
+                        <a href="package" class="main">Packages</a>
+                    </li>
+                    <li>
+                        <a href="destination.html" class="main">Destinations</a>
+                    </li>
+                    <li class="has-droupdown">
+                        <a href="#" class="main">Pages</a>
+                        <ul class="submenu mm-collapse">
+                            <li><a class="mobile-menu-link" href="about">About</a></li>
+                            <li><a class="mobile-menu-link" href="contact">Contact</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="contact" class="main">Contact Us</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="follow-us">
+                <ul>
+                    <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"
+                                style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                    </li>
+                    <li><a href="#" aria-label="twitter"><i class="fab fa-twitter"
+                                style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                    </li>
+                    <li><a href="#" aria-label="instagram"><i class="fab fa-instagram"
+                                style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                    </li>
+                    <li><a href="#" aria-label="linkdin"><i class="fa-brands fa-linkedin-in"
+                                style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- mobile menu area end -->
+    </div>
+
+    <div id="side-bar2" class="side-bar side-bar2">
+        <div class="rts-sidebar-menu-desktop">
+            <button class="close-icon-menu" aria-label="footer_Button"><i class="far fa-times"></i></button>
+            <div class="body d-none d-lg-block">
+                <div class="about-us">
+                    <a class="logo" href="."><img src="assets/images/logo/02.svg" alt=""></a>
+                    <p>
+                        Discover the World, <br> Full Adventure at a Time!
+                    </p>
+                </div>
+                <div class="gallery-image-area">
+                    <div class="gallery-wrapper with-icon">
+                        <a href="assets/images/gallery/06.webp" class="gallery-image image-transform">
+                            <img class="hover-image" src="assets/images/gallery/06.webp" width="190" alt="">
+                            <span class="icon"><img src="assets/images/gallery/insta.svg" alt=""></span>
+                        </a>
+                    </div>
+                    <div class="gallery-wrapper with-icon">
+                        <a href="assets/images/gallery/07.webp" class="gallery-image image-transform">
+                            <img class="hover-image" src="assets/images/gallery/07.webp" width="190" alt="">
+                            <span class="icon"><img src="assets/images/gallery/insta.svg" alt=""></span>
+                        </a>
+                    </div>
+                    <div class="gallery-wrapper with-icon">
+                        <a href="assets/images/gallery/08.webp" class="gallery-image image-transform">
+                            <img class="hover-image" src="assets/images/gallery/08.webp" width="190" alt="">
+                            <span class="icon"><img src="assets/images/gallery/insta.svg" alt=""></span>
+                        </a>
+                    </div>
+                    <div class="gallery-wrapper with-icon">
+                        <a href="assets/images/gallery/09.webp" class="gallery-image image-transform">
+                            <img class="hover-image" src="assets/images/gallery/09.webp" width="190" alt="">
+                            <span class="icon"><img src="assets/images/gallery/insta.svg" alt=""></span>
+                        </a>
+                    </div>
+                    <div class="gallery-wrapper with-icon">
+                        <a href="assets/images/gallery/10.webp" class="gallery-image image-transform">
+                            <img class="hover-image" src="assets/images/gallery/10.webp" width="190" alt="">
+                            <span class="icon"><img src="assets/images/gallery/insta.svg" alt=""></span>
+                        </a>
+                    </div>
+                    <div class="gallery-wrapper with-icon">
+                        <a href="assets/images/gallery/12.webp" class="gallery-image image-transform">
+                            <img class="hover-image" src="assets/images/gallery/11.webp" width="190" alt="">
+                            <span class="icon"><img src="assets/images/gallery/insta.svg" alt=""></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="get-in-touch">
+                    <h4>Get In Touch</h4>
+                    <div class="wrapper">
+                        <div class="single">
+                            <i class="fas fa-phone-alt"
+                                style="font-family: &quot;Font Awesome 6 Pro&quot;, Bangla867, sans-serif;"></i>
+                            <a href="#">+91 98765 43210</a>
+                        </div>
+                        <div class="single">
+                            <i class="fas fa-envelope"
+                                style="font-family: &quot;Font Awesome 6 Pro&quot;, Bangla867, sans-serif;"></i>
+                            <a href="#">info@vmsgovista.com</a>
+                        </div>
+                        <div class="single">
+                            <i class="fas fa-globe"
+                                style="font-family: &quot;Font Awesome 6 Pro&quot;, Bangla867, sans-serif;"></i>
+                            <a href="#">www.vmsgovista.com</a>
+                        </div>
+                        <div class="single">
+                            <i class="fas fa-map-marker-alt"
+                                style="font-family: &quot;Font Awesome 6 Pro&quot;, Bangla867, sans-serif;"></i>
+                            <a href="#">13/A, New Pro State, NYC</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="follow-us">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"
+                                    style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                        </li>
+                        <li><a href="#" aria-label="twitter"><i class="fab fa-twitter"
+                                    style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                        </li>
+                        <li><a href="#" aria-label="instagram"><i class="fab fa-instagram"
+                                    style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                        </li>
+                        <li><a href="#" aria-label="linkdin"><i class="fa-brands fa-linkedin-in"
+                                    style="font-family: &quot;Font Awesome 6 Brands&quot;, Bangla867, sans-serif;"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="anywhere-home" class=""></div>
+
+    <div class="slider-drag-cursor"><i class="fas fa-angle-left me-2"></i> DRAG <i class="fas fa-angle-right ms-2"></i></div>
+
+    <!-- progress area start -->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
+                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
+            </path>
+        </svg>
+    </div>
+    <!-- progress area end -->
+
+    <!-- Scripts -->
+    <script defer src="assets/js/plugins/jquery.min.js"></script>
+    <script defer src="assets/js/plugins/bootstrap.min.js"></script>
+    <script defer src="assets/js/plugins/metismenu.js"></script>
+    <script defer src="assets/js/vendor/jqueryui.js"></script>
+    <script defer src="assets/js/vendor/waypoint.js"></script>
+    <script defer src="assets/js/plugins/swiper.js"></script>
+    <script defer src="assets/js/plugins/smoothscroll.js"></script>
+    <script defer src="assets/js/vendor/wow.js"></script>
+    <script defer src="assets/js/plugins/odometer.js"></script>
+    <script defer src="assets/js/plugins/magnific-popup.js"></script>
+    <script defer src="assets/js/plugins/isotop.js"></script>
+    <script defer src="assets/js/plugins/contact-form.js"></script>
+    <script defer src="assets/js/main.js"></script>
+
+    <script>document.addEventListener('turbo:load',function(){
+    document.body.classList.add('loaded');
+    if(typeof WOW!=='undefined'){new WOW().init();}
+});
+
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+
+            if (menuBtn && mobileNav && mobileNavOverlay && mobileNavClose) {
+                function openMobileNav() {
+                    mobileNav.classList.add('active');
+                    mobileNavOverlay.classList.add('active');
+                    menuBtn.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                }
+                function closeMobileNav() {
+                    mobileNav.classList.remove('active');
+                    mobileNavOverlay.classList.remove('active');
+                    menuBtn.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+
+                menuBtn.addEventListener('click', function () {
+                    mobileNav.classList.contains('active') ? closeMobileNav() : openMobileNav();
+                });
+
+                mobileNavClose.addEventListener('click', closeMobileNav);
+                mobileNavOverlay.addEventListener('click', closeMobileNav);
+
+                const mobileNavLinks = mobileNav.querySelectorAll('.bromo-mobile-nav-links a');
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', closeMobileNav);
+                });
+            }
+
+        });
+    </script>
+
+<script src="assets/js/page-transition.js"></script>
+</body>
+</html>

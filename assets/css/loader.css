@@ -1,0 +1,212 @@
+/* ============================================================
+   VMS GO VISTA — Ultra-Premium Loader Animation
+   Apple Motion Language | Lottie Quality | Luxury Branding
+   ============================================================ */
+
+/* === OVERLAY === */
+.vms-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vms-preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* === ANIMATION STAGE === */
+.vms-preloader-stage {
+    position: relative;
+    width: min(520px, 85vw);
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vms-preloader-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+/* === LINE STYLE === */
+.vms-line-primary {
+    fill: none;
+    stroke: #0A4D68;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.vms-line-accent {
+    fill: none;
+    stroke: #FF6B35;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* === DRAW ANIMATION === */
+.vms-draw {
+    stroke-dasharray: var(--path-length, 1000);
+    stroke-dashoffset: var(--path-length, 1000);
+    transition: stroke-dashoffset var(--draw-duration, 0.9s) cubic-bezier(0.65, 0, 0.35, 1),
+                opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vms-draw.drawing {
+    stroke-dashoffset: 0;
+}
+
+.vms-draw.erase {
+    stroke-dashoffset: calc(var(--path-length, 1000) * -1);
+}
+
+/* === SCENE TRANSITIONS === */
+.vms-scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+}
+
+.vms-scene.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.vms-scene.exit {
+    opacity: 0;
+    transform: scale(1.02);
+}
+
+/* === FINAL LOGO === */
+.vms-preloader-logo {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 8px 40px rgba(10, 77, 104, 0.12));
+}
+
+.vms-preloader-logo.visible {
+    opacity: 1;
+    transform: scale(1.03);
+}
+
+.vms-preloader-logo img {
+    width: 160px;
+    height: auto;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+/* === PROGRESS DOTS === */
+.vms-preloader-progress {
+    position: absolute;
+    bottom: -48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.vms-progress-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #E2E8F0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.vms-progress-dot.active {
+    width: 24px;
+    border-radius: 10px;
+    background: #0A4D68;
+}
+
+.vms-progress-dot.done {
+    background: #FF6B35;
+}
+
+/* === BRAND MARK (bottom) === */
+.vms-preloader-brand {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #CBD5E1;
+    opacity: 0;
+    transition: opacity 0.6s ease 0.3s;
+}
+
+.vms-preloader.loaded .vms-preloader-brand {
+    opacity: 1;
+}
+
+/* === GLOW EFFECT (subtle) === */
+.vms-preloader-logo::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(10, 77, 104, 0.06) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+}
+
+.vms-preloader-logo.visible::after {
+    opacity: 1;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 575px) {
+    .vms-preloader-stage {
+        width: 90vw;
+    }
+    .vms-preloader-logo img {
+        width: 120px;
+    }
+    .vms-preloader-brand {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+    .vms-preloader {
+        transition: none;
+    }
+    .vms-draw {
+        transition: none;
+        stroke-dashoffset: 0 !important;
+    }
+    .vms-scene,
+    .vms-preloader-logo {
+        transition: opacity 0.3s ease;
+        transform: none !important;
+    }
+}

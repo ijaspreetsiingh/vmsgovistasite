@@ -1,0 +1,31 @@
+/* VMS GO VISTA — Page Transition Overlay */
+#vms-page-transition {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 999998 !important;
+    background: #FFFFFF !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+#vms-page-transition.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: all !important;
+}
+
+#vms-page-transition svg {
+    width: 48px;
+    height: 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #vms-page-transition {
+        transition: none !important;
+    }
+}

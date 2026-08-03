@@ -1,0 +1,54 @@
+# Freebuff / editor app data
+.freebuff/
+.continue/
+
+# Windows artifacts
+/nul
+
+# Backups
+mailer.php.backup
+
+# Logs & temp
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Uploads (user-generated content)
+uploads/
+
+# Node (reference project)
+node_modules/
+refrence/
+
+# Large media files (video/audio >5MB)
+*.mp4
+*.webm
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+*.flac
+*.gif
+
+# Large images (>1.5MB)
+assets/hero1.png
+assets/hero2.png
+assets/hero4.png
+assets/hero4.webp
+assets/hero5.png
+assets/hero5.webp
+assets/herol3.png
+assets/herol3.webp
+assets/imh2.png
+assets/3d logo.png
+
+# Large SVG/TTF files (>1MB)
+assets/images/testimonials/author-01.svg
+assets/images/testimonials/author-02.svg
+assets/fonts/fa-duotone-900.svg
+assets/fonts/fa-light-300.svg
+assets/fonts/fa-regular-400.svg
+assets/fonts/fa-solid-900.svg
+assets/fonts/fa-thin-100.ttf
