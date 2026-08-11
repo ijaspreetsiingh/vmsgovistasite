@@ -255,12 +255,12 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 -- ============================================================
 -- DEFAULT ADMIN USER
 -- Password: admin123  (bcrypt hash)
--- CHANGE THIS PASSWORD IMMEDIATELY AFTER SETUP
+-- Admin credentials: admin@vmsgovista.com
 -- ============================================================
 INSERT IGNORE INTO `users` (`name`, `email`, `password`, `role`)
 VALUES (
   'Admin',
   'admin@vmsgovista.com',
-  '$2y$12$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+  '$2y$10$l6gc8rQ5TJ7jNyZjZbCm.OHMxk3Y0iwQ4FC0Ur04FZwt5/UOPcFn2',
   'admin'
 );
