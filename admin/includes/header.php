@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../includes/auth.php';
 require_once __DIR__ . '/../../includes/functions.php';
+require_once __DIR__ . '/../../includes/mailer.php';
 requireLogin();
 $adminUser = currentUser();
 $flash     = getFlash();
@@ -59,6 +60,18 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
           $navNew = (int)getDB()->query("SELECT COUNT(*) FROM enquiries WHERE status='new'")->fetchColumn();
           if ($navNew > 0) {
               echo '<span style="margin-left:auto;background:#f79009;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;">' . $navNew . '</span>';
+          }
+      } catch (Throwable $e) { /* ignore */ }
+      ?>
+    </a>
+    <a href="<?= SITE_URL ?>/admin/contacts.php" class="<?= $currentPage==='contacts'?'active':'' ?>">
+      <i class="fa-solid fa-envelope-open-text"></i> Contact Messages
+      <?php
+      try {
+          ensureContactsTable();
+          $navContacts = (int)getDB()->query("SELECT COUNT(*) FROM contacts WHERE status='new'")->fetchColumn();
+          if ($navContacts > 0) {
+              echo '<span style="margin-left:auto;background:#f79009;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;">' . $navContacts . '</span>';
           }
       } catch (Throwable $e) { /* ignore */ }
       ?>

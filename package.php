@@ -46,8 +46,7 @@ $tourTypes    = getSettings('tour_type');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.svg">
-    <title>Tours – VMS Go Vista</title>
+    <title>Package – VMS Go Vista</title>
     <link rel="stylesheet preload" href="assets/css/plugins/swiper.min.css" as="style">
     <link rel="stylesheet preload" href="assets/fonts/custom-font.css" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,9 +195,9 @@ $tourTypes    = getSettings('tour_type');
         .vms-footer-links a:hover{color:#003A59;}
         @keyframes vmsBgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
         .vms-video-section{position:relative;z-index:1;width:100%;height:520px;overflow:hidden;margin-top:-210px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);background-size:400% 400%;animation:vmsBgShift 15s ease infinite;}
-        .vms-video-section video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+        .vms-video-section .vms-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
         .vms-video-gradient{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,whitesmoke 0%,rgba(245,245,245,0.92) 12%,rgba(245,245,245,0.35) 22%,rgba(245,245,245,0.08) 32%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.5) 78%,#000 100%);}
-        .vms-big-text{position:absolute;bottom:80px;left:0;right:0;z-index:2;text-align:center;font-size:clamp(120px,18vw,180px);font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3);pointer-events:none;font-family:var(--font-heading);margin:0;padding:0 20px;white-space:nowrap;}
+        .vms-big-text{position:absolute;bottom:80px;left:0;right:0;z-index:2;text-align:center;font-size:clamp(80px,12vw,140px);font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3);pointer-events:none;font-family:var(--font-heading);margin:0;padding:0 30px;white-space:nowrap;}
         body.dark-mode .vms-footer{background:#0d1117;}
         body.dark-mode .vms-logo-text,body.dark-mode .vms-tagline,body.dark-mode .vms-footer-col h5,body.dark-mode .vms-footer-links a{color:#e6edf3;}
         body.dark-mode .vms-desc,body.dark-mode .vms-credit{color:#8b949e;}
@@ -222,17 +221,24 @@ $tourTypes    = getSettings('tour_type');
             .vms-footer-nominee{display:none;}
             .vms-footer-content{padding:60px 32px 32px;gap:40px;}
         }
+        @media(min-width:1024px) and (max-width:1199px){
+            .vms-big-text{font-size:clamp(60px,10vw,110px);bottom:70px;}
+        }
         @media(max-width:991px){
             .vms-footer-content{grid-template-columns:1fr 1fr;gap:32px;padding:40px 28px 80px;}
             .vms-brand{grid-column:span 2;}
             .vms-video-section{height:360px;margin-top:-120px;}
-            .vms-big-text{font-size:clamp(16px,4vw,24px);bottom:40px;}
+            .vms-big-text{font-size:clamp(40px,8vw,70px);bottom:45px;}
+        }
+        @media(max-width:767px){
+            .vms-video-section{height:320px;margin-top:-105px;}
+            .vms-big-text{font-size:clamp(30px,6vw,50px);bottom:35px;}
         }
         @media(max-width:575px){
             .vms-footer-content{grid-template-columns:1fr;gap:26px;padding:28px 22px 60px;}
             .vms-brand{grid-column:span 1;}
             .vms-video-section{height:280px;margin-top:-90px;}
-            .vms-big-text{font-size:clamp(14px,5vw,20px);bottom:24px;}
+            .vms-big-text{font-size:clamp(22px,5vw,35px);bottom:25px;}
         }
 
         /* CTA Section — PROFESSIONAL REDESIGN */
@@ -369,6 +375,12 @@ $tourTypes    = getSettings('tour_type');
             .bromo-cta-content { padding: 48px 36px; align-items: center; text-align: center; }
             .bromo-cta-content .cta-desc { margin-left: auto; margin-right: auto; }
             .bromo-cta-content .cta-buttons { justify-content: center; }
+        }
+        @media (max-width: 575px) {
+            .bromo-cta-content { padding: 36px 20px; }
+            .bromo-cta-content .cta-buttons { flex-direction: column; width: 100%; }
+            .bromo-cta-content .cta-btn-primary,
+            .bromo-cta-content .cta-btn-secondary { justify-content: center; width: 100%; }
         }
         @keyframes bromoStickyIn{0%{transform:translateY(-15px)}100%{transform:translateY(0)}}
         /* ===== SEARCH BAR — PROFESSIONAL REDESIGN (theme navy #003A59) ===== */
@@ -651,29 +663,76 @@ $tourTypes    = getSettings('tour_type');
             background: #fff;
             color: #003A59;
         }
+        .vms-logo-img{
+            height: 70px;
+            width: auto;
+        }
+        /* Header logo text — hide when zoomed 110%+ */
+        .bromo-logo span {
+            white-space: nowrap;
+            font-size: 16px;
+        }
+        @media (min-width: 768px) and (max-width: 1400px) {
+            .bromo-logo span { display: none !important; }
+        }
+        @media (max-width: 767px) {
+            .bromo-logo span { display: block !important; font-size: 12px !important; white-space: nowrap !important; }
+            .bromo-header .bromo-logo { gap: 6px; }
+            .vms-video-section { overflow: hidden !important; }
+            body { overflow-x: hidden !important; }
+        }
+        @media (min-width: 768px) {
+            .vms-video-section { overflow: visible !important; }
+        }
+        .vms-big-text{
+            font-family: 'Sunsive', sans-serif !important;
+            font-size: clamp(40px, 7vw, 90px) !important;
+            font-weight: 700 !important;
+            bottom: 60px !important;
+            text-align: center !important;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            white-space: nowrap !important;
+            padding: 0 30px !important;
+        }
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            .vms-big-text { font-size: clamp(28px, 5vw, 70px) !important; bottom: 50px !important; }
+        }
+        @media (max-width: 991px) {
+            .vms-big-text { font-size: clamp(20px, 4vw, 45px) !important; bottom: 35px !important; }
+        }
+        @media (max-width: 767px) {
+            .vms-big-text { font-size: clamp(18px, 4vw, 35px) !important; bottom: 25px !important; }
+        }
+        @media (max-width: 575px) {
+            .vms-big-text { font-size: clamp(24px, 5vw, 40px) !important; bottom: 25px !important; }
+        }
+        @media (max-width: 400px) {
+            .vms-big-text { font-size: clamp(20px, 4.5vw, 32px) !important; bottom: 20px !important; }
+        }
     </style>
+    <link rel="stylesheet" href="assets/css/loader.css">
     <link rel="stylesheet" href="assets/css/page-transition.css">
 </head>
-<body class="with-sidebar">
+<body class="with-sidebar" data-turbo-cache="false">
 
-<!-- preloader -->
-<div class="preloader">
-    <div class="loader">
-        <?php for($i=1;$i<=20;$i++): ?><span style="--i:<?=$i?>;"></span><?php endfor; ?>
-        <div class="loader-plane"></div>
+<!-- ===== CORPORATE LOADER (fast — never blocks the page) ===== -->
+<div class="vms-preloader" id="vmsPreloader">
+    <div class="vms-preloader-logo">
+        <img src="assets/newlogo.png" alt="VMS Go Vista">
+    </div>
+    <div class="vms-preloader-brand" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</div>
+    <div class="vms-preloader-bar">
+        <div class="vms-preloader-bar-fill" id="vmsLoaderFill"></div>
     </div>
 </div>
 
 <!-- ===== BROMORISE HEADER ===== -->
 <header class="bromo-header header--sticky" id="bromoHeader">
     <a href="." class="bromo-logo">
-        <span class="bromo-logo-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" fill="#111"/>
-                <circle cx="17" cy="7" r="2.2" fill="#111"/>
-            </svg>
-        </span>
-        <span>vmsgovista</span>
+        <img src="assets/newlogo.png" alt="VMS Go Vista" class="vms-logo-img">
+        <span style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
     </a>
     <nav class="bromo-nav">
         <a href=".">Home</a>
@@ -683,7 +742,7 @@ $tourTypes    = getSettings('tour_type');
         <a href="contact">Contact</a>
     </nav>
     <div class="bromo-book-btn">
-        <a href="contact">
+        <a href="booking.php">
             Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
@@ -698,7 +757,7 @@ $tourTypes    = getSettings('tour_type');
 <div class="bromo-mobile-nav" id="mobileNav">
     <div class="bromo-mobile-nav-top">
         <a href="." class="bromo-mobile-nav-logo">
-            <img src="assets/3d logo.png" alt="VMS Go Vista">
+            <img src="assets/newlogo.png" alt="VMS Go Vista">
         </a>
         <button class="bromo-mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
@@ -712,13 +771,13 @@ $tourTypes    = getSettings('tour_type');
         <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
     </nav>
     <div class="bromo-mobile-nav-foot">
-        <a href="contact" class="bromo-mobile-nav-cta">
+        <a href="booking.php" class="bromo-mobile-nav-cta">
             <span>Book Now</span>
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
         <div class="bromo-mobile-nav-contact">
-            <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
-            <a href="mailto:hello@vmsgovista.com"><i class="fa-solid fa-envelope"></i> hello@vmsgovista.com</a>
+            <a href="tel:+919870182425"><i class="fa-solid fa-phone"></i> +91 98701 82425</a>
+            <a href="mailto:info@vmsgovista.com"><i class="fa-solid fa-envelope"></i> info@vmsgovista.com</a>
         </div>
     </div>
 </div>
@@ -833,7 +892,7 @@ $tourTypes    = getSettings('tour_type');
                                     <li class="checkbox-item">
                                         <label class="checkbox-label">
                                             <input type="checkbox" <?= $destination===$d['value']?'checked':'' ?>
-                                                onclick="window.location='package?destination=<?= urlencode($d['value']) ?>'">
+                                                onclick="vmsToggleFilter('destination', <?= e(json_encode($d['value'])) ?>)">
                                             <span><?= e($d['value']) ?></span>
                                         </label>
                                     </li>
@@ -850,7 +909,7 @@ $tourTypes    = getSettings('tour_type');
                                     <li class="checkbox-item">
                                         <label class="checkbox-label">
                                             <input type="checkbox" <?= $days==(string)$d?'checked':'' ?>
-                                                onclick="window.location='package?days=<?= $d ?>'">
+                                                onclick="vmsToggleFilter('days', '<?= $d ?>')">
                                             <span>Up to <?= $d ?> days</span>
                                         </label>
                                     </li>
@@ -866,7 +925,7 @@ $tourTypes    = getSettings('tour_type');
                                     <li class="checkbox-item">
                                         <label class="checkbox-label">
                                             <input type="checkbox" <?= $tour_type===$tt['value']?'checked':'' ?>
-                                                onclick="window.location='package?tour_type=<?= urlencode($tt['value']) ?>'">
+                                                onclick="vmsToggleFilter('tour_type', <?= e(json_encode($tt['value'])) ?>)">
                                             <span><?= e($tt['value']) ?></span>
                                         </label>
                                     </li>
@@ -910,7 +969,7 @@ $tourTypes    = getSettings('tour_type');
                                 <div class="image-area radius-6">
                                     <a href="package-details/<?= $slug ?>">
                                         <img class="hover-image" src="<?= e($imgUrl) ?>" alt="<?= e($pkg['title']) ?>">
-                                        <span class="tag"><?= formatPrice((float)($pkg['price_discounted'] ?? $pkg['price'] ?? 0)) ?>/person</span>
+                                        <span class="tag"><?= formatPrice((float)($pkg['price_discounted'] ?? $pkg['price'] ?? 0), $pkg['currency'] ?? 'INR') ?>/person</span>
                                     </a>
                                 </div>
                                 <div class="content">
@@ -980,7 +1039,7 @@ $tourTypes    = getSettings('tour_type');
                         Get a Free Quote
                         <i class="fa-regular fa-arrow-up-right"></i>
                     </a>
-                    <a href="tel:+919876543210" class="cta-btn-secondary">
+                    <a href="tel:+919870182425" class="cta-btn-secondary">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
                 </div>
@@ -1003,13 +1062,8 @@ $tourTypes    = getSettings('tour_type');
         <!-- Brand Column -->
         <div class="vms-brand">
             <div class="vms-logo">
-                <div class="vms-logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" stroke-linejoin="round"/>
-                        <circle cx="17" cy="7" r="2"/>
-                    </svg>
-                </div>
-                <span class="vms-logo-text">VMS Go Vista</span>
+                <img src="assets/newlogo.png" alt="VMS Go Vista" style="height:42px;width:auto;border-radius:8px;">
+                <span class="vms-logo-text" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
             </div>
             <h3 class="vms-tagline">Your smart travel companion</h3>
             <p class="vms-desc">VMS Go Vista brings tours, destinations, deals, weather, quick bookings and more useful travel tools into one beautiful platform beside your dream journey.</p>
@@ -1060,11 +1114,11 @@ $tourTypes    = getSettings('tour_type');
 
     <!-- Bottom bar with copyright -->
     <div class="vms-footer-bottom">
-        <p class="vms-credit">&copy; <?= date('Y') ?> VMS Go Vista &middot; All rights reserved</p>
+        <p class="vms-credit" style="font-weight: 900; color: black;">&copy; <?= date('Y') ?> VMS Go Vista &middot; All rights reserved</p>
         <div class="vms-credit">
-            <span>Crafted with dedication by</span>
-            <span class="vms-author">
-                <span class="vms-author-avatar"></span>
+            <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
+            <span class="vms-author" style="font-weight: 900; color: black;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 VMS Go Vista Team
             </span>
         </div>
@@ -1072,11 +1126,9 @@ $tourTypes    = getSettings('tour_type');
 
     <!-- Video Section with travel footage -->
     <div class="vms-video-section">
-        <video autoplay muted loop playsinline poster="">
-            <source src="assets/video6.mp4" type="video/mp4">
-        </video>
+        <img src="assets/videofotter.gif" alt="VMS Go Vista" class="vms-video-bg" loading="lazy">
         <div class="vms-video-gradient"></div>
-        <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista</div>
+        <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista Pvt Ltd</div>
     </div>
 </footer>
 
@@ -1120,6 +1172,7 @@ document.addEventListener('turbo:load',function(){
     document.body.classList.add('loaded');
     if(typeof WOW!=='undefined'){new WOW().init();}
 });
+window.addEventListener('pageshow',function(){ document.body.classList.add('loaded'); });
 
     document.addEventListener('DOMContentLoaded', function() {
         // Mobile Menu
@@ -1172,6 +1225,38 @@ document.addEventListener('turbo:load',function(){
             headerFilterBtn.addEventListener('click', toggleFilterSection);
         }
     });
+
+    // ── Corporate Loader (fast — hides ~250ms after DOM ready, never blocks) ──
+    (function () {
+        var overlay = document.getElementById('vmsPreloader');
+        var done = false;
+        function removeLoader() {
+            if (done || !overlay) return; done = true;
+            overlay.classList.add('hidden');
+            setTimeout(function () { if (overlay.parentNode) overlay.remove(); }, 500);
+        }
+        function fastHide() { setTimeout(removeLoader, 250); }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fastHide);
+        } else { fastHide(); }
+        window.addEventListener('pageshow', removeLoader);  // back/forward cache restore
+        window.addEventListener('load', removeLoader);
+        setTimeout(removeLoader, 1200);  // absolute max
+    })();
+
+    // ── Filter toggle: clicking an active filter REMOVES it, clicking an
+    //    inactive one ADDS it (fixes 'remove filter not working') ──
+    window.vmsToggleFilter = function (param, value) {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get(param) === value) {
+            params.delete(param);
+        } else {
+            params.set(param, value);
+        }
+        params.delete('page');
+        var qs = params.toString();
+        window.location.href = 'package' + (qs ? '?' + qs : '');
+    };
 </script>
 <script src="assets/js/page-transition.js"></script>
 </body>

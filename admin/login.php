@@ -32,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/fav.svg">
     <title>Admin Login — VMS Go Vista</title>
     <!-- Custom Font css -->
     <link rel="stylesheet preload" href="../assets/fonts/custom-font.css" as="style">
@@ -497,7 +496,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="vms-login-visual">
             <div class="vms-visual-top">
                 <a href="<?= SITE_URL ?>" class="vms-visual-logo">
-                    <img src="../assets/3d logo.png" alt="VMS Go Vista" class="vms-logo-img">
+                    <img src="../assets/newlogo.png" alt="VMS Go Vista" class="vms-logo-img">
                     <span class="logo-text">VMS Go Vista<small>Admin Portal</small></span>
                 </a>
             </div>
@@ -518,7 +517,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="vms-login-form-side">
             <div class="vms-login-card">
                 <div class="vms-card-logo">
-                    <img src="../assets/3d logo.png" alt="VMS Go Vista" class="vms-logo-img">
+                    <img src="../assets/newlogo.png" alt="VMS Go Vista" class="vms-logo-img">
                     <span class="card-brand">VMS Go Vista</span>
                 </div>
 

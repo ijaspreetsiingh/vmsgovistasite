@@ -158,7 +158,7 @@ document.addEventListener('turbo:load',function(){
                 window.clearInterval(autoplayId);
                 autoplayId = window.setInterval(function () {
                     transitionTo(1);
-                }, 2200);
+                }, 3000);
             }
 
             cards.forEach(function (card) {
@@ -178,9 +178,35 @@ document.addEventListener('turbo:load',function(){
                 else scheduleAutoplay();
             });
 
-            renderActive();
-            scheduleAutoplay();
-            console.log('Autoplay scheduled');
+            // ── Wait for the corporate loader to disappear before starting ──
+            // The loader takes ~1400ms + 500ms fade, while autoplay would have
+            // already rotated to slide 2 by then — making Kerala look like the
+            // first image. Boot the carousel (fresh from slide 0 = Dubai) only
+            // once the preloader element is actually removed from the DOM.
+            function bootCarousel() {
+                renderActive();
+                scheduleAutoplay();
+                console.log('Autoplay scheduled (after loader)');
+            }
+            var preloader = document.getElementById('vmsPreloader');
+            if (preloader && !preloader.classList.contains('hidden')) {
+                var bootTimer = window.setInterval(function () {
+                    if (!document.getElementById('vmsPreloader')) {
+                        window.clearInterval(bootTimer);
+                        bootCarousel();
+                    }
+                }, 60);
+                // Safety fallback: if the loader somehow never gets removed
+                // (JS error etc.), force-boot the carousel after 5s.
+                window.setTimeout(function () {
+                    if (document.getElementById('vmsPreloader')) {
+                        window.clearInterval(bootTimer);
+                        bootCarousel();
+                    }
+                }, 5000);
+            } else {
+                bootCarousel();
+            }
         })();
 
         // Mobile Menu Toggle

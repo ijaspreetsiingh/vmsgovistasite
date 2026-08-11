@@ -1,6 +1,7 @@
 <?php
 $pageTitle = 'Package Settings';
 require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/../includes/mailer.php';
 
 $db = getDB();
 $types = ['category' => 'Category', 'tour_type' => 'Tour Type', 'destination' => 'Destination', 'country' => 'Country', 'city' => 'City'];
@@ -9,6 +10,50 @@ $types = ['category' => 'Category', 'tour_type' => 'Tour Type', 'destination' =>
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     verifyCsrf();
     $action = $_POST['action'] ?? '';
+
+    // ── Save Email & SMTP settings ──
+    if ($action === 'smtp_save') {
+        $map = [
+            'mail_enabled'       => isset($_POST['mail_enabled']) ? '1' : '0',
+            'smtp_host'          => trim($_POST['smtp_host'] ?? ''),
+            'smtp_port'          => trim($_POST['smtp_port'] ?? '587'),
+            'smtp_user'          => trim($_POST['smtp_user'] ?? ''),
+            'smtp_encryption'    => in_array($_POST['smtp_encryption'] ?? '', ['tls','ssl','none'], true) ? $_POST['smtp_encryption'] : 'tls',
+            'smtp_from_email'    => trim($_POST['smtp_from_email'] ?? ''),
+            'smtp_from_name'     => trim($_POST['smtp_from_name'] ?? SITE_NAME),
+            'admin_notify_email' => trim($_POST['admin_notify_email'] ?? ''),
+        ];
+        // Password: keep old if left blank
+        $pass = (string)($_POST['smtp_pass'] ?? '');
+        if ($pass !== '') {
+            $map['smtp_pass'] = $pass;
+        }
+        foreach ($map as $k => $v) {
+            setSetting($k, $v);
+        }
+        setFlash('success', 'Email & SMTP settings saved.');
+        redirect(SITE_URL . '/admin/settings.php#email-smtp');
+    }
+
+    // ── Send a test email ──
+    if ($action === 'test_email') {
+        $to = trim($_POST['test_to'] ?? '');
+        if ($to === '') {
+            $to = getSetting('admin_notify_email', '');
+        }
+        if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+            setFlash('error', 'Enter a valid test recipient email address.');
+        } else {
+            $res = sendMail(
+                $to,
+                'Test Email — ' . SITE_NAME,
+                emailTemplate('SMTP Test Email',
+                    '<p style="margin:0;font-size:14px;color:#475467;line-height:1.7;">If you are reading this, your <strong>SMTP configuration is working perfectly</strong>. Great job! &#127881;</p>')
+            );
+            setFlash($res['success'] ? 'success' : 'error', ($res['success'] ? 'Test email sent to ' . e($to) . '. ' : 'Test failed: ') . e($res['message']));
+        }
+        redirect(SITE_URL . '/admin/settings.php#email-smtp');
+    }
 
     if ($action === 'add' || $action === 'edit') {
         $type  = trim($_POST['type'] ?? '');
@@ -75,6 +120,92 @@ foreach ($all as $r) {
 .add-form button { background:var(--adm-accent, #003A59); color:#fff; border:none; padding:7px 16px; border-radius:6px; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition:background .15s; }
 .add-form button:hover { background:var(--adm-accent-hover, #002B43); }
 </style>
+
+<!-- ===== EMAIL & SMTP SETTINGS ===== -->
+<div class="setting-card" id="email-smtp" style="margin-bottom:24px;">
+    <h3>
+        <i class="fa-solid fa-envelope-circle-check"></i> Email &amp; SMTP Settings
+        <span class="badge">Notifications</span>
+    </h3>
+    <div style="padding:18px;">
+        <p style="margin:0 0 16px;font-size:13px;color:#667085;line-height:1.6;">
+            Configure your mail server here. Works with <strong>Gmail / Google Workspace</strong> (use an
+            <a href="https://support.google.com/accounts/answer/185833" target="_blank" rel="noopener">App Password</a>),
+            <strong>Outlook / Microsoft 365</strong>, or any <strong>official webmail SMTP</strong> of your hosting provider.
+            When a package is booked or the contact form is submitted, the admin gets a notification and the customer gets a thank-you email.
+        </p>
+
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+            <input type="hidden" name="action" value="smtp_save">
+
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:12px 14px;background:#f9fafb;border:1px solid #e4e7ec;border-radius:8px;">
+                <input type="checkbox" name="mail_enabled" id="mail_enabled" style="width:18px;height:18px;accent-color:#003A59;" <?= mailIsEnabled() ? 'checked' : '' ?>>
+                <label for="mail_enabled" style="font-size:13px;font-weight:600;color:#344054;margin:0;">Enable email notifications (admin alerts + customer thank-you emails)</label>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;">
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">SMTP Host *</label>
+                    <input type="text" name="smtp_host" class="form-control-admin" placeholder="smtp.gmail.com" value="<?= e(getSetting('smtp_host')) ?>">
+                    <small style="color:#98a2b3;font-size:11px;">e.g. smtp.gmail.com, smtp.office365.com, mail.yourdomain.com</small>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">Port *</label>
+                    <input type="number" name="smtp_port" class="form-control-admin" value="<?= e(getSetting('smtp_port', '587')) ?>" min="1" max="65535">
+                    <small style="color:#98a2b3;font-size:11px;">587 (TLS) / 465 (SSL) / 25</small>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">Encryption *</label>
+                    <select name="smtp_encryption" class="form-control-admin">
+                        <?php $enc = getSetting('smtp_encryption', 'tls'); ?>
+                        <option value="tls" <?= $enc==='tls'?'selected':'' ?>>TLS (STARTTLS, port 587)</option>
+                        <option value="ssl" <?= $enc==='ssl'?'selected':'' ?>>SSL (implicit, port 465)</option>
+                        <option value="none" <?= $enc==='none'?'selected':'' ?>>None (plain, port 25)</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">SMTP Username</label>
+                    <input type="text" name="smtp_user" class="form-control-admin" placeholder="you@gmail.com" value="<?= e(getSetting('smtp_user')) ?>">
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">SMTP Password / App Password</label>
+                    <input type="password" name="smtp_pass" class="form-control-admin" placeholder="••••••••••••" autocomplete="new-password">
+                    <small style="color:#98a2b3;font-size:11px;">Leave blank to keep current password</small>
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">From Email *</label>
+                    <input type="email" name="smtp_from_email" class="form-control-admin" placeholder="noreply@yourdomain.com" value="<?= e(getSetting('smtp_from_email')) ?>">
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">From Name</label>
+                    <input type="text" name="smtp_from_name" class="form-control-admin" value="<?= e(getSetting('smtp_from_name', SITE_NAME)) ?>">
+                </div>
+                <div class="form-group" style="margin:0;">
+                    <label style="display:block;font-size:12px;color:#475467;margin-bottom:4px;">Admin Notification Email *</label>
+                    <input type="text" name="admin_notify_email" class="form-control-admin" placeholder="admin@yourdomain.com" value="<?= e(getSetting('admin_notify_email')) ?>">
+                    <small style="color:#98a2b3;font-size:11px;">Multiple addresses allowed, comma-separated</small>
+                </div>
+            </div>
+
+            <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;">
+                <button type="submit" class="btn-primary-admin" style="background:#003A59;border:none;"><i class="fa-solid fa-save"></i> Save Settings</button>
+                <span style="font-size:12px;color:#98a2b3;align-self:center;">Status: <?= mailIsEnabled() ? '<span style="color:#027a48;font-weight:600;">ON</span>' : '<span style="color:#b42318;font-weight:600;">OFF</span>' ?> <?= getSetting('smtp_host')!=='' ? '· SMTP configured' : '· SMTP not configured (will use PHP mail())' ?></span>
+            </div>
+        </form>
+
+        <!-- Test email -->
+        <form method="POST" style="margin-top:18px;padding-top:16px;border-top:1px dashed #e4e7ec;">
+            <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+            <input type="hidden" name="action" value="test_email">
+            <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                <label style="font-size:13px;font-weight:600;color:#344054;">Send test email to:</label>
+                <input type="email" name="test_to" class="form-control-admin" style="flex:1;min-width:200px;" placeholder="recipient@example.com (defaults to admin notification email)" value="<?= e(getSetting('admin_notify_email')) ?>">
+                <button type="submit" class="btn-secondary-admin"><i class="fa-solid fa-paper-plane"></i> Send Test Email</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <div class="setting-page">
     <?php foreach ($types as $tkey => $tlabel): 

@@ -25,13 +25,14 @@
     if (typeof Turbo !== 'undefined' || typeof window.Turbo !== 'undefined') {
         document.addEventListener('turbo:before-visit', showTransition);
         document.addEventListener('turbo:load', hideTransition);
+        document.addEventListener('turbo:render', hideTransition);
     }
 
-    // Safety: auto-hide after 3 seconds if something goes wrong
+    // Safety: auto-hide after 2 seconds if something goes wrong (was 3s)
     var safetyTimer = null;
     function startSafetyTimer() {
         clearTimeout(safetyTimer);
-        safetyTimer = setTimeout(hideTransition, 3000);
+        safetyTimer = setTimeout(hideTransition, 2000);
     }
 
     // Show on any navigation attempt
@@ -39,11 +40,27 @@
 
     // Fallback: hide on load for non-Turbo pages
     window.addEventListener('load', function () {
-        setTimeout(hideTransition, 200);
+        setTimeout(hideTransition, 150);
+    });
+
+    // CRITICAL FIX: back/forward cache (bfcache) restore fires `pageshow`,
+    // NOT `load`/`turbo:load` — so the overlay used to stay stuck when the
+    // user pressed Back. Hide the moment the page is shown again.
+    window.addEventListener('pageshow', function (e) {
+        clearTimeout(safetyTimer);
+        hideTransition();
     });
 
     // Handle back/forward navigation
     window.addEventListener('popstate', function () {
+        // Don't flash the overlay for bfcache restores — pageshow will fire right after.
+        if (window.performance && window.performance.getEntriesByType('navigation').length) {
+            var navType = window.performance.getEntriesByType('navigation')[0].type;
+            if (navType === 'back_forward') {
+                setTimeout(hideTransition, 50);
+                return;
+            }
+        }
         showTransition();
         startSafetyTimer();
     });

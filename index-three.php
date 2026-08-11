@@ -11,7 +11,6 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.svg">
     <title>VMS Go Vista – Travel &amp; Tour Booking</title>
     
     <!-- PERFORMANCE: Preconnect & DNS-prefetch -->
@@ -19,6 +18,12 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    
+    <!-- PERFORMANCE: Preload hero images so they are ready before the loader fades -->
+    <link rel="preload" as="image" href="assets/hero/dub1.webp">
+    <link rel="preload" as="image" href="assets/hero/k.webp">
+    <link rel="preload" as="image" href="assets/hero/thailand.webp">
+    <link rel="preload" as="image" href="assets/hero/kas.webp">
     
     <!-- CSS: EXACT MATCH to index-three.html load order -->
     <link rel="stylesheet preload" href="assets/css/plugins/swiper.min.css" as="style">
@@ -34,8 +39,8 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
     <link rel="stylesheet preload" href="assets/css/plugins/fontawesome.min.css" as="style">
     <link rel="stylesheet preload" href="assets/css/plugins/nice-select.css" as="style">
     <link rel="stylesheet preload" href="assets/css/style.css" as="style">
-    <link rel="stylesheet" href="assets/css/bromo-theme.css">
-    <link rel="stylesheet" href="assets/css/index-three-inline.css">
+    <link rel="stylesheet" href="assets/css/bromo-theme.css?v=3.0">
+    <link rel="stylesheet" href="assets/css/index-three-inline.css?v=3.0">
     <link rel="stylesheet" href="assets/css/loader.css">
     
     <!-- RESTORE index-three.html styling: Override index-three-inline.css font-heading changes -->
@@ -86,31 +91,141 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                 font-size: 15px !important;
             }
         }
-        /* VMS Big Text footer watermark - restore original positioning (matches index-three-inline.css) */
+        /* Match package.php header logo size (80px) */
+        .bromo-header .vms-logo-img {
+            height: 80px;
+            width: auto;
+        }
+        /* Header logo text — hide when zoomed 110%+ (1920px@110%=1745px) */
+        .bromo-logo span {
+            white-space: nowrap;
+            font-size: 16px;
+            transition: opacity 0.3s ease;
+        }
+        @media (min-width: 768px) and (max-width: 1400px) {
+            .bromo-logo span {
+                display: none !important;
+            }
+        }
+        /* Always show on phone — hide Pvt Ltd, reduce font */
+        @media (max-width: 767px) {
+            .bromo-logo span { display: block !important; font-size: 12px !important; white-space: nowrap !important; }
+            .header-pvt { display: none !important; }
+            .bromo-header .bromo-logo { gap: 6px; }
+        }
+        /* Fix: video section overflow clips watermark — allow it */
+        .vms-video-section { overflow: visible !important; }
+        /* VMS Big Text footer watermark */
         .vms-big-text {
             font-family: 'Sunsive', sans-serif !important;
-            font-size: clamp(120px, 18vw, 180px) !important;
+            font-size: clamp(40px, 7vw, 90px) !important;
             font-weight: 700 !important;
-            bottom: 80px !important;
+            bottom: 60px !important;
             text-align: center !important;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            white-space: nowrap !important;
+            padding: 0 30px !important;
+        }
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            .vms-big-text { font-size: clamp(28px, 5vw, 70px) !important; bottom: 50px !important; }
         }
         @media (max-width: 991px) {
-            .vms-big-text { font-size: clamp(16px, 4vw, 24px) !important; bottom: 40px !important; }
+            .vms-big-text { font-size: clamp(20px, 4vw, 45px) !important; bottom: 35px !important; }
+        }
+        @media (max-width: 767px) {
+            .vms-big-text { font-size: clamp(18px, 4vw, 35px) !important; bottom: 25px !important; }
         }
         @media (max-width: 575px) {
-            .vms-big-text { font-size: clamp(14px, 5vw, 20px) !important; bottom: 24px !important; }
+            .vms-big-text { font-size: clamp(24px, 5vw, 40px) !important; bottom: 25px !important; }
+        }
+        @media (max-width: 400px) {
+            .vms-big-text { font-size: clamp(20px, 4.5vw, 32px) !important; bottom: 20px !important; }
+        }
+        /* Newsletter Section Responsive Styles */
+        .bromo-newsletter-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .bromo-newsletter-form input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 14px;
+        }
+        .bromo-newsletter-form button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        @media (max-width: 767px) {
+            .bromo-newsletter-inner {
+                padding: 30px 20px;
+            }
+            .bromo-newsletter-title {
+                font-size: 24px !important;
+                line-height: 1.3 !important;
+            }
+            .bromo-newsletter-desc {
+                font-size: 14px !important;
+                margin-bottom: 20px !important;
+            }
+            .bromo-newsletter-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .bromo-newsletter-form input {
+                width: 100% !important;
+                min-width: auto;
+                padding: 14px 15px;
+                font-size: 16px;
+            }
+            .bromo-newsletter-form button {
+                width: 100% !important;
+                padding: 14px 20px;
+                font-size: 16px;
+            }
+        }
+        @media (max-width: 575px) {
+            .bromo-newsletter-inner {
+                padding: 25px 15px;
+            }
+            .bromo-newsletter-title {
+                font-size: 20px !important;
+            }
+            .bromo-newsletter-desc {
+                font-size: 13px !important;
+            }
         }
     </style>
 </head>
-<body class="home-yacht-bg with-sidebar">
+<body class="home-yacht-bg with-sidebar" data-turbo-cache="false">
 
-
+<!-- ===== CORPORATE LOADER (static — renders instantly) ===== -->
+<div class="vms-preloader" id="vmsPreloader">
+    <div class="vms-preloader-logo">
+        <img src="assets/newlogo.png" alt="VMS Go Vista">
+    </div>
+    <div class="vms-preloader-brand" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span></span>
+    </a> </div>
+    <div class="vms-preloader-bar">
+        <div class="vms-preloader-bar-fill" id="vmsLoaderFill"></div>
+    </div>
+</div>
 
 <!-- ===== BROMORISE HEADER ===== -->
 <header class="bromo-header header--sticky" id="bromoHeader">
     <a href="." class="bromo-logo">
-        <img src="assets/3d.png" alt="VMS Go Vista" class="vms-logo-img">
-        <span class="vms-logo-name">VMS Go Vista</span>
+        <img src="assets/newlogo.png" alt="VMS Go Vista" class="vms-logo-img">
+        <span style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
     </a>
     <nav class="bromo-nav">
         <a href="." class="active">Home</a>
@@ -120,7 +235,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
         <a href="contact">Contact</a>
     </nav>
     <div class="bromo-book-btn">
-        <a href="contact">
+        <a href="booking.php" class="active">
             Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
@@ -135,7 +250,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
 <div class="bromo-mobile-nav" id="mobileNav">
     <div class="bromo-mobile-nav-top">
         <a href="." class="bromo-mobile-nav-logo">
-            <img src="assets/3d logo.png" alt="VMS Go Vista">
+            <img src="assets/newlogo.png" alt="VMS Go Vista">
         </a>
         <button class="bromo-mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
@@ -149,13 +264,13 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
         <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
     </nav>
     <div class="bromo-mobile-nav-foot">
-        <a href="contact" class="bromo-mobile-nav-cta">
+        <a href="booking.php" class="bromo-mobile-nav-cta">
             <span>Book Now</span>
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
         <div class="bromo-mobile-nav-contact">
-            <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
-            <a href="mailto:hello@vmsgovista.com"><i class="fa-solid fa-envelope"></i> hello@vmsgovista.com</a>
+            <a href="tel:+919870182425"><i class="fa-solid fa-phone"></i> +91 98701 82425</a>
+            <a href="mailto:info@vmsgovista.com"><i class="fa-solid fa-envelope"></i> info@vmsgovista.com</a>
         </div>
     </div>
 </div>
@@ -165,19 +280,19 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
     <div class="bromo-hero-swiper">
         <div class="swiper bromo-bg-slider">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/images/banner/bg-01.webp');"></div></div>
-                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/images/banner/bg-02.webp');"></div></div>
-                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/images/banner/bg-05.webp');"></div></div>
-                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/images/banner/bg-10.webp');"></div></div>
+                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/hero/dub1.webp');"></div></div>
+                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/hero/k.webp');"></div></div>
+                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/hero/thailand.webp');"></div></div>
+                <div class="swiper-slide"><div class="bromo-hero-slide-bg" style="background-image:url('assets/hero/kas.webp');"></div></div>
             </div>
         </div>
     </div>
     <div class="bromo-hero-content">
         <div class="bromo-center-text">
-            <span class="bromo-eyebrow">East Java's Natural Wonder</span>
+            <span class="bromo-eyebrow">Travel Beyond Expectations</span>
             <h1>
-                <span class="bromo-line">Unforgettable Mount Bromo</span>
-                <span class="bromo-line">Sunrise Experience</span>
+                <span class="bromo-line">Unforgettable Travel Journeys</span>
+                <span class="bromo-line">Begin With VMS Go Vista</span>
             </h1>
         </div>
     </div>
@@ -191,27 +306,27 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                 <span class="bromo-joined">Happy Travelers</span>
             </div>
             <p>From coastlines to mountain trails, discover handpicked journeys made for stories worth telling.</p>
-            <a href="contact" class="bromo-hero-btn">
-                Explore trips
+            <a href="package" class="bromo-hero-btn">
+                Explore Packages
                 <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
             </a>
         </div>
         <div class="bromo-right-cards">
             <div class="bromo-img-card is-active" data-slide-index="0">
-                <img src="assets/images/banner/bg-01.webp" alt="Scenic road trips">
-                <div class="bromo-card-label"><strong>Scenic Road Trips</strong><span>Follow unforgettable roads through dramatic landscapes.</span></div>
+                <img src="assets/hero/dub1.webp" alt="Dubai Luxury Adventure and Skyline" fetchpriority="high">
+                <div class="bromo-card-label"><strong>Dubai – Luxury, Adventure &amp; Skyline</strong><span>Experience world-class luxury, iconic skylines, thrilling adventures, and unforgettable desert experiences.</span></div>
             </div>
             <div class="bromo-img-card" data-slide-index="1">
-                <img src="assets/images/banner/bg-02.webp" alt="Coastal escapes">
-                <div class="bromo-card-label"><strong>Coastal Escapes</strong><span>Chase clear blue waters, quiet coves, and sun-soaked days.</span></div>
+                <img src="assets/hero/k.webp" alt="Kerala God's Own Country">
+                <div class="bromo-card-label"><strong>Kerala – God's Own Country</strong><span>Experience serene backwaters, lush greenery, pristine beaches, and unforgettable cultural escapes.</span></div>
             </div>
             <div class="bromo-img-card" data-slide-index="2">
-                <img src="assets/images/banner/bg-05.webp" alt="Glacier adventures">
-                <div class="bromo-card-label"><strong>Glacier Adventures</strong><span>Step into wild ice landscapes with expert-led experiences.</span></div>
+                <img src="assets/hero/thailand.webp" alt="Thailand Beaches Culture and Adventure">
+                <div class="bromo-card-label"><strong>Thailand – Beaches, Culture &amp; Adventure</strong><span>Discover stunning beaches, vibrant culture, delicious cuisine, and thrilling adventures in a tropical paradise.</span></div>
             </div>
             <div class="bromo-img-card" data-slide-index="3">
-                <img src="assets/images/banner/bg-10.webp" alt="Safari sunsets">
-                <div class="bromo-card-label"><strong>Safari Sunsets</strong><span>Experience unforgettable wildlife beneath golden skies.</span></div>
+                <img src="assets/hero/kas.webp" alt="Kashmir Paradise in the Himalayas">
+                <div class="bromo-card-label"><strong>Kashmir – Paradise in the Himalayas</strong><span>Discover breathtaking valleys, snow-capped mountains, serene lakes, and timeless natural beauty.</span></div>
             </div>
         </div>
     </div>
@@ -691,7 +806,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                             <div class="why-choose-video-wrap radius-10 wow fadeInLeft" data-wow-delay="0.1s">
                                 <video id="whyChooseVideo" autoplay muted loop playsinline>
                                     <source
-                                        src="assets/video3.mp4"
+                                        src="assets/video4.mp4"
                                         type="video/mp4">
                                 </video>
                                 <div class="video-gradient-overlay"></div>
@@ -769,10 +884,25 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                                         </li>
                                     </ul>
                                     <div class="why-choose-fixed-bottom">
-                                        <div class="button-area">
-                                            <a href="contact" class="rts-btn btn-primary">Talk to Our Team</a>
+                                        <div class="button-area" style="text-align: left;">
+                                            <div class="bromo-book-btn" style="justify-self: start;">
+                                                <a href="contact" class="why-choose-btn" style="background: rgba(0,58,89,0.06); border-color: rgba(0,58,89,0.12); color: #003A59;">
+                                                    Talk to Our Team
+                                                    <span class="bromo-arrow" style="background: #003A59; color: #fff;"><i class="fa-regular fa-arrow-up-right"></i></span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
+                                    <style>
+                                        .why-choose-btn:hover {
+                                            background: #003A59 !important;
+                                            color: #fff !important;
+                                        }
+                                        .why-choose-btn:hover .bromo-arrow {
+                                            background: #fff !important;
+                                            color: #003A59 !important;
+                                        }
+                                    </style>
                                 </div>
                             </div>
                         </div>
@@ -798,24 +928,24 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
         <div class="container"><div class=""><div class="outer-box overflow-hidden radius-10 wow fadeInUp" data-wow-delay="0.4s">
             <br><br>
             <div class="project-block-four">
-                <div class="image-area"><img src="assets/images/destination/india-kashmir.webp" width="630" alt="Kashmir Valley"></div>
-                <div class="content-area"><p><i class="fa-light fa-location-dot"></i> Jammu & Kashmir</p><h4 class="title"><a href="vms-tour-details">Kashmir Valley Escape</a></h4></div>
+                <div class="image-area"><img src="assets/indexpageimg/img1.webp" width="630" alt="Rainbow Bridge Tokyo"></div>
+                <div class="content-area"><p style="color: white;"><i class="fa-light fa-location-dot"></i> Tokyo, Japan</p><h4 class="title" style="color: white;">Rainbow Bridge</h4></div>
             </div>
             <div class="project-block-four">
-                <div class="image-area"><img src="assets/images/destination/india-taj.webp" width="630" alt="Taj Mahal"></div>
-                <div class="content-area"><p><i class="fa-light fa-location-dot"></i> Uttar Pradesh</p><h4 class="title"><a href="vms-tour-details">Taj Mahal Sunrise Tour</a></h4></div>
+                <div class="image-area"><img src="assets/indexpageimg/img3.webp" width="630" alt="Bangkok Temple"></div>
+                <div class="content-area"><p style="color: white;"><i class="fa-light fa-location-dot"></i> Bangkok, Thailand</p><h4 class="title" style="color: white;">Wat Arun Temple</h4></div>
             </div>
             <div class="project-block-four">
-                <div class="image-area"><img src="assets/images/destination/india-jaipur.webp" width="630" alt="Jaipur Palace"></div>
-                <div class="content-area"><p><i class="fa-light fa-location-dot"></i> Rajasthan</p><h4 class="title"><a href="vms-tour-details">Jaipur Heritage Walk</a></h4></div>
+                <div class="image-area"><img src="assets/indexpageimg/imglast.webp" width="630" alt="Udaipur Lake Palace"></div>
+                <div class="content-area"><p style="color: white;"><i class="fa-light fa-location-dot"></i> Udaipur, India</p><h4 class="title" style="color: white;">Lake Palace</h4></div>
             </div>
             <div class="project-block-four">
-                <div class="image-area"><img src="assets/images/destination/india-goa.webp" width="630" alt="Goa Beach"></div>
-                <div class="content-area"><p><i class="fa-light fa-location-dot"></i> Goa</p><h4 class="title"><a href="vms-tour-details">Goa Beach Retreat</a></h4></div>
+                <div class="image-area"><img src="assets/indexpageimg/new (1).webp" width="630" alt="Bangkok City"></div>
+                <div class="content-area"><p style="color: white;"><i class="fa-light fa-location-dot"></i> Bangkok, Thailand</p><h4 class="title" style="color: white;">Grand Palace</h4></div>
             </div>
             <div class="project-block-four active">
-                <div class="image-area"><img src="assets/images/destination/india-manali.webp" width="630" alt="Manali Mountains"></div>
-                <div class="content-area"><p><i class="fa-light fa-location-dot"></i> Himachal Pradesh</p><h4 class="title"><a href="vms-tour-details">Manali Himalayan Trek</a></h4></div>
+                <div class="image-area"><img src="assets/indexpageimg/new (2).webp" width="630" alt="Kerala Backwaters"></div>
+                <div class="content-area"><p style="color: white;"><i class="fa-light fa-location-dot"></i> Kerala, India</p><h4 class="title" style="color: white;">Kerala Backwaters</h4></div>
             </div>
         </div></div></div>
     </div>
@@ -836,65 +966,65 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
         </div>
         <div class="bento-gallery wow fadeInUp" data-wow-delay="0.2s">
             <div class="bento-item bento-item-1">
-                <a href="assets/images/gallery/01.webp" class="gallery-image magnific-zoom">
-                    <img src="assets/images/gallery/01.webp" alt="Kerala Backwaters">
+                <a href="assets/indexpageimg/indexgallery/img (1).webp" class="gallery-image magnific-zoom">
+                    <img src="assets/indexpageimg/indexgallery/img (1).webp" alt="Travel Gallery 1">
                     <div class="bento-overlay"></div>
                     <div class="bento-caption">
                         <div class="bento-label">
-                            <span class="bento-name">Kerala Backwaters</span>
-                            <span class="bento-location">God's Own Country</span>
+                            <span class="bento-name">Travel Moment 1</span>
+                            <span class="bento-location">Beautiful Destination</span>
                         </div>
                         <span class="bento-zoom"><i class="fa-regular fa-plus"></i></span>
                     </div>
                 </a>
             </div>
             <div class="bento-item bento-item-2">
-                <a href="assets/images/gallery/02.webp" class="gallery-image magnific-zoom">
-                    <img src="assets/images/gallery/02.webp" alt="Taj Mahal">
+                <a href="assets/indexpageimg/indexgallery/img (2).webp" class="gallery-image magnific-zoom">
+                    <img src="assets/indexpageimg/indexgallery/img (2).webp" alt="Travel Gallery 2">
                     <div class="bento-overlay"></div>
                     <div class="bento-caption">
                         <div class="bento-label">
-                            <span class="bento-name">Taj Mahal</span>
-                            <span class="bento-location">Agra, Uttar Pradesh</span>
+                            <span class="bento-name">Travel Moment 2</span>
+                            <span class="bento-location">Beautiful Destination</span>
                         </div>
                         <span class="bento-zoom"><i class="fa-regular fa-plus"></i></span>
                     </div>
                 </a>
             </div>
             <div class="bento-item bento-item-3">
-                <a href="assets/images/gallery/03.webp" class="gallery-image magnific-zoom">
-                    <img src="assets/images/gallery/03.webp" alt="Jaipur">
+                <a href="assets/indexpageimg/indexgallery/img (3).webp" class="gallery-image magnific-zoom">
+                    <img src="assets/indexpageimg/indexgallery/img (3).webp" alt="Travel Gallery 3">
                     <div class="bento-overlay"></div>
                     <div class="bento-caption">
                         <div class="bento-label">
-                            <span class="bento-name">Pink City</span>
-                            <span class="bento-location">Jaipur, Rajasthan</span>
+                            <span class="bento-name">Travel Moment 3</span>
+                            <span class="bento-location">Beautiful Destination</span>
                         </div>
                         <span class="bento-zoom"><i class="fa-regular fa-plus"></i></span>
                     </div>
                 </a>
             </div>
             <div class="bento-item bento-item-4">
-                <a href="assets/images/gallery/04.webp" class="gallery-image magnific-zoom">
-                    <img src="assets/images/gallery/04.webp" alt="Himalayas">
+                <a href="assets/indexpageimg/indexgallery/img (4).webp" class="gallery-image magnific-zoom">
+                    <img src="assets/indexpageimg/indexgallery/img (4).webp" alt="Travel Gallery 4">
                     <div class="bento-overlay"></div>
                     <div class="bento-caption">
                         <div class="bento-label">
-                            <span class="bento-name">Himalayan Range</span>
-                            <span class="bento-location">Northern India</span>
+                            <span class="bento-name">Travel Moment 4</span>
+                            <span class="bento-location">Beautiful Destination</span>
                         </div>
                         <span class="bento-zoom"><i class="fa-regular fa-plus"></i></span>
                     </div>
                 </a>
             </div>
             <div class="bento-item bento-item-5">
-                <a href="assets/images/gallery/05.webp" class="gallery-image magnific-zoom">
-                    <img src="assets/images/gallery/05.webp" alt="Goa Beach">
+                <a href="assets/indexpageimg/indexgallery/img (5).webp" class="gallery-image magnific-zoom">
+                    <img src="assets/indexpageimg/indexgallery/img (5).webp" alt="Travel Gallery 5">
                     <div class="bento-overlay"></div>
                     <div class="bento-caption">
                         <div class="bento-label">
-                            <span class="bento-name">Goa Beaches</span>
-                            <span class="bento-location">Sun, Sand & Sea</span>
+                            <span class="bento-name">Travel Moment 5</span>
+                            <span class="bento-location">Beautiful Destination</span>
                         </div>
                         <span class="bento-zoom"><i class="fa-regular fa-plus"></i></span>
                     </div>
@@ -910,8 +1040,8 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
     <div class="container">
         <div class="section-title-area center-style">
             <p class="fst-italic mb--5 wow fadeInUp" data-wow-delay="0.1s" style="font-size:16px;color:var(--color-body-1);">Trusted by travelers worldwide</p>
-            <h2 class="section-title text-uppercase wow fadeInUp" data-wow-delay="0.2s">What Our Guests Say</h2>
-        </div>
+            <h2 class="section-title wow fadeInUp" data-wow-delay="0.2s">What Our Guests Say</h2>
+            </div>
         <div class="section-inner position-relative mt--60 wow fadeInUp" data-wow-delay="0.2s">
             <?php
             $testimonials = [
@@ -924,7 +1054,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
             <div class="row g-5 align-items-center">
                 <div class="col-xl-5 col-lg-6">
                     <div class="testi-image-wrap">
-                        <img src="assets/images/destination/india-kerala.webp" alt="Beautiful Kerala Backwaters" class="testi-fixed-image">
+                        <img src="assets/imgr.webp" alt="Happy travelers enjoying their journey" class="testi-fixed-image">
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-6">
@@ -1005,7 +1135,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                         Get a Free Quote
                         <i class="fa-regular fa-arrow-up-right"></i>
                     </a>
-                    <a href="tel:+919876543210" class="cta-btn-secondary">
+                    <a href="tel:+919870182425" class="cta-btn-secondary">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
                 </div>
@@ -1028,13 +1158,8 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
         <!-- Brand Column -->
         <div class="vms-brand">
             <div class="vms-logo">
-                <div class="vms-logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" stroke-linejoin="round"/>
-                        <circle cx="17" cy="7" r="2"/>
-                    </svg>
-                </div>
-                <span class="vms-logo-text">VMS Go Vista</span>
+                <img src="assets/newlogo.png" alt="VMS Go Vista" style="height:42px;width:auto;border-radius:8px;">
+                <span class="vms-logo-text" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
             </div>
             <h3 class="vms-tagline">Your smart travel companion</h3>
             <p class="vms-desc">VMS Go Vista brings tours, destinations, deals, weather, quick bookings and more useful travel tools into one beautiful platform beside your dream journey.</p>
@@ -1085,11 +1210,11 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
 
     <!-- Bottom bar with copyright -->
     <div class="vms-footer-bottom">
-        <p class="vms-credit">&copy; <?= date('Y') ?> VMS Go Vista &middot; All rights reserved</p>
+        <p class="vms-credit" style="font-weight: 900; color: black;">&copy; <?= date('Y') ?> VMS Go Vista &middot; All rights reserved</p>
         <div class="vms-credit">
-            <span>Crafted with dedication by</span>
-            <span class="vms-author">
-                <span class="vms-author-avatar"></span>
+            <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
+            <span class="vms-author" style="font-weight: 900; color: black;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 VMS Go Vista Team
             </span>
         </div>
@@ -1097,11 +1222,9 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
 
     <!-- Video Section with travel footage -->
     <div class="vms-video-section">
-        <video autoplay muted loop playsinline poster="">
-            <source src="assets/video6.mp4" type="video/mp4">
-        </video>
+        <img src="assets/videofotter.gif" alt="VMS Go Vista" class="vms-video-bg" loading="lazy">
         <div class="vms-video-gradient"></div>
-        <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista</div>
+        <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista PVT LTD</div>
     </div>
 </footer>
 
@@ -1157,23 +1280,29 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
 <script defer src="assets/js/main.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.min.js"></script>
 
-<!-- Premium Loader -->
-<link rel="preload" href="assets/loader-logo.png" as="image">
-<script src="assets/js/loader.js"></script>
+<!-- Corporate Loader (inline — no external file needed) -->
+<link rel="preload" href="assets/newlogo.png" as="image">
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var loader = new VMSUltraLoader({
-        logoSrc: 'assets/loader-logo.png',
-        holdTime: 1500,
-        loop: false,
-        onReady: function() {
-            if (typeof WOW !== 'undefined') new WOW().init();
-        }
-    });
-    loader.play();
-    // Hide after animation completes (~7.5s) + 1s buffer
-    setTimeout(function() { loader.hide(); }, 8500);
-});
+(function(){
+    var duration = 1400;
+    var overlay = document.getElementById('vmsPreloader');
+    var fill = document.getElementById('vmsLoaderFill');
+    function removeLoader(){
+        if(overlay){overlay.classList.add('hidden');setTimeout(function(){if(overlay.parentNode)overlay.remove();},500);}
+    }
+    function initWOW(){if(typeof WOW!=='undefined')new WOW().init();}
+    if(!overlay||!fill){removeLoader();initWOW();return;}
+    var start=performance.now();
+    function tick(now){
+        var elapsed=now-start;
+        var progress=Math.min(elapsed/duration,1);
+        var eased=1-Math.pow(1-progress,3);
+        fill.style.width=(eased*100)+'%';
+        if(progress<1){requestAnimationFrame(tick);}
+        else{setTimeout(function(){removeLoader();initWOW();},250);}
+    }
+    requestAnimationFrame(tick);
+})();
 </script>
 
 <!-- BromoRise Hero FIFO Carousel -->

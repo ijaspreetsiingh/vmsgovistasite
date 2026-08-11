@@ -1025,9 +1025,26 @@
       });
     },
     preloader: function () {
-      window.addEventListener("load", function () {
-        document.querySelector("body").classList.add("loaded");
-      });
+      var body = document.querySelector("body");
+      function hidePreloader() {
+        if (body && !body.classList.contains("loaded")) {
+          body.classList.add("loaded");
+        }
+      }
+      // Hide as soon as the DOM is ready — never wait for images/fonts/ads
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () {
+          setTimeout(hidePreloader, 120);
+        });
+      } else {
+        setTimeout(hidePreloader, 120);
+      }
+      // Absolute safety: loader can never spin longer than 1.6s
+      setTimeout(hidePreloader, 1600);
+      // Full load + bfcache restore (back/forward button) — `load` does NOT
+      // fire on bfcache restore, so `pageshow` is mandatory here
+      window.addEventListener("load", hidePreloader);
+      window.addEventListener("pageshow", hidePreloader);
     },
     // search popup
     searchOption: function () {

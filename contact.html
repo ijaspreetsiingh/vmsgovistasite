@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.svg">
     <link rel="preload" href="assets/hero5.png" as="image">
+    <link rel="stylesheet" href="assets/css/loader.css">
     <link rel="stylesheet" href="assets/css/page-transition.css">
     <title>Contact Us – VMS Go Vista</title>
     <!-- PERFORMANCE: Preconnect & DNS-prefetch -->
@@ -29,6 +29,17 @@
     <!-- Google Fonts (sync to prevent FOUT / font-size shift) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+       .vms-logo-img{
+            height: 70px;
+            width: auto;
+        }
+        /* Contact-page header: logo size + gap match package.php */
+        .bromo-header .bromo-logo{ gap: 10px; }
+        @media (max-width: 767px){
+            .vms-logo-img{ height: 70px; }
+            .bromo-header .bromo-logo{ gap: 6px; }
+            .bromo-logo span{ white-space: nowrap !important; }
+        }
         /* Page-specific overrides */
         body.dark-mode .rts-contact-area, body.dark-mode section {
             background-color: #0d1117 !important;
@@ -87,6 +98,11 @@
 
         /* ===== VMS FOOTER — COOLDOCK STYLE ===== */
         .vms-footer{position:relative;background:whitesmoke;padding:0;overflow:hidden;font-family:var(--font-body);}
+        html,body{overflow-x:hidden !important;max-width:100%;}
+        .container,.container-fluid,.wrapper{max-width:100% !important;overflow-x:hidden !important;}
+        .rts-contact-area{max-width:1260px !important;margin:0 auto !important;overflow-x:hidden !important;}
+        .rts-contact-area .section-inner{max-width:1260px !important;margin:0 auto !important;}
+        .bromo-header,.bromo-nav,.bromo-mobile-menu,.mobile-menu-wrapper{max-width:100% !important;overflow-x:hidden !important;}
         .vms-footer-toppill{position:absolute;top:-28px;left:50%;transform:translateX(-50%);z-index:5;background:#003A59;border-radius:999px;padding:8px 8px 8px 20px;display:flex;align-items:center;gap:22px;box-shadow:0 8px 30px rgba(0,58,89,0.25);}
         .vms-footer-toppill .tp-logo{display:flex;align-items:center;gap:8px;color:#fff;font-weight:600;font-size:14px;}
         .vms-footer-toppill .tp-logo-box{width:22px;height:22px;background:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;}
@@ -96,7 +112,7 @@
         .vms-footer-toppill .tp-nav a:hover{color:#fff;}
         .vms-footer-toppill .tp-download{background:rgba(255,255,255,0.15);color:#fff;font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,0.2);}
         .vms-footer-toppill .tp-download:hover{background:rgba(255,255,255,0.25);}
-        .vms-footer-nominee{position:absolute;top:120px;right:0;z-index:4;background:#003A59;color:#fff;padding:20px 8px;border-radius:8px 0 0 8px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;font-weight:600;letter-spacing:2px;}
+        .vms-footer-nominee{position:absolute;bottom:0;right:0;z-index:4;background:#003A59;color:#fff;padding:20px 8px;border-radius:8px 0 0 8px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;font-weight:600;letter-spacing:2px;}
         .vms-footer-content{position:relative;z-index:3;max-width:1100px;margin:0 auto;padding-top:80px;padding-bottom:40px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:60px;}
         .vms-brand{display:flex;flex-direction:column;gap:12px;}
         .vms-logo{display:flex;align-items:center;gap:10px;}
@@ -119,10 +135,10 @@
         .vms-footer-links a{font-size:13.5px;color:#555;text-decoration:none;transition:color .2s;}
         .vms-footer-links a:hover{color:#003A59;}
         @keyframes vmsBgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-        .vms-video-section{position:relative;z-index:1;width:100%;height:520px;overflow:hidden;margin-top:-210px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);background-size:400% 400%;animation:vmsBgShift 15s ease infinite;}
-        .vms-video-section video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+        .vms-video-section{position:relative;z-index:1;width:100%;height:520px;overflow:visible;margin-top:-210px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);background-size:400% 400%;animation:vmsBgShift 15s ease infinite;}
+        .vms-video-section .vms-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
         .vms-video-gradient{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,whitesmoke 0%,rgba(245,245,245,0.92) 12%,rgba(245,245,245,0.35) 22%,rgba(245,245,245,0.08) 32%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.5) 78%,#000 100%);}
-        .vms-big-text{position:absolute;bottom:80px;left:0;right:0;z-index:2;text-align:center;font-size:clamp(120px,18vw,180px);font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3);pointer-events:none;font-family:var(--font-heading);margin:0;padding:0 20px;white-space:nowrap;}
+        .vms-big-text{position:absolute;bottom:80px;left:0;right:0;z-index:2;text-align:center;font-size:clamp(80px,12vw,140px);font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3);pointer-events:none;font-family:var(--font-heading);margin:0;padding:0 30px;white-space:nowrap;}
         body.dark-mode .vms-footer{background:#0d1117;}
         body.dark-mode .vms-logo-text,body.dark-mode .vms-tagline,body.dark-mode .vms-footer-col h5,body.dark-mode .vms-footer-links a{color:#e6edf3;}
         body.dark-mode .vms-desc,body.dark-mode .vms-credit{color:#8b949e;}
@@ -146,21 +162,58 @@
             .vms-footer-nominee{display:none;}
             .vms-footer-content{padding:60px 32px 32px;gap:40px;}
         }
+        @media(min-width:1024px) and (max-width:1199px){
+            .vms-big-text{font-size:clamp(60px,10vw,110px);bottom:70px;}
+        }
         @media(max-width:991px){
             .vms-footer-content{grid-template-columns:1fr 1fr;gap:32px;padding:40px 28px 80px;}
             .vms-brand{grid-column:span 2;}
             .vms-video-section{height:360px;margin-top:-120px;}
-            .vms-big-text{font-size:clamp(16px,4vw,24px);bottom:40px;}
+            .vms-big-text{font-size:clamp(40px,8vw,70px);bottom:45px;}
+        }
+        @media(max-width:767px){
+            .vms-video-section{height:320px;margin-top:-105px;overflow:hidden !important;}
+            .vms-big-text{font-size:clamp(30px,6vw,50px);bottom:35px;white-space:normal !important;padding:0 15px !important;}
+            body{overflow-x:hidden !important;}
         }
         @media(max-width:575px){
             .vms-footer-content{grid-template-columns:1fr;gap:26px;padding:28px 22px 60px;}
             .vms-brand{grid-column:span 1;}
-            .vms-video-section{height:280px;margin-top:-90px;}
-            .vms-big-text{font-size:clamp(14px,5vw,20px);bottom:24px;}
+            .vms-video-section{height:280px;margin-top:-90px;overflow:hidden !important;}
+            .vms-big-text{font-size:clamp(18px,4vw,28px);bottom:25px;white-space:normal !important;padding:0 15px !important;}
+            body{overflow-x:hidden !important;}
         }
         /* ===== THEME OVERRIDES — VMS Go Vista ===== */
         /* Contact Form */
         .rts-contact-area .section-inner.body-bg-one{background:rgb(255, 255, 255) !important;border:1px solid rgba(0,58,89,0.06);}
+        /* ============================================================
+           INTERNAL FONT SIZE FIX — Contact Page (reference: About page)
+           ============================================================ */
+        /* === BASE DESKTOP (1200px+) === */
+        @media(min-width:1200px){
+            .contact-form > .title{font-size:30px!important;font-weight:700!important;color:#003A59!important;line-height:1.2!important;}
+            .contact-form label{font-size:15px!important;font-weight:600!important;color:#003A59!important;line-height:1.2!important;}
+            .contact-form input,.contact-form textarea{font-size:15.5px!important;font-weight:400!important;color:#222!important;}
+            .contact-form input::placeholder,.contact-form textarea::placeholder{font-size:15px!important;}
+            .contact-form .desc{font-size:14px!important;line-height:1.6!important;}
+            .single-contact-card .top-area .title{font-size:20px!important;font-weight:700!important;color:#003A59!important;}
+            .single-contact-card p,.single-contact-card a{font-size:15px!important;line-height:1.7!important;}
+            .section-title-area h2,.section-title-area .section-title{font-size:48px!important;font-weight:700!important;line-height:1.15!important;color:#003A59!important;}
+            .section-title-area .sub-title{font-size:13px!important;font-weight:600!important;color:#003A59!important;letter-spacing:1.5px!important;text-transform:uppercase!important;}
+        }
+        /* === TABLET (768px-1199px) === */
+        @media(min-width:768px) and (max-width:1199px){
+            .contact-form > .title{font-size:26px!important;font-weight:700!important;color:#003A59!important;}
+            .contact-form label{font-size:14px!important;}
+            .single-contact-card .top-area .title{font-size:18px!important;}
+            .single-contact-card p,.single-contact-card a{font-size:14.5px!important;line-height:1.65!important;}
+        }
+        @media(max-width:767px){
+            .contact-form > .title{font-size:24px!important;font-weight:700!important;color:#003A59!important;}
+            .contact-form label{font-size:14px!important;}
+            .single-contact-card .top-area .title{font-size:18px!important;}
+            .single-contact-card p,.single-contact-card a{font-size:14px!important;line-height:1.6!important;}
+        }
         .contact-form .form-inner .title{color:#003A59!important;}
         .contact-form label{color:#003A59!important;font-weight:600;}
         .contact-form input,.contact-form textarea{border:1px solid rgba(0,58,89,0.12)!important;background:#fff!important;transition:border-color .22s;}
@@ -170,6 +223,118 @@
         .rts-btn.btn-primary:hover{background:#002B43!important;transform:translateY(-1px);}
         .contact-form .desc{color:#666!important;}
         .contact-form .desc a{color:#003A59!important;text-decoration:underline;}
+
+        /* ===== CONTACT FORM — RESPONSIVE (phone-friendly) ===== */
+        @media(max-width:991px){
+            .rts-contact-area.inner .section-inner{padding:40px 28px;}
+            .rts-contact-area.inner .section-inner .contact-form .form-inner{flex-direction:column;gap:24px;}
+            .rts-contact-area.inner .section-inner .contact-form .left,
+            .rts-contact-area.inner .section-inner .contact-form .right{max-width:100%;gap:20px;}
+            .rts-contact-area.inner .section-inner .contact-form input{height:54px;}
+            .rts-contact-area.inner .section-inner .contact-form textarea{height:220px;}
+        }
+        @media(max-width:575px){
+            .rts-contact-area.inner .section-inner{padding:30px 18px;}
+            .rts-contact-area.inner .section-inner .contact-form .form-inner{gap:20px;}
+            .rts-contact-area.inner .section-inner .contact-form label{margin-bottom:10px;}
+            .rts-contact-area.inner .section-inner .contact-form input{height:50px;padding:13px 16px;}
+            .rts-contact-area.inner .section-inner .contact-form textarea{height:180px;padding:16px;}
+            .contact-form-content-bottom-wrapper .single-contact-card{padding:28px 22px!important;}
+        }
+        /* ===== CONTACT SUBMIT BUTTON — HEADER BOOK-NOW PILL STYLE ===== */
+        /* Matches .bromo-book-btn (sticky header variant): glass pill, arrow circle */
+        .vms-submit-btn{
+            position:relative;
+            display:inline-flex!important;
+            align-items:center;
+            justify-content:center;
+            gap:14px;
+            min-width:210px;
+            max-width:none!important;
+            padding:12px 12px 12px 28px!important;
+            border-radius:999px!important;
+            background:rgba(0,58,89,0.06)!important;
+            border:1.5px solid rgba(0,58,89,0.18)!important;
+            color:#003A59!important;
+            font-size:14.5px;
+            font-weight:600;
+            letter-spacing:.2px;
+            overflow:hidden;
+        }
+        /* Kill theme's white sweep ::before layer that caused the white hover */
+        .vms-submit-btn::before{display:none!important;}
+        .vms-submit-btn:hover{
+            background:#003A59!important;
+            color:#fff!important;
+            transform:translateY(-2px);
+            box-shadow:0 12px 28px rgba(0,58,89,0.28);
+        }
+        .vms-submit-btn .vms-btn-label{display:inline-block;transition:transform .25s ease,opacity .25s ease;}
+        .vms-submit-btn .vms-btn-arrow{
+            width:32px;
+            height:32px;
+            border-radius:50%;
+            flex-shrink:0;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            background:#003A59;
+            color:#fff;
+            font-size:13px;
+            transition:background .25s ease,color .25s ease,transform .25s ease,opacity .25s ease;
+        }
+        .vms-submit-btn:hover .vms-btn-arrow{background:#fff;color:#003A59;transform:translate(2px,-2px);}
+        .vms-submit-btn .vms-btn-spinner,
+        .vms-submit-btn .vms-btn-check{display:none;align-items:center;justify-content:center;}
+        /* Neutralize theme arrow rotation — check icon needs !important, spinner must NOT have it
+           (an !important transform on the spinner <i> would override its vmsSpin animation) */
+        .vms-submit-btn .vms-btn-check i{transform:rotate(0deg)!important;}
+        .vms-submit-btn .vms-btn-spinner i{transform:none;}
+        /* Loading state */
+        .vms-submit-btn.loading{pointer-events:none;opacity:.94;background:#003A59!important;border-color:#003A59!important;color:#fff!important;}
+        .vms-submit-btn.loading .vms-btn-label{transform:translateY(-4px);opacity:0;}
+        .vms-submit-btn.loading .vms-btn-arrow{transform:translateY(4px);opacity:0;}
+        .vms-submit-btn.loading .vms-btn-spinner{display:inline-flex;animation:vmsSpinIn .3s ease;}
+        .vms-submit-btn.loading .vms-btn-spinner i{animation:vmsSpin 1s linear infinite;font-size:16px;}
+        /* Success state */
+        .vms-submit-btn.success{background:#1a9e5c!important;border-color:#1a9e5c!important;pointer-events:none;}
+        .vms-submit-btn.success .vms-btn-label{transform:translateY(0);opacity:0;}
+        .vms-submit-btn.success .vms-btn-arrow{opacity:0;}
+        .vms-submit-btn.success .vms-btn-check{display:inline-flex;animation:vmsPopIn .5s cubic-bezier(.34,1.56,.64,1);}
+        .vms-submit-btn.success .vms-btn-check i{font-size:18px;}
+        @keyframes vmsSpin{to{transform:rotate(360deg)}}
+        @keyframes vmsSpinIn{0%{transform:scale(0) rotate(-90deg)}100%{transform:scale(1) rotate(0)}}
+        @keyframes vmsPopIn{0%{transform:scale(0)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
+        /* ===== PARTY SUCCESS POPUP ===== */
+        .vms-party-overlay{position:fixed;inset:0;z-index:999996;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,18,30,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease;}
+        .vms-party-overlay.active{opacity:1;visibility:visible;}
+        .vms-party-modal{position:relative;background:#fff;border-radius:24px;padding:44px 40px 38px;max-width:430px;width:100%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35);transform:translateY(30px) scale(.92);transition:transform .5s cubic-bezier(.34,1.4,.64,1);overflow:hidden;}
+        .vms-party-overlay.active .vms-party-modal{transform:translateY(0) scale(1);}
+        .vms-party-check{width:88px;height:88px;margin:0 auto 22px;border-radius:50%;background:linear-gradient(135deg,#1a9e5c,#0e7a45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px;box-shadow:0 16px 40px rgba(26,158,92,.45);animation:vmsCheckBounce .7s cubic-bezier(.34,1.56,.64,1) .15s both;}
+        .vms-party-modal h3{margin:0 0 8px;font-size:26px;font-weight:800;color:#003A59;letter-spacing:-.4px;}
+        .vms-party-modal p{margin:0 0 24px;font-size:14.5px;color:#667085;line-height:1.7;}
+        .vms-party-btn{display:inline-flex;align-items:center;gap:10px;background:#003A59;color:#fff;border:none;padding:13px 34px;border-radius:999px;font-size:14px;font-weight:700;cursor:pointer;transition:background .22s,transform .2s,box-shadow .25s;box-shadow:0 10px 26px rgba(0,58,89,.32);}
+        .vms-party-btn:hover{background:#002B43;transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,58,89,.42);}
+        .vms-party-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:none;background:rgba(0,58,89,.07);color:#003A59;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;}
+        .vms-party-close:hover{background:rgba(0,58,89,.14);transform:rotate(90deg);}
+        @keyframes vmsCheckBounce{0%{transform:scale(0) rotate(-25deg)}55%{transform:scale(1.18) rotate(6deg)}75%{transform:scale(.94) rotate(-2deg)}100%{transform:scale(1) rotate(0)}}
+        /* Confetti canvas */
+        #vmsConfettiCanvas{position:fixed;inset:0;z-index:999997;pointer-events:none;}
+        @media(max-width:480px){
+            .vms-submit-btn{min-width:0;width:100%;}
+            .vms-party-modal{padding:36px 22px 30px;}
+        }
+        /* Respect reduced-motion preferences (consistent with page-transition.js) */
+        @media (prefers-reduced-motion: reduce){
+            .vms-submit-btn.loading .vms-btn-spinner i,
+            .vms-submit-btn.success .vms-btn-check,
+            .vms-party-check{animation:none!important;}
+        }
+        body.dark-mode .vms-party-modal{background:#161b22;}
+        body.dark-mode .vms-party-modal h3{color:#e6edf3;}
+        body.dark-mode .vms-party-modal p{color:#8b949e;}
+        body.dark-mode .vms-party-close{background:rgba(255,255,255,.08);color:#e6edf3;}
+        body.dark-mode .vms-party-close:hover{background:rgba(255,255,255,.16);}
         /* Contact Cards */
         .contact-form-content-bottom-wrapper{padding:0 0 20px;}
         .single-contact-card{background:#fff!important;border:1px solid rgba(0,58,89,0.08)!important;box-shadow:0 4px 24px rgba(0,58,89,0.06)!important;transition:transform .35s cubic-bezier(.25,.46,.45,.94),box-shadow .35s;border-radius:16px!important;padding:36px 32px!important;min-height:200px;display:flex;flex-direction:column;}
@@ -333,10 +498,62 @@
             .bromo-cta-content .cta-desc { margin-left: auto; margin-right: auto; }
             .bromo-cta-content .cta-buttons { justify-content: center; }
         }
+        @media (max-width: 575px) {
+            .bromo-cta-content { padding: 36px 20px; }
+            .bromo-cta-content .cta-buttons { flex-direction: column; width: 100%; }
+            .bromo-cta-content .cta-btn-primary,
+            .bromo-cta-content .cta-btn-secondary { justify-content: center; width: 100%; }
+        }
         body.dark-mode .section-title-area h2,body.dark-mode .section-title-area .section-title{color:#e6edf3!important;}
         body.dark-mode .section-title-area .sub-title{color:#58a6ff!important;}
         body.dark-mode .rts-map-area{background:#0d1117!important;}
         body.dark-mode .contact-map-area-fluid{border-color:#30363d!important;}
+        /* Header logo text — hide when zoomed 110%+ */
+        .bromo-logo span {
+            white-space: nowrap;
+            font-size: 16px;
+        }
+        @media (min-width: 768px) and (max-width: 1400px) {
+            .bromo-logo span { display: none !important; }
+        }
+        @media (max-width: 767px) {
+            .bromo-logo span { display: block !important; font-size: 12px !important; white-space: nowrap !important; }
+            .bromo-header .bromo-logo { gap: 6px; }
+            .header-pvt { display: none !important; }
+            .vms-video-section { overflow: hidden !important; }
+            body { overflow-x: hidden !important; }
+        }
+        @media (min-width: 768px) {
+            .vms-video-section { overflow: visible !important; }
+        }
+        body { overflow-x: hidden !important; }
+        .vms-big-text {
+            font-family: 'Sunsive', sans-serif !important;
+            font-size: clamp(40px, 7vw, 90px) !important;
+            font-weight: 700 !important;
+            bottom: 60px !important;
+            text-align: center !important;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            white-space: nowrap !important;
+            padding: 0 30px !important;
+        }
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            .vms-big-text { font-size: clamp(28px, 5vw, 70px) !important; bottom: 50px !important; }
+        }
+        @media (max-width: 991px) {
+            .vms-big-text { font-size: clamp(20px, 4vw, 45px) !important; bottom: 35px !important; }
+        }
+        @media (max-width: 767px) {
+            .vms-big-text { font-size: clamp(18px, 4vw, 35px) !important; bottom: 25px !important; }
+        }
+        @media (max-width: 575px) {
+            .vms-big-text { font-size: clamp(24px, 5vw, 40px) !important; bottom: 25px !important; }
+        }
+        @media (max-width: 400px) {
+            .vms-big-text { font-size: clamp(20px, 4.5vw, 32px) !important; bottom: 20px !important; }
+        }
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.min.js"></script>
     <script>
@@ -350,32 +567,16 @@
     </script>
 </head>
 
-<body class="home-bg">
+<body class="home-bg" data-turbo-cache="false">
 
-    <!-- preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <span style="--i:1;"></span>
-            <span style="--i:2;"></span>
-            <span style="--i:3;"></span>
-            <span style="--i:4;"></span>
-            <span style="--i:5;"></span>
-            <span style="--i:6;"></span>
-            <span style="--i:7;"></span>
-            <span style="--i:8;"></span>
-            <span style="--i:9;"></span>
-            <span style="--i:10;"></span>
-            <span style="--i:11;"></span>
-            <span style="--i:12;"></span>
-            <span style="--i:13;"></span>
-            <span style="--i:14;"></span>
-            <span style="--i:15;"></span>
-            <span style="--i:16;"></span>
-            <span style="--i:17;"></span>
-            <span style="--i:18;"></span>
-            <span style="--i:19;"></span>
-            <span style="--i:20;"></span>
-            <div class="loader-plane"></div>
+    <!-- ===== CORPORATE LOADER (fast — never blocks the page) ===== -->
+    <div class="vms-preloader" id="vmsPreloader">
+        <div class="vms-preloader-logo">
+            <img src="assets/newlogo.png" alt="VMS Go Vista">
+        </div>
+        <div class="vms-preloader-brand" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</div>
+        <div class="vms-preloader-bar">
+            <div class="vms-preloader-bar-fill" id="vmsLoaderFill"></div>
         </div>
     </div>
     <!-- preloader end -->
@@ -383,13 +584,8 @@
     <!-- ===== BROMORISE HEADER ===== -->
     <header class="bromo-header header--sticky" id="bromoHeader">
         <a href="." class="bromo-logo">
-            <span class="bromo-logo-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" fill="#111"/>
-                    <circle cx="17" cy="7" r="2.2" fill="#111"/>
-                </svg>
-            </span>
-            <span>vmsgovista</span>
+            <img src="assets/newlogo.png" alt="VMS Go Vista" class="vms-logo-img">
+                <span style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
         </a>
         <nav class="bromo-nav">
             <a href=".">Home</a>
@@ -414,7 +610,7 @@
     <div class="bromo-mobile-nav" id="mobileNav">
         <div class="bromo-mobile-nav-top">
             <a href="." class="bromo-mobile-nav-logo">
-                <img src="assets/3d logo.png" alt="VMS Go Vista">
+                <img src="assets/newlogo.png" alt="VMS Go Vista">
             </a>
             <button class="bromo-mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
                 <i class="fa-solid fa-xmark"></i>
@@ -433,8 +629,8 @@
                 <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
             </a>
             <div class="bromo-mobile-nav-contact">
-                <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
-                <a href="mailto:hello@vmsgovista.com"><i class="fa-solid fa-envelope"></i> hello@vmsgovista.com</a>
+                <a href="tel:+919870182425"><i class="fa-solid fa-phone"></i> +91 98701 82425</a>
+                <a href="mailto:info@vmsgovista.com"><i class="fa-solid fa-envelope"></i> info@vmsgovista.com</a>
             </div>
         </div>
     </div>
@@ -460,7 +656,7 @@
     <section class="rts-contact-area inner rts-section-gap">
         <div class="container">
             <div class="section-inner body-bg-one radius-10">
-                <form class="contact-form" id="contact-form" method="POST" action="mailer.php">
+                <form class="contact-form" id="contact-form" method="POST" action="contact-submit.php">
                     <h4 class="title">Your info</h4>
                     <div class="form-inner">
                         <div class="left">
@@ -474,11 +670,11 @@
                             </div>
                             <div class="single-input-wrapper">
                                 <label for="company">Company</label>
-                                <input type="text" id="company" name="company" placeholder="Your company name" required>
+                                <input type="text" id="company" name="company" placeholder="Your company name">
                             </div>
                             <div class="single-input-wrapper">
                                 <label for="website">Website</label>
-                                <input type="text" id="website" name="website" placeholder="Your website" required>
+                                <input type="text" id="website" name="website" placeholder="Your website">
                             </div>
                         </div>
                         <div class="right">
@@ -487,7 +683,12 @@
                                 <textarea name="message" id="message" placeholder="Enter your message here" required></textarea>
                             </div>
                             <div class="single-input-wrapper">
-                                <button type="submit" class="rts-btn btn-primary with-arrow">Get Started <i class="fa-regular fa-arrow-up up-right"></i></button>
+                                <button type="submit" class="rts-btn vms-submit-btn" id="contactSubmitBtn" aria-busy="false">
+                                    <span class="vms-btn-label">Get Started</span>
+                                    <span class="vms-btn-spinner"><i class="fa-solid fa-circle-notch"></i></span>
+                                    <span class="vms-btn-check"><i class="fa-solid fa-check"></i></span>
+                                    <span class="vms-btn-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
+                                </button>
                             </div>
                             <div id="form-messages" class="mt-15 cb"></div>
                             <p class="desc">Please read our <a href="#"> privacy policy</a> and <a href="#">Cookies policy</a> so you understand how we collect and use your personal data.</p>
@@ -506,8 +707,7 @@
                                 <h4 class="title">Our Location</h4>
                             </div>
                             <p class="disc">
-                                123 Main Street, Apt 4B Springfield,
-                                IL 62704, UK
+                                Unit no. 04, Ground floor, D-MALL, Netaji Subhash Place, Shakurpur, New Delhi, Delhi, 110034
                             </p>
                         </div>
                     </div>
@@ -522,7 +722,7 @@
                             <p class="disc">
                                 Our support team is here to assist you
                             </p>
-                            <a href="#">support@Digix.com</a>
+                            <a href="mailto:info@vmsgovista.com">info@vmsgovista.com</a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -536,7 +736,7 @@
                             <p class="disc">
                                 Our customer support team is available
                             </p>
-                            <a href="#">+1 (111) 125- 42174</a>
+                            <a href="tel:+919870182425">+91 98701 82425</a>
                         </div>
                     </div>
                 </div>
@@ -558,7 +758,7 @@
                         Get a Free Quote
                         <i class="fa-regular fa-arrow-up-right"></i>
                     </a>
-                    <a href="tel:+919876543210" class="cta-btn-secondary">
+                    <a href="tel:+919870182425" class="cta-btn-secondary">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
                 </div>
@@ -582,13 +782,8 @@
             <!-- Brand Column -->
             <div class="vms-brand">
                 <div class="vms-logo">
-                    <div class="vms-logo-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" stroke-linejoin="round"/>
-                            <circle cx="17" cy="7" r="2"/>
-                        </svg>
-                    </div>
-                    <span class="vms-logo-text">VMS Go Vista</span>
+                    <img src="assets/newlogo.png" alt="VMS Go Vista" style="height:42px;width:auto;border-radius:8px;">
+                    <span class="vms-logo-text" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
                 </div>
                 <h3 class="vms-tagline">Your smart travel companion</h3>
                 <p class="vms-desc">VMS Go Vista brings tours, destinations, deals, weather, quick bookings and more useful travel tools into one beautiful platform beside your dream journey.</p>
@@ -639,11 +834,11 @@
 
         <!-- Bottom bar with copyright -->
         <div class="vms-footer-bottom">
-            <p class="vms-credit">&copy; <script>document.write(new Date().getFullYear())</script> VMS Go Vista &middot; All rights reserved</p>
+            <p class="vms-credit" style="font-weight: 900; color: black;">&copy; <script>document.write(new Date().getFullYear())</script> VMS Go Vista &middot; All rights reserved</p>
             <div class="vms-credit">
-                <span>Crafted with dedication by</span>
-                <span class="vms-author">
-                    <span class="vms-author-avatar"></span>
+                <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
+                <span class="vms-author" style="font-weight: 900; color: black;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                     VMS Go Vista Team
                 </span>
             </div>
@@ -651,13 +846,22 @@
 
         <!-- Video Section with travel footage -->
         <div class="vms-video-section">
-            <video autoplay muted loop playsinline poster="">
-                <source src="assets/video6.mp4" type="video/mp4">
-            </video>
+            <img src="assets/videofotter.gif" alt="VMS Go Vista" class="vms-video-bg" loading="lazy">
             <div class="vms-video-gradient"></div>
-            <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista</div>
+            <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista Pvt Ltd</div>
         </div>
     </footer>
+
+    <!-- ===== PARTY SUCCESS POPUP ===== -->
+    <div class="vms-party-overlay" id="vmsPartyOverlay" aria-hidden="true">
+        <div class="vms-party-modal" role="dialog" aria-modal="true" aria-labelledby="vmsPartyTitle">
+            <button class="vms-party-close" id="vmsPartyClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="vms-party-check"><i class="fa-solid fa-check"></i></div>
+            <h3 id="vmsPartyTitle">Thank You!</h3>
+            <p id="vmsPartyMsg">Your message has been sent successfully. Our team will get back to you within 24 hours.</p>
+            <button class="vms-party-btn" id="vmsPartyOk">Awesome! <i class="fa-regular fa-arrow-up-right"></i></button>
+        </div>
+    </div>
 
     <!-- mobile sidebar -->
     <div id="side-bar" class="side-bar header-two header-eight">
@@ -892,6 +1096,26 @@ document.addEventListener('turbo:load',function(){
 
         });
     </script>
+
+<script>
+// ── Corporate Loader (fast — hides ~250ms after DOM ready, never blocks) ──
+(function () {
+    var overlay = document.getElementById('vmsPreloader');
+    var done = false;
+    function removeLoader() {
+        if (done || !overlay) return; done = true;
+        overlay.classList.add('hidden');
+        setTimeout(function () { if (overlay.parentNode) overlay.remove(); }, 500);
+    }
+    function fastHide() { setTimeout(removeLoader, 250); }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fastHide);
+    } else { fastHide(); }
+    window.addEventListener('pageshow', removeLoader);  // back/forward cache restore
+    window.addEventListener('load', removeLoader);
+    setTimeout(removeLoader, 1200);  // absolute max
+})();
+</script>
 
 <script src="assets/js/page-transition.js"></script>
 </body>

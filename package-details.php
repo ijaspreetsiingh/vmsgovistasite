@@ -31,7 +31,6 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.svg">
     <title><?= $pkg ? e($pkg['title']).' – VMS Go Vista' : 'Package Not Found – VMS Go Vista' ?></title>
     <?php $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'); ?>
     <base href="<?= $basePath ?>/">
@@ -54,6 +53,10 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
     <style>
         /* Page-specific overrides */
         /* ===== GLASS PILL BUTTONS — index-three.php style ===== */
+        .vms-logo-img{
+            height: 70px;
+            width: auto;
+        }
         .vms-glass-btn {
             display: inline-flex;
             align-items: center;
@@ -81,6 +84,35 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
             transform: translateY(-1px);
             box-shadow: 0 10px 24px -10px rgba(0,58,89,.45);
         }
+        /* Send-Enquiry loading state — instant feedback + double-click guard */
+        .vms-glass-btn.loading {
+            pointer-events: none;
+            background: #003A59;
+            color: #fff;
+            border-color: #003A59;
+            opacity: .96;
+        }
+        .vms-glass-btn .vms-glass-spinner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .vms-glass-btn.loading .vms-glass-spinner {
+            display: inline-flex;
+            animation: vmsGlassSpinIn .3s ease;
+        }
+        .vms-glass-btn.loading .vms-glass-spinner i {
+            animation: vmsGlassSpin 1s linear infinite;
+            font-size: 15px;
+        }
+        .vms-glass-btn.loading .vms-glass-arrow {
+            display: none;
+        }
+        @keyframes vmsGlassSpin { to { transform: rotate(360deg); } }
+        @keyframes vmsGlassSpinIn {
+            0% { transform: scale(0) rotate(-90deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
         .vms-glass-btn .vms-glass-arrow {
             width: 34px;
             height: 34px;
@@ -105,6 +137,21 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
         }
         .vms-glass-btn .vms-glass-arrow svg path { fill: currentColor; }
         .vms-glass-btn.w-100 { width: 100%; justify-content: center; }
+        /* Enquiry form field labels */
+        .enq-field-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #003A59;
+            margin-bottom: 7px;
+            letter-spacing: .01em;
+        }
+        .enq-field-label .req { color: #0f6a94; }
+        .single-input input[type="date"],
+        .single-input input[type="text"],
+        .single-input input[type="number"],
+        .single-input input[type="email"] { color: #1d2939; }
+        .single-input input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .6; }
         body.dark-mode .vms-glass-btn {
             background: rgba(255,255,255,0.08);
             border-color: rgba(255,255,255,0.18);
@@ -765,9 +812,9 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
         .vms-footer-links a:hover{color:#003A59;}
         @keyframes vmsBgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
         .vms-video-section{position:relative;z-index:1;width:100%;height:520px;overflow:hidden;margin-top:-210px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);background-size:400% 400%;animation:vmsBgShift 15s ease infinite;}
-        .vms-video-section video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+        .vms-video-section .vms-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
         .vms-video-gradient{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,whitesmoke 0%,rgba(245,245,245,0.92) 12%,rgba(245,245,245,0.35) 22%,rgba(245,245,245,0.08) 32%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.5) 78%,#000 100%);}
-        .vms-big-text{position:absolute;bottom:80px;left:0;right:0;z-index:2;text-align:center;font-size:clamp(120px,18vw,180px);font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3);pointer-events:none;font-family:var(--font-heading);margin:0;padding:0 20px;white-space:nowrap;}
+        .vms-big-text{position:absolute;bottom:80px;left:0;right:0;z-index:2;text-align:center;font-size:clamp(80px,12vw,140px);font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3);pointer-events:none;font-family:var(--font-heading);margin:0;padding:0 30px;white-space:nowrap;}
         body.dark-mode .vms-footer{background:#0d1117;}
         body.dark-mode .vms-logo-text,body.dark-mode .vms-tagline,body.dark-mode .vms-footer-col h5,body.dark-mode .vms-footer-links a{color:#e6edf3;}
         body.dark-mode .vms-desc,body.dark-mode .vms-credit{color:#8b949e;}
@@ -791,17 +838,24 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
             .vms-footer-nominee{display:none;}
             .vms-footer-content{padding:60px 32px 32px;gap:40px;}
         }
+        @media(min-width:1024px) and (max-width:1199px){
+            .vms-big-text{font-size:clamp(60px,10vw,110px);bottom:70px;}
+        }
         @media(max-width:991px){
             .vms-footer-content{grid-template-columns:1fr 1fr;gap:32px;padding:40px 28px 80px;}
             .vms-brand{grid-column:span 2;}
             .vms-video-section{height:360px;margin-top:-120px;}
-            .vms-big-text{font-size:clamp(16px,4vw,24px);bottom:40px;}
+            .vms-big-text{font-size:clamp(40px,8vw,70px);bottom:45px;}
+        }
+        @media(max-width:767px){
+            .vms-video-section{height:320px;margin-top:-105px;}
+            .vms-big-text{font-size:clamp(30px,6vw,50px);bottom:35px;}
         }
         @media(max-width:575px){
             .vms-footer-content{grid-template-columns:1fr;gap:26px;padding:28px 22px 60px;}
             .vms-brand{grid-column:span 1;}
             .vms-video-section{height:280px;margin-top:-90px;}
-            .vms-big-text{font-size:clamp(14px,5vw,20px);bottom:24px;}
+            .vms-big-text{font-size:clamp(22px,5vw,35px);bottom:25px;}
         }
         /* CTA Section — PROFESSIONAL REDESIGN */
         .bromo-cta-section {
@@ -938,7 +992,58 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
             .bromo-cta-content .cta-desc { margin-left: auto; margin-right: auto; }
             .bromo-cta-content .cta-buttons { justify-content: center; }
         }
+        @media (max-width: 575px) {
+            .bromo-cta-content { padding: 36px 20px; }
+            .bromo-cta-content .cta-buttons { flex-direction: column; width: 100%; }
+            .bromo-cta-content .cta-btn-primary,
+            .bromo-cta-content .cta-btn-secondary { justify-content: center; width: 100%; }
+        }
+        /* Header logo text — hide when zoomed 110%+ */
+        .bromo-logo span {
+            white-space: nowrap;
+            font-size: 16px;
+        }
+        @media (min-width: 768px) and (max-width: 1400px) {
+            .bromo-logo span { display: none !important; }
+        }
+        @media (max-width: 767px) {
+            .bromo-logo span { display: block !important; font-size: 12px !important; white-space: nowrap !important; }
+            .bromo-header .bromo-logo { gap: 6px; }
+            .vms-video-section { overflow: hidden !important; }
+            body { overflow-x: hidden !important; }
+        }
+        @media (min-width: 768px) {
+            .vms-video-section { overflow: visible !important; }
+        }
+        .vms-big-text {
+            font-family: 'Sunsive', sans-serif !important;
+            font-size: clamp(40px, 7vw, 90px) !important;
+            font-weight: 700 !important;
+            bottom: 60px !important;
+            text-align: center !important;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            white-space: nowrap !important;
+            padding: 0 30px !important;
+        }
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            .vms-big-text { font-size: clamp(28px, 5vw, 70px) !important; bottom: 50px !important; }
+        }
+        @media (max-width: 991px) {
+            .vms-big-text { font-size: clamp(20px, 4vw, 45px) !important; bottom: 35px !important; }
+        }
+        @media (max-width: 767px) {
+            .vms-big-text { font-size: clamp(18px, 4vw, 35px) !important; bottom: 25px !important; }
+        }
+        @media (max-width: 575px) {
+            .vms-big-text { font-size: clamp(24px, 5vw, 40px) !important; bottom: 25px !important; }
+        }
+        @media (max-width: 400px) {
+            .vms-big-text { font-size: clamp(20px, 4.5vw, 32px) !important; bottom: 20px !important; }
+        }
     </style>
+    <link rel="stylesheet" href="assets/css/loader.css">
     <link rel="stylesheet" href="assets/css/page-transition.css">
 </head>
 <script>
@@ -951,26 +1056,24 @@ window.addEventListener('error', function(e) {
     }
 }, true);
 </script>
-<body class="home-bg with-sidebar onepage">
+<body class="home-bg with-sidebar onepage" data-turbo-cache="false">
 
-<!-- preloader -->
-<div class="preloader">
-    <div class="loader">
-        <?php for($i=1;$i<=20;$i++): ?><span style="--i:<?=$i?>;"></span><?php endfor; ?>
-        <div class="loader-plane"></div>
+<!-- ===== CORPORATE LOADER (fast — never blocks the page) ===== -->
+<div class="vms-preloader" id="vmsPreloader">
+    <div class="vms-preloader-logo">
+        <img src="assets/newlogo.png" alt="VMS Go Vista">
+    </div>
+    <div class="vms-preloader-brand" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</div>
+    <div class="vms-preloader-bar">
+        <div class="vms-preloader-bar-fill" id="vmsLoaderFill"></div>
     </div>
 </div>
 
 <!-- ===== BROMORISE HEADER ===== -->
 <header class="bromo-header header--sticky" id="bromoHeader">
     <a href="." class="bromo-logo">
-        <span class="bromo-logo-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" fill="#111"/>
-                <circle cx="17" cy="7" r="2.2" fill="#111"/>
-            </svg>
-        </span>
-        <span>vmsgovista</span>
+        <img src="assets/newlogo.png" alt="VMS Go Vista" class="vms-logo-img">
+        <span style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
     </a>
     <nav class="bromo-nav">
         <a href=".">Home</a>
@@ -980,7 +1083,7 @@ window.addEventListener('error', function(e) {
         <a href="contact">Contact</a>
     </nav>
     <div class="bromo-book-btn">
-        <a href="contact">
+        <a href="booking.php?package=<?= e($pkg['slug'] ?? '') ?>">
             Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
@@ -995,7 +1098,7 @@ window.addEventListener('error', function(e) {
 <div class="bromo-mobile-nav" id="mobileNav">
     <div class="bromo-mobile-nav-top">
         <a href="." class="bromo-mobile-nav-logo">
-            <img src="assets/3d logo.png" alt="VMS Go Vista">
+            <img src="assets/newlogo.png" alt="VMS Go Vista">
         </a>
         <button class="bromo-mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
             <i class="fa-solid fa-xmark"></i>
@@ -1009,13 +1112,13 @@ window.addEventListener('error', function(e) {
         <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
     </nav>
     <div class="bromo-mobile-nav-foot">
-        <a href="contact" class="bromo-mobile-nav-cta">
+        <a href="booking.php?package=<?= e($pkg['slug'] ?? '') ?>" class="bromo-mobile-nav-cta">
             <span>Book Now</span>
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
         <div class="bromo-mobile-nav-contact">
-            <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
-            <a href="mailto:hello@vmsgovista.com"><i class="fa-solid fa-envelope"></i> hello@vmsgovista.com</a>
+            <a href="tel:+919870182425"><i class="fa-solid fa-phone"></i> +91 98701 82425</a>
+            <a href="mailto:info@vmsgovista.com"><i class="fa-solid fa-envelope"></i> info@vmsgovista.com</a>
         </div>
     </div>
 </div>
@@ -1075,7 +1178,7 @@ $childPrice  = (float)($pkg['price_per_child']  ?? 0);
 $price       = (float)($pkg['price_original']   ?? 0);
 $discounted  = (float)($pkg['price_discounted'] ?? $price);
 $discPct     = $price > 0 && $discounted < $price ? round((1 - $discounted/$price)*100) : 0;
-$currency    = $pkg['currency'] ?? 'USD';
+$currency    = $pkg['currency'] ?? 'INR';
 $rating      = (float)($pkg['rating']           ?? 5);
 $reviewCount = (int)($pkg['review_count']       ?? 0);
 $days        = (int)($pkg['days']               ?? 0);
@@ -1365,6 +1468,10 @@ $days        = (int)($pkg['days']               ?? 0);
                                 <div class="col-lg-6"><div class="single-input"><input type="text" name="phone" placeholder="Enter your contact number"></div></div>
                                 <div class="col-lg-6"><div class="single-input"><input type="number" name="adults" placeholder="Number of adults" min="0"></div></div>
                                 <div class="col-lg-6"><div class="single-input"><input type="number" name="children" placeholder="Number of children" min="0"></div></div>
+                                <div class="col-lg-12"><div class="single-input">
+                                    <label class="enq-field-label" for="travelDateField">Travelling Date <span class="req">*</span></label>
+                                    <input type="date" id="travelDateField" name="travel_date" min="<?= date('Y-m-d', strtotime('+1 day')) ?>" required>
+                                </div></div>
                                 <div class="col-lg-12"><div class="single-input"><textarea name="message" placeholder="Enter your message*" required></textarea></div></div>
                                 <div class="col-lg-12"><button type="submit" class="vms-glass-btn">Send Enquiry <span class="vms-glass-arrow"><i class="fa-solid fa-paper-plane"></i></span></button></div>
                             </div>
@@ -1546,7 +1653,7 @@ $days        = (int)($pkg['days']               ?? 0);
                         Get a Free Quote
                         <i class="fa-regular fa-arrow-up-right"></i>
                     </a>
-                    <a href="tel:+919876543210" class="cta-btn-secondary">
+                    <a href="tel:+919870182425" class="cta-btn-secondary">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
                 </div>
@@ -1570,13 +1677,8 @@ $days        = (int)($pkg['days']               ?? 0);
         <!-- Brand Column -->
         <div class="vms-brand">
             <div class="vms-logo">
-                <div class="vms-logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" stroke-linejoin="round"/>
-                        <circle cx="17" cy="7" r="2"/>
-                    </svg>
-                </div>
-                <span class="vms-logo-text">VMS Go Vista</span>
+                <img src="assets/newlogo.png" alt="VMS Go Vista" style="height:42px;width:auto;border-radius:8px;">
+                <span class="vms-logo-text" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
             </div>
             <h3 class="vms-tagline">Your smart travel companion</h3>
             <p class="vms-desc">VMS Go Vista brings tours, destinations, deals, weather, quick bookings and more useful travel tools into one beautiful platform beside your dream journey.</p>
@@ -1627,11 +1729,11 @@ $days        = (int)($pkg['days']               ?? 0);
 
     <!-- Bottom bar with copyright -->
     <div class="vms-footer-bottom">
-        <p class="vms-credit">&copy; <?= date('Y') ?> VMS Go Vista &middot; All rights reserved</p>
+        <p class="vms-credit" style="font-weight: 900; color: black;">&copy; <?= date('Y') ?> VMS Go Vista &middot; All rights reserved</p>
         <div class="vms-credit">
-            <span>Crafted with dedication by</span>
-            <span class="vms-author">
-                <span class="vms-author-avatar"></span>
+            <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
+            <span class="vms-author" style="font-weight: 900; color: black;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 VMS Go Vista Team
             </span>
         </div>
@@ -1639,11 +1741,9 @@ $days        = (int)($pkg['days']               ?? 0);
 
     <!-- Video Section with travel footage -->
     <div class="vms-video-section">
-        <video autoplay muted loop playsinline poster="">
-            <source src="assets/video6.mp4" type="video/mp4">
-        </video>
+        <img src="assets/videofotter.gif" alt="VMS Go Vista" class="vms-video-bg" loading="lazy">
         <div class="vms-video-gradient"></div>
-        <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista</div>
+        <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista Pvt Ltd</div>
     </div>
 </footer>
 
@@ -1690,7 +1790,27 @@ document.addEventListener('turbo:load',function(){
     document.body.classList.add('loaded');
     if(typeof WOW!=='undefined'){new WOW().init();}
 });
+window.addEventListener('pageshow',function(){ document.body.classList.add('loaded'); });
 </script>
+
+<script>
+// ── Corporate Loader (fast — hides ~250ms after DOM ready, never blocks) ──
+(function () {
+    var overlay = document.getElementById('vmsPreloader');
+    var done = false;
+    function removeLoader() {
+        if (done || !overlay) return; done = true;
+        overlay.classList.add('hidden');
+        setTimeout(function () { if (overlay.parentNode) overlay.remove(); }, 500);
+    }
+    function fastHide() { setTimeout(removeLoader, 250); }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fastHide);
+    } else { fastHide(); }
+    window.addEventListener('pageshow', removeLoader);  // back/forward cache restore
+    window.addEventListener('load', removeLoader);
+    setTimeout(removeLoader, 1200);  // absolute max
+})();
 
 <script>
 // Initialize gallery and animations once DOM is ready
@@ -1762,6 +1882,36 @@ document.addEventListener('DOMContentLoaded', function() {
         window.mfpReady = true;
     }
 });
+
+// ===== Send Enquiry — instant button feedback + double-click guard =====
+(function () {
+    var form = document.getElementById('enquiry-form');
+    if (!form) return;
+    var btn = form.querySelector('button[type="submit"]');
+    if (!btn) return;
+
+    form.addEventListener('submit', function (e) {
+        // Guard: if already submitting, block repeat clicks
+        if (btn.classList.contains('loading')) {
+            e.preventDefault();
+            return;
+        }
+
+        // Only engage the loading state when the form passes HTML5 validation
+        if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+            return; // browser will show validation bubbles — do nothing
+        }
+
+        // .loading sets pointer-events:none (blocks repeat clicks). Disabling via
+        // .disabled inside the submit handler can cancel submission on Safari/WebKit,
+        // so we only swap to the loading state + aria-busy here.
+        btn.classList.add('loading');
+        btn.setAttribute('aria-busy', 'true');
+        btn.innerHTML =
+            '<span class="vms-glass-spinner"><i class="fa-solid fa-circle-notch"></i></span>' +
+            'Sending...';
+    });
+})();
 </script>
 <script src="assets/js/page-transition.js"></script>
 

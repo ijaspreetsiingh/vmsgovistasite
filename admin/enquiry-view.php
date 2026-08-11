@@ -254,6 +254,8 @@ unset($transitions[$enq['status']]);
           <dt>Phone</dt><dd><?= e($enq['phone'] ?: '—') ?> <?php if($enq['phone']): ?><a href="https://wa.me/<?= preg_replace('/\D/','',$enq['phone']) ?>?text=Hi%20<?= urlencode($enq['first_name']) ?>%2C%20regarding%20your%20enquiry" target="_blank" style="margin-left:6px;font-size:12px;color:#25D366;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a><?php endif; ?></dd>
           <dt>Country</dt><dd><?= e($enq['country'] ?: '—') ?></dd>
           <dt>Adults / Children</dt><dd><?= $enq['adults'] !== null ? (int)$enq['adults'] : '—' ?> / <?= $enq['children'] !== null ? (int)$enq['children'] : '—' ?></dd>
+          <dt>Travelling Date</dt><dd><?= !empty($enq['travel_date']) ? date('d M Y', strtotime($enq['travel_date'])) : '—' ?></dd>
+          <dt>Received</dt><dd><?= date('d M Y H:i', strtotime($enq['created_at'])) ?></dd>
           <dt>Source</dt><dd><?= e($enq['source'] ?? 'Website') ?></dd>
           <dt>Package</dt><dd><?= $enq['package_title'] ? e($enq['package_title']) . ($packageLink ? ' <a href="'.e($packageLink).'" target="_blank" style="font-size:12px;">View <i class="fa-solid fa-arrow-up-right-from-square"></i></a>' : '') : 'General enquiry' ?></dd>
         </dl>

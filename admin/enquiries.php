@@ -163,7 +163,8 @@ $sc = [
       <th>Phone</th>
       <th>Package</th>
       <th>People</th>
-      <th>Date</th>
+      <th>Travelling Date</th>
+      <th>Received</th>
       <th>Status</th>
       <th>Actions</th>
     </tr>
@@ -179,7 +180,19 @@ $sc = [
       <td><?= e($e['phone'] ?: '—') ?></td>
       <td style="max-width:140px;font-size:12px;"><?= e($e['package_title'] ?: 'General') ?></td>
       <td style="font-size:12px;"><?= (int)($e['adults']??0) ?>A / <?= (int)($e['children']??0) ?>C</td>
-      <td style="font-size:12px;white-space:nowrap;"><?= date('d M Y', strtotime($e['created_at'])) ?></td>
+      <?php
+        $tDate = !empty($e['travel_date']) ? date('d M Y', strtotime($e['travel_date'])) : '';
+      ?>
+      <td style="font-size:12px;white-space:nowrap;">
+        <?php if ($tDate): ?>
+          <span style="color:var(--adm-text-strong,#1a2433);font-weight:600;"><i class="fa-solid fa-calendar-days" style="color:#0f6a94;margin-right:5px;"></i><?= $tDate ?></span>
+        <?php else: ?>
+          <span style="color:var(--adm-text-muted);">—</span>
+        <?php endif; ?>
+      </td>
+      <td style="font-size:12px;white-space:nowrap;color:var(--adm-text-muted);">
+        <i class="fa-solid fa-inbox" style="color:#8a94a6;margin-right:5px;"></i><?= date('d M Y', strtotime($e['created_at'])) ?>
+      </td>
       <td>
         <span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:600;background:<?= $st['bg'] ?>;color:<?= $st['color'] ?>;border:1px solid <?= $st['color'] ?>33;">
           <i class="fa-solid <?= $st['icon'] ?>" style="font-size:10px;"></i> <?= $st['label'] ?>
@@ -211,7 +224,7 @@ $sc = [
     </tr>
   <?php endforeach; ?>
   <?php if (empty($enquiries)): ?>
-    <tr><td colspan="8" style="text-align:center;padding:48px;color:var(--adm-text-muted);font-size:14px;">
+    <tr><td colspan="9" style="text-align:center;padding:48px;color:var(--adm-text-muted);font-size:14px;">
       <div style="font-size:40px;margin-bottom:12px;opacity:0.3;"><i class="fa-solid fa-inbox"></i></div>
       No leads found matching your criteria.
     </td></tr>

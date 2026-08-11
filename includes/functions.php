@@ -165,6 +165,12 @@ function getPopularPackages(int $limit = 8): array {
     );
 }
 
+function getAllPackages(): array {
+    return fetchAll(
+        "SELECT * FROM packages WHERE status='published' ORDER BY title ASC"
+    );
+}
+
 function getAllPublishedPackages(array $filters = [], int $page = 1, int $perPage = 9): array {
     $db     = getDB();
     $where  = ["status='published'"];

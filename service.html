@@ -1,10 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.svg">
     <link rel="preload" href="assets/herol3.png" as="image">
     <title>Our Services — VMS Go Vista</title>
     <!-- PERFORMANCE: Preconnect & DNS-prefetch -->
@@ -28,10 +27,14 @@
     <!-- Google Fonts (sync to prevent FOUT / font-size shift) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..600;1,400..500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/loader.css">
     <link rel="stylesheet" href="assets/css/page-transition.css">
     <style>
         /* Page-specific overrides */
-
+        .vms-logo-img{
+            height: 70px;
+            width: auto;
+        }
         /* ===== STICKY HEADER ===== */
         .bromo-header.header--sticky.sticky {
             position: fixed !important;
@@ -265,7 +268,7 @@
 
         .vms-footer-nominee {
             position: absolute;
-            top: 120px;
+            bottom: 0;
             right: 0;
             z-index: 4;
             background: #003A59;
@@ -556,14 +559,14 @@
             z-index: 1;
             width: 100%;
             height: 520px;
-            overflow: hidden;
+            overflow: visible;
             margin-top: -210px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             background-size: 400% 400%;
             animation: vmsBgShift 15s ease infinite;
         }
 
-        .vms-video-section video {
+        .vms-video-section .vms-video-bg {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -581,12 +584,12 @@
 
         .vms-big-text {
             position: absolute;
-            bottom: 40px;
+            bottom: 60px;
             left: 0;
             right: 0;
             z-index: 2;
             text-align: center;
-            font-size: clamp(120px, 18vw, 180px);
+            font-size: clamp(70px, 11vw, 130px);
             font-weight: 700;
             color: rgba(255, 255, 255, 0.35);
             letter-spacing: 0.05em;
@@ -595,7 +598,7 @@
             pointer-events: none;
             font-family: 'Sunsive', sans-serif;
             margin: 0;
-            padding: 0 20px;
+            padding: 0 30px;
             white-space: nowrap;
         }
 
@@ -609,12 +612,12 @@
 
         @media(max-width:991px) {
             .vms-video-section { height: 360px; margin-top: -120px; }
-            .vms-big-text { font-size: clamp(16px, 4vw, 24px); bottom: 40px; }
+            .vms-big-text { font-size: clamp(35px, 7vw, 60px) !important; bottom: 40px !important; }
         }
 
         @media(max-width:575px) {
             .vms-video-section { height: 280px; margin-top: -90px; }
-            .vms-big-text { font-size: clamp(14px, 5vw, 20px); bottom: 24px; }
+            .vms-big-text { font-size: clamp(20px, 5vw, 32px) !important; bottom: 25px !important; }
         }
 
         /* ===== THEME OVERRIDES — VMS Go Vista ===== */
@@ -1218,7 +1221,7 @@
             font-family: 'Sunsive', sans-serif !important;
             font-size: clamp(120px, 18vw, 180px) !important;
             font-weight: 700 !important;
-            bottom: 40px !important;
+            bottom: 10px !important;
         }
         .vms-footer-col h5 {
             font-size: 15px !important;
@@ -1261,7 +1264,7 @@
             }
             .vms-big-text {
                 font-size: clamp(100px, 15vw, 160px) !important;
-                bottom: 30px !important;
+                bottom: 10px !important;
             }
         }
         /* === TABLET (≤991px) === */
@@ -1420,6 +1423,85 @@
         }
 
 
+    /* ================================================================
+       WATERMARK — EXACT MATCH to index-three.php
+       Single authoritative block, all properties !important
+       ================================================================ */
+    .vms-big-text {
+        position: absolute !important;
+        bottom: 60px !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 2 !important;
+        text-align: center !important;
+        font-size: clamp(70px, 11vw, 130px) !important;
+        font-weight: 700 !important;
+        color: rgba(255, 255, 255, 0.35) !important;
+        letter-spacing: 0.05em !important;
+        text-transform: uppercase !important;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+        pointer-events: none !important;
+        font-family: 'Sunsive', sans-serif !important;
+        margin: 0 !important;
+        padding: 0 30px !important;
+        white-space: nowrap !important;
+    }        @media (min-width: 1024px) and (max-width: 1199px) {
+            .vms-big-text { font-size: clamp(50px, 9vw, 100px) !important; bottom: 50px !important; }
+        }
+        @media (max-width: 991px) {
+            .vms-big-text { font-size: clamp(35px, 7vw, 60px) !important; bottom: 40px !important; }
+        }
+        @media (max-width: 767px) {
+            .vms-big-text { font-size: clamp(25px, 5vw, 40px) !important; bottom: 30px !important; }
+        }
+        @media (max-width: 575px) {
+            .vms-big-text { font-size: clamp(24px, 5vw, 40px) !important; bottom: 25px !important; }
+        }
+        /* Header logo text — hide when zoomed 110%+ */
+        .bromo-logo span {
+            white-space: nowrap;
+            font-size: 16px;
+        }
+        @media (min-width: 768px) and (max-width: 1400px) {
+            .bromo-logo span { display: none !important; }
+        }
+        @media (max-width: 767px) {
+            .bromo-logo span { display: block !important; font-size: 12px !important; white-space: nowrap !important; }
+            .bromo-header .bromo-logo { gap: 6px; }
+            .header-pvt { display: none !important; }
+            .vms-video-section { overflow: hidden !important; }
+            body { overflow-x: hidden !important; }
+        }
+        @media (min-width: 768px) {
+            .vms-video-section { overflow: visible !important; }
+        }
+        .vms-big-text {
+            font-family: 'Sunsive', sans-serif !important;
+            font-size: clamp(40px, 8vw, 100px) !important;
+            font-weight: 700 !important;
+            bottom: 10px !important;
+            text-align: center !important;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            white-space: nowrap !important;
+            padding: 0 20px !important;
+        }
+        @media (min-width: 1024px) and (max-width: 1199px) {
+            .vms-big-text { font-size: clamp(32px, 6vw, 80px) !important; bottom: 10px !important; }
+        }
+        @media (max-width: 991px) {
+            .vms-big-text { font-size: clamp(24px, 5vw, 50px) !important; bottom: 8px !important; }
+        }
+        @media (max-width: 767px) {
+            .vms-big-text { font-size: clamp(30px, 6vw, 50px) !important; bottom: 6px !important; }
+        }
+        @media (max-width: 575px) {
+            .vms-big-text { font-size: clamp(24px, 5vw, 40px) !important; bottom: 4px !important; }
+        }
+        @media (max-width: 400px) {
+            .vms-big-text { font-size: clamp(20px, 4.5vw, 32px) !important; bottom: 4px !important; }
+        }
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.min.js"></script>
     <script>
@@ -1432,32 +1514,16 @@
     </script>
 </head>
 
-<body class="home-bg with-sidebar">
+<body class="home-bg with-sidebar" data-turbo-cache="false">
 
-    <!-- preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <span style="--i:1;"></span>
-            <span style="--i:2;"></span>
-            <span style="--i:3;"></span>
-            <span style="--i:4;"></span>
-            <span style="--i:5;"></span>
-            <span style="--i:6;"></span>
-            <span style="--i:7;"></span>
-            <span style="--i:8;"></span>
-            <span style="--i:9;"></span>
-            <span style="--i:10;"></span>
-            <span style="--i:11;"></span>
-            <span style="--i:12;"></span>
-            <span style="--i:13;"></span>
-            <span style="--i:14;"></span>
-            <span style="--i:15;"></span>
-            <span style="--i:16;"></span>
-            <span style="--i:17;"></span>
-            <span style="--i:18;"></span>
-            <span style="--i:19;"></span>
-            <span style="--i:20;"></span>
-            <div class="loader-plane"></div>
+    <!-- ===== CORPORATE LOADER (fast — never blocks the page) ===== -->
+    <div class="vms-preloader" id="vmsPreloader">
+        <div class="vms-preloader-logo">
+            <img src="assets/newlogo.png" alt="VMS Go Vista">
+        </div>
+        <div class="vms-preloader-brand" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</div>
+        <div class="vms-preloader-bar">
+            <div class="vms-preloader-bar-fill" id="vmsLoaderFill"></div>
         </div>
     </div>
     <!-- preloader end -->
@@ -1465,13 +1531,8 @@
     <!-- ===== BROMORISE HEADER ===== -->
     <header class="bromo-header header--sticky" id="bromoHeader">
         <a href="." class="bromo-logo">
-            <span class="bromo-logo-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" fill="#111" />
-                    <circle cx="17" cy="7" r="2.2" fill="#111" />
-                </svg>
-            </span>
-            <span>vmsgovista</span>
+            <img src="assets/newlogo.png" alt="VMS Go Vista" class="vms-logo-img">
+            <span style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
         </a>
         <nav class="bromo-nav">
             <a href=".">Home</a>
@@ -1481,7 +1542,7 @@
             <a href="contact">Contact</a>
         </nav>
         <div class="bromo-book-btn">
-            <a href="contact">
+            <a href="booking.php">
                 Book now
                 <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
             </a>
@@ -1496,7 +1557,7 @@
     <div class="bromo-mobile-nav" id="mobileNav">
         <div class="bromo-mobile-nav-top">
             <a href="." class="bromo-mobile-nav-logo">
-                <img src="assets/3d logo.png" alt="VMS Go Vista">
+                <img src="assets/newlogo.png" alt="VMS Go Vista">
             </a>
             <button class="bromo-mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
                 <i class="fa-solid fa-xmark"></i>
@@ -1510,13 +1571,13 @@
             <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
         </nav>
         <div class="bromo-mobile-nav-foot">
-            <a href="contact" class="bromo-mobile-nav-cta">
+            <a href="booking.php" class="bromo-mobile-nav-cta">
                 <span>Book Now</span>
                 <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
             </a>
             <div class="bromo-mobile-nav-contact">
-                <a href="tel:+919876543210"><i class="fa-solid fa-phone"></i> +91 98765 43210</a>
-                <a href="mailto:hello@vmsgovista.com"><i class="fa-solid fa-envelope"></i> hello@vmsgovista.com</a>
+                <a href="tel:+919870182425"><i class="fa-solid fa-phone"></i> +91 98701 82425</a>
+                <a href="mailto:info@vmsgovista.com"><i class="fa-solid fa-envelope"></i> info@vmsgovista.com</a>
             </div>
         </div>
     </div>
@@ -1617,6 +1678,105 @@
                         </a>
                     </div>
                 </div>
+                <!-- Service 7 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-heart"></i></div>
+                        <h4 class="title">Honeymoon Packages</h4>
+                        <p class="desc">Dreamy honeymoon experiences to the world's most romantic destinations. Curated stays, private dinners, and unforgettable moments crafted for your special journey together.</p>
+                        <a href="package" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 8 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-users"></i></div>
+                        <h4 class="title">Family Vacation Packages</h4>
+                        <p class="desc">Hassle-free holidays designed for every generation. Kid-friendly activities, comfortable family stays, and itineraries that keep everyone happy and engaged.</p>
+                        <a href="package" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 9 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-people-group"></i></div>
+                        <h4 class="title">Group Tours</h4>
+                        <p class="desc">Exciting group travel experiences for friends, school trips, and organizations. Perfectly coordinated transport, stays, and activities with dedicated group guides.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 10 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
+                        <h4 class="title">Corporate Travel Management</h4>
+                        <p class="desc">Professional travel solutions for businesses — MICE events, business-class bookings, hotel programs, and streamlined travel policies for your organization.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 11 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h4 class="title">Travel Insurance</h4>
+                        <p class="desc">Comprehensive coverage for medical emergencies, trip cancellations, lost baggage, and more — so you explore the world with complete peace of mind.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 12 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <h4 class="title">Sightseeing Tours</h4>
+                        <p class="desc">Expert-guided sightseeing tours to iconic landmarks and hidden gems. Skip-the-line access and local insights that bring every destination to life.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 13 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-ship"></i></div>
+                        <h4 class="title">Cruise Holiday Packages</h4>
+                        <p class="desc">Luxurious cruise holidays across the seas with premium cabins, world-class dining, onboard entertainment, and unforgettable port excursions.</p>
+                        <a href="package" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 14 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-ticket-simple"></i></div>
+                        <h4 class="title">Activities &amp; Attraction Tickets</h4>
+                        <p class="desc">Skip the queues with pre-booked tickets to popular attractions, theme parks, shows, and adventure activities at the best prices.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service 15 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-wrapper">
+                        <div class="icon"><i class="fa-solid fa-headset"></i></div>
+                        <h4 class="title">24/7 Customer Support</h4>
+                        <p class="desc">Our dedicated travel experts are available round-the-clock to assist you before, during, and after your journey — wherever you are in the world.</p>
+                        <a href="contact" class="service-learn-more">
+                            Learn More <i class="fa-regular fa-arrow-up-right"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1667,31 +1827,38 @@
                         <p class="sub-title">Simple Process</p>
                         <h2 class="section-title">How It Works</h2>
                         <p style="color:#666; max-width:520px; margin:12px auto 0; font-size:15px; line-height:1.7;">
-                            Getting started is easy. Just three simple steps to your dream journey.
+                            Getting started is easy. Just four simple steps to your dream journey.
                         </p>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center g-4">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="process-step">
                         <div class="step-num">01</div>
-                        <h5>Tell Us Your Plan</h5>
-                        <p>Share your destination, dates, preferences, and budget. The more details, the better we can tailor your experience.</p>
+                        <h5>Tell Us Your Travel Plans</h5>
+                        <p>Share where you dream of going. We start with three simple things and build the rest around you.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="process-step">
                         <div class="step-num">02</div>
-                        <h5>Get a Curated Quote</h5>
-                        <p>Our travel experts design a personalized itinerary with transparent pricing — no hidden charges, no surprises.</p>
+                        <h5>Receive a Customized Quote</h5>
+                        <p>Your designer maps the route, the stays and the moments in between — priced clearly, no surprises.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-6">
                     <div class="process-step">
                         <div class="step-num">03</div>
-                        <h5>Pack & Go!</h5>
-                        <p>Once you confirm, we handle all the arrangements. Just pack your bags and get ready for an unforgettable journey.</p>
+                        <h5>Confirm Your Booking</h5>
+                        <p>One confirmation locks everything in. Documents, transfers and reservations land in your pocket.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="process-step">
+                        <div class="step-num">04</div>
+                        <h5>Travel &amp; Enjoy</h5>
+                        <p>Mountains at sunrise, a city at midnight, a cruise at golden hour. We stay with you the whole way.</p>
                     </div>
                 </div>
             </div>
@@ -1711,7 +1878,7 @@
                         Get a Free Quote
                         <i class="fa-regular fa-arrow-up-right"></i>
                     </a>
-                    <a href="tel:+919876543210" class="cta-btn-secondary">
+                    <a href="tel:+919870182425" class="cta-btn-secondary">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
                 </div>
@@ -1732,13 +1899,8 @@
             <!-- Brand Column -->
             <div class="vms-brand">
                 <div class="vms-logo">
-                    <div class="vms-logo-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M4 18L8.5 10L12 14L15.5 8L20 18H4Z" stroke-linejoin="round" />
-                            <circle cx="17" cy="7" r="2" />
-                        </svg>
-                    </div>
-                    <span class="vms-logo-text">VMS Go Vista</span>
+                    <img src="assets/newlogo.png" alt="VMS Go Vista" style="height:42px;width:auto;border-radius:8px;">
+                    <span class="vms-logo-text" style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
                 </div>
                 <h3 class="vms-tagline">Your smart travel companion</h3>
                 <p class="vms-desc">VMS Go Vista brings tours, destinations, deals, weather, quick bookings and more useful travel tools into one beautiful platform beside your dream journey.</p>
@@ -1789,13 +1951,13 @@
 
         <!-- Bottom bar with copyright -->
         <div class="vms-footer-bottom">
-            <p class="vms-credit">&copy;
+            <p class="vms-credit" style="font-weight: 900; color: black;">&copy;
                 <script>document.write(new Date().getFullYear())</script> VMS Go Vista &middot; All rights reserved
             </p>
             <div class="vms-credit">
-                <span>Crafted with dedication by</span>
-                <span class="vms-author">
-                    <span class="vms-author-avatar"></span>
+                <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
+                <span class="vms-author" style="font-weight: 900; color: black;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                     VMS Go Vista Team
                 </span>
             </div>
@@ -1803,13 +1965,12 @@
 
         <!-- Video Section with travel footage -->
         <div class="vms-video-section">
-            <video autoplay muted loop playsinline poster="">
-                <source src="assets/video6.mp4" type="video/mp4">
-            </video>
+            <img src="assets/videofotter.gif" alt="VMS Go Vista" class="vms-video-bg" loading="lazy">
             <div class="vms-video-gradient"></div>
-            <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista</div>
+            <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista Pvt Ltd</div>
         </div>
     </footer>
+
 
     <!-- mobile sidebar -->
     <div id="side-bar" class="side-bar header-two header-eight">
@@ -2025,6 +2186,26 @@
 
         });
     </script>
+
+<script>
+// ── Corporate Loader (fast — hides ~250ms after DOM ready, never blocks) ──
+(function () {
+    var overlay = document.getElementById('vmsPreloader');
+    var done = false;
+    function removeLoader() {
+        if (done || !overlay) return; done = true;
+        overlay.classList.add('hidden');
+        setTimeout(function () { if (overlay.parentNode) overlay.remove(); }, 500);
+    }
+    function fastHide() { setTimeout(removeLoader, 250); }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', fastHide);
+    } else { fastHide(); }
+    window.addEventListener('pageshow', removeLoader);  // back/forward cache restore
+    window.addEventListener('load', removeLoader);
+    setTimeout(removeLoader, 1200);  // absolute max
+})();
+</script>
 
 <script src="assets/js/page-transition.js"></script>
 </body>

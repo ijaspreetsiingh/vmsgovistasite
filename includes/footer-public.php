@@ -49,14 +49,14 @@
                         <span class="contact-icon"><i class="fa-solid fa-envelope"></i></span>
                         <div>
                             <span class="contact-label">Email</span>
-                            <a href="mailto:hello@vmsgovista.com" class="contact-value">hello@vmsgovista.com</a>
+                            <a href="mailto:info@vmsgovista.com" class="contact-value">info@vmsgovista.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <span class="contact-icon"><i class="fa-solid fa-phone-volume"></i></span>
                         <div>
                             <span class="contact-label">Phone</span>
-                            <a href="tel:+628XXXXXXX" class="contact-value">+62 8XX XXXX XXX</a>
+                            <a href="tel:+919870182425" class="contact-value">+91 98701 82425</a>
                         </div>
                     </div>
                     <div class="contact-item">

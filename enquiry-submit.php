@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/config/db.php';
 require_once __DIR__ . '/includes/functions.php';
+require_once __DIR__ . '/includes/mailer.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect(SITE_URL . '/package.php');
@@ -23,6 +24,12 @@ if (isset($_POST['adults']) && $_POST['adults'] !== '') {
 $children = null;
 if (isset($_POST['children']) && $_POST['children'] !== '') {
     $children = max(0, min(99, (int)$_POST['children']));
+}
+
+// Travel date (optional field)
+$travelDate = trim($_POST['travel_date'] ?? '');
+if ($travelDate !== '' && !DateTime::createFromFormat('Y-m-d', $travelDate)) {
+    $travelDate = '';
 }
 
 if (!$packageSlug && $packageId > 0) {
@@ -68,10 +75,14 @@ if (strlen($message) > 10000) {
 
 try {
     $db = getDB();
+
+    // Auto-ensure travel column (safe on existing installs)
+    $db->exec("ALTER TABLE `enquiries` ADD COLUMN IF NOT EXISTS `travel_date` DATE DEFAULT NULL AFTER `children`");
+
     $stmt = $db->prepare(
         'INSERT INTO enquiries
-        (package_id, package_title, first_name, last_name, email, country, phone, adults, children, message, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        (package_id, package_title, first_name, last_name, email, country, phone, adults, children, travel_date, message, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     );
     $stmt->execute([
         $packageId > 0 ? $packageId : null,
@@ -83,10 +94,34 @@ try {
         $phone !== '' ? $phone : null,
         $adults,
         $children,
+        $travelDate !== '' ? $travelDate : null,
         $message,
         'new',
     ]);
-    redirect(enquiryReturnUrl($packageSlug, 'sent'));
+
+    // ── Redirect INSTANTLY, then fire emails in the background ──
+    // (SMTP can take 5-15s — the user must land on the success page immediately.)
+    respondRedirectThen(enquiryReturnUrl($packageSlug, 'sent'), function () use (
+        $firstName, $lastName, $email, $phone, $country, $adults, $children, $packageTitle, $packageSlug, $message, $travelDate
+    ) {
+        try {
+            sendEnquiryEmails([
+                'first_name'    => $firstName,
+                'last_name'     => $lastName,
+                'email'         => $email,
+                'phone'         => $phone,
+                'country'       => $country,
+                'adults'        => $adults,
+                'children'      => $children,
+                'travel_date'   => $travelDate !== '' ? $travelDate : '',
+                'package_title' => $packageTitle !== '' ? $packageTitle : ($packageSlug !== '' ? $packageSlug : 'General enquiry'),
+                'message'       => $message,
+            ]);
+        } catch (Throwable $emailErr) {
+            // Emails must never block a booking — log and continue
+            error_log('VMS email error: ' . $emailErr->getMessage());
+        }
+    });
 } catch (Throwable $e) {
     $fail('server');
 }

@@ -92,14 +92,14 @@
             font-family: var(--font-ui);
         }
         /* ===== BROMORISE HEADER (GRID LAYOUT) ===== */
-        .bromo-header{position:absolute;top:0;left:0;right:0;z-index:100;padding:26px 72px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;transition:background .35s,box-shadow .35s,border-color .35s;}
+        .bromo-header{position:absolute;top:0;left:0;right:0;z-index:100;padding:14px 72px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;transition:background .35s,box-shadow .35s,border-color .35s;}
         .bromo-header .bromo-logo{justify-self:start;display:flex;align-items:center;gap:12px;text-decoration:none;}
-        .bromo-header .vms-logo-img{height: 70px; width: auto; object-fit: contain; transition: height .3s ease;}
-        .bromo-header .vms-logo-name{display:none;opacity:0;transition:opacity .3s ease;}
-        .bromo-header.header--sticky.sticky .vms-logo-name{display:block;opacity:1;font-size:18px;font-weight:700;color:#003A59;white-space:nowrap;letter-spacing:-0.3px;}
+        .bromo-header .vms-logo-img{height: 80px; width: auto; object-fit: contain; transition: height .3s ease;}
+        .bromo-header .vms-logo-name{display:block;opacity:1;font-size:20px;font-weight:600;color:#fff;white-space:nowrap;letter-spacing:-0.2px;text-shadow:0 1px 10px rgba(0,0,0,0.28);transition:color .3s ease,opacity .3s ease;}
+        .bromo-header.header--sticky.sticky .vms-logo-name{font-size:20px;font-weight:600;color:#003A59;text-shadow:none;letter-spacing:-0.2px;transition:color .3s ease;}
         .bromo-header .bromo-logo-icon{width:38px;height:38px;border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
         .bromo-header .bromo-logo-icon svg{width:22px;height:22px;display:block;}
-        .bromo-header .bromo-logo span{font-size:21px;font-weight:600;color:#fff;letter-spacing:-0.2px;}
+        .bromo-header .bromo-logo span{font-size:20px;font-weight:600;color:#fff;letter-spacing:-0.2px;transition:color .3s ease;}
         .bromo-nav{justify-self:center;background:rgba(255,255,255,0.16);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.22);border-radius:999px;padding:6px 8px;display:flex;align-items:center;gap:4px;}
         .bromo-nav a{color:rgba(255,255,255,0.95);font-size:14px;font-weight:500;padding:9px 22px;border-radius:999px;text-decoration:none;transition:background .22s,color .22s;white-space:nowrap;}
         .bromo-nav a:hover,.bromo-nav a.active{background:#fff;color:#111;}
@@ -123,7 +123,7 @@
             border-bottom:1px solid rgba(0,0,0,0.06);
             animation:bromoStickyIn .3s ease;
         }
-        .bromo-header.header--sticky.sticky .vms-logo-img{height: 55px;transition:height .3s ease;}
+        .bromo-header.header--sticky.sticky .vms-logo-img{height: 80px;transition:height .3s ease;}
         .bromo-header.header--sticky.sticky .bromo-logo span{color:#003A59;}
         .bromo-header.header--sticky.sticky .bromo-logo-icon{background:#003A59;}
         .bromo-header.header--sticky.sticky .bromo-logo-icon svg path,
@@ -155,13 +155,17 @@
         @keyframes bromoStickyIn{0%{transform:translateY(-15px)}100%{transform:none}}
 
         @media(max-width:991px){
-            .bromo-header{padding:18px 20px;display:flex;justify-content:space-between;}
+            .bromo-header{padding:14px 20px;display:flex;justify-content:space-between;}
             .bromo-header.header--sticky.sticky{display:flex;justify-content:space-between;grid-template-columns:none;}
             .bromo-header .dark-mode-toggle{display:inline-flex;}
             .bromo-nav{display:none;}
             .bromo-mobile-menu{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);border-radius:50%;cursor:pointer;}
             .bromo-mobile-menu span{color:#fff;font-size:18px;}
-            .bromo-header .vms-logo-name{display:none!important;}
+            .bromo-header .vms-logo-name{display:block;font-size:20px;}
+            .bromo-header .bromo-logo span{font-size:19px !important;}
+            .bromo-header .vms-logo-img{height:80px;}
+            .bromo-header.header--sticky.sticky .vms-logo-img{height:70px;}
+            .bromo-header.header--sticky.sticky .bromo-logo span{font-size:16px;}
         }
         /* ===== HERO ===== */
         .bromo-hero{position:relative;width:100%;height:100vh;min-height:680px;overflow:hidden;isolation:isolate;}
@@ -388,6 +392,12 @@
             .bromo-cta-content .cta-desc { margin-left: auto; margin-right: auto; }
             .bromo-cta-content .cta-buttons { justify-content: center; }
         }
+        @media (max-width: 575px) {
+            .bromo-cta-content { padding: 36px 20px; }
+            .bromo-cta-content .cta-buttons { flex-direction: column; width: 100%; }
+            .bromo-cta-content .cta-btn-primary,
+            .bromo-cta-content .cta-btn-secondary { justify-content: center; width: 100%; }
+        }
         /* ===== COOLDOCK-STYLE FOOTER ===== */
 /* ===== FOOTER — COOLDOCK STYLE (EXACT MATCH) ===== */
 .vms-footer{position:relative;background:whitesmoke;padding:0;overflow:hidden;font-family:var(--font-body);}
@@ -438,7 +448,7 @@
 /* ===== VIDEO SECTION WITH TRAVEL VIDEO ===== */
 @keyframes vmsBgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .vms-video-section{position:relative;z-index:1;width:100%;height:520px;overflow:hidden;margin-top:-210px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);background-size:400% 400%;animation:vmsBgShift 15s ease infinite;}
-.vms-video-section video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.vms-video-section .vms-video-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
 .vms-video-gradient{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,whitesmoke 0%,rgba(245,245,245,0.92) 12%,rgba(245,245,245,0.35) 22%,rgba(245,245,245,0.08) 32%,rgba(0,0,0,0.2) 48%,rgba(0,0,0,0.5) 78%,#000 100%);}
 .vms-big-text{position:absolute;bottom:80px;left:0;right:0;z-index:2;text-align:center;font-size:clamp(120px,18vw,180px);font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:0.05em;text-transform:uppercase;text-shadow:0 2px 20px rgba(0,0,0,0.3);pointer-events:none;font-family:var(--font-heading);margin:0;padding:0 20px;white-space:nowrap;}
 
@@ -533,7 +543,7 @@ body.dark-mode .vms-footer-nominee{background:#003A59;color:#fff;}
             .bromo-newsletter-wrap{min-height:auto;border-radius:24px;}
             .bromo-newsletter-content{position:relative;top:auto;left:auto;bottom:auto;width:100%;padding:56px 36px;border-radius:0;backdrop-filter:blur(12px);}
             .rts-testimonials-area .row g-5{align-items:center;}
-            .testi-image-wrap{height:300px;border-radius:16px;}
+            .testi-image-wrap{height:400px;border-radius:16px;}
             .testimonials-wrapper-five{padding:32px 28px;}
             .rts-popular-package-area{padding:60px 0!important;}
             .rts-destination-area{padding:40px 0!important;}
@@ -548,7 +558,7 @@ body.dark-mode .vms-footer-nominee{background:#003A59;color:#fff;}
             .bromo-newsletter-form{flex-direction:column;border-radius:14px;padding:8px;gap:8px;background:#fff;}
             .bromo-newsletter-form input{width:100%;border-radius:100px;padding:0 14px;height:44px;}
             .bromo-newsletter-btn{width:100%;justify-content:center;height:44px;border-radius:100px;}
-            .testi-image-wrap{height:220px;border-radius:14px;}
+            .testi-image-wrap{height:320px;border-radius:14px;}
             .testimonials-wrapper-five{padding:24px 20px;border-radius:16px;}
             .testimonials-wrapper-five .text{font-size:14px!important;}
             .bromo-right-cards{display:none!important;}
@@ -967,7 +977,7 @@ body.dark-mode .vms-footer-nominee{background:#003A59;color:#fff;}
             .about-glass-card {
                 flex-direction: column-reverse;
                 gap: 40px;
-                text-align: center;
+                text-align: left;
             }
             .about-glass-image {
                 width: 100%;
@@ -980,7 +990,7 @@ body.dark-mode .vms-footer-nominee{background:#003A59;color:#fff;}
             .about-glass-content {
                 display: flex;
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
             }
             .about-glass-content .glass-desc {
                 max-width: 100%;
@@ -1753,7 +1763,12 @@ body.dark-mode .vms-footer-nominee{background:#003A59;color:#fff;}
 
         /* ===== TESTIMONIALS — CLEAN BALANCED LAYOUT ===== */
         .rts-testimonials-area{padding:100px 0;background:#f8fafc;}
-        .testi-image-wrap{overflow:hidden;border-radius:20px;height:450px;box-shadow:0 8px 30px rgba(0,0,0,0.06);}
+        .rts-testimonials-area .section-title-area h2{
+            font-family:var(--font-heading);
+            font-weight:600;
+            text-transform:capitalize;
+        }
+        .testi-image-wrap{overflow:hidden;border-radius:20px;height:580px;box-shadow:0 8px 30px rgba(0,0,0,0.06);}
         .testi-fixed-image{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
         .testi-image-wrap:hover .testi-fixed-image{transform:scale(1.04);}
         .testimonials-wrapper-five{padding:44px 50px 40px 40px;background:#fff;border-radius:20px;box-shadow:0 2px 20px rgba(0,0,0,0.04);border:1px solid #eef2f6;transition:all .4s cubic-bezier(.22,.8,.2,1);}

@@ -7,6 +7,7 @@
 
 # Backups
 mailer.php.backup
+*.backup
 
 # Logs & temp
 *.log
@@ -14,14 +15,19 @@ mailer.php.backup
 .DS_Store
 Thumbs.db
 
+# Environment / secrets
+.env
+.env.*
+config/db.local.php
+
 # Uploads (user-generated content)
 uploads/
 
-# Node (reference project)
+# Node
 node_modules/
 refrence/
 
-# Large media files (video/audio >5MB)
+# Large media (>5MB)
 *.mp4
 *.webm
 *.mov
@@ -52,3 +58,9 @@ assets/fonts/fa-light-300.svg
 assets/fonts/fa-regular-400.svg
 assets/fonts/fa-solid-900.svg
 assets/fonts/fa-thin-100.ttf
+
+# PowerShell scripts
+*.ps1
+
+# Database dumps (keep schema only)
+config/*.sql.bak

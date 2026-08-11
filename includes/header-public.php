@@ -11,7 +11,6 @@ $_pageTitle = isset($pageTitle) ? $pageTitle . ' — VMS Go Vista' : 'VMS Go Vis
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/x-icon" href="<?= SITE_URL ?>/assets/images/fav.svg">
 <title><?= htmlspecialchars($_pageTitle) ?></title>
 
 <!-- PERFORMANCE: Preload critical assets -->

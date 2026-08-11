@@ -31,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" type="image/x-icon" href="<?= SITE_URL ?>/assets/images/fav.svg">
 <title>Sign In — VMS Go Vista</title>
 <link rel="stylesheet preload" href="<?= SITE_URL ?>/assets/css/plugins/swiper.min.css" as="style">
 <link rel="stylesheet preload" href="<?= SITE_URL ?>/assets/fonts/custom-font.css" as="style">
