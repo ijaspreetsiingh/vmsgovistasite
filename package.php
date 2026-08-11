@@ -741,9 +741,8 @@ $tourTypes    = getSettings('tour_type');
         <a href="about">About Us</a>
         <a href="contact">Contact</a>
     </nav>
-    <div class="bromo-book-btn">
-        <a href="booking.php">
-            Book now
+    <div class="bromo-book-btn"><a href="booking">
+                Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
     </div>
@@ -771,7 +770,7 @@ $tourTypes    = getSettings('tour_type');
         <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
     </nav>
     <div class="bromo-mobile-nav-foot">
-        <a href="booking.php" class="bromo-mobile-nav-cta">
+        <a href="booking" class="bromo-mobile-nav-cta">
             <span>Book Now</span>
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>

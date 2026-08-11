@@ -1083,7 +1083,7 @@ window.addEventListener('error', function(e) {
         <a href="contact">Contact</a>
     </nav>
     <div class="bromo-book-btn">
-        <a href="booking.php?package=<?= e($pkg['slug'] ?? '') ?>">
+        <a href="booking?package=<?= e($pkg['slug'] ?? '') ?>">
             Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>

@@ -235,7 +235,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
         <a href="contact">Contact</a>
     </nav>
     <div class="bromo-book-btn">
-        <a href="booking.php" class="active">
+        <a href="booking" class="active">
             Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
@@ -264,7 +264,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
         <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
     </nav>
     <div class="bromo-mobile-nav-foot">
-        <a href="booking.php" class="bromo-mobile-nav-cta">
+        <a href="booking" class="bromo-mobile-nav-cta">
             <span>Book Now</span>
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>

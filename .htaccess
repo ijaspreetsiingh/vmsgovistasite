@@ -133,6 +133,9 @@ RewriteRule ^ package-details/%1? [R=301,L]
 # /package-details/something -> package-details.php?slug=something
 RewriteRule ^package-details/(.+)$ package-details.php?slug=$1 [L,QSA]
 
+# /booking -> booking.php
+RewriteRule ^booking$ booking.php [L,QSA]
+
 # /package -> package.php
 RewriteRule ^package$ package.php [L,QSA]
 

@@ -1096,14 +1096,14 @@ function bkShortDesc(?string $desc): string {
         <span style="font-family: Sunsive;">VMS Go Vista Pvt Ltd</span>
     </a>
     <nav class="bromo-nav">
-        <a href="index-three.php">Home</a>
-        <a href="package.php">Packages</a>
-        <a href="service.html">Services</a>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact</a>
+        <a href=".">Home</a>
+        <a href="package">Packages</a>
+        <a href="service">Services</a>
+        <a href="about">About Us</a>
+        <a href="contact">Contact</a>
     </nav>
     <div class="bromo-book-btn">
-        <a href="booking.php" class="active">
+        <a href="booking" class="active">
             Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
@@ -1125,14 +1125,14 @@ function bkShortDesc(?string $desc): string {
         </button>
     </div>
     <nav class="bromo-mobile-nav-links">
-        <a href="index-three.php"><i class="fa-solid fa-house"></i><span>Home</span></a>
-        <a href="package.php"><i class="fa-solid fa-suitcase"></i><span>Packages</span></a>
-        <a href="service.html"><i class="fa-solid fa-concierge-bell"></i><span>Services</span></a>
-        <a href="about.html"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a>
-        <a href="contact.html"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
+        <a href="."><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="package"><i class="fa-solid fa-suitcase"></i><span>Packages</span></a>
+        <a href="service"><i class="fa-solid fa-concierge-bell"></i><span>Services</span></a>
+        <a href="about"><i class="fa-solid fa-circle-info"></i><span>About Us</span></a>
+        <a href="contact"><i class="fa-solid fa-envelope"></i><span>Contact</span></a>
     </nav>
     <div class="bromo-mobile-nav-foot">
-        <a href="booking.php" class="bromo-mobile-nav-cta">
+        <a href="booking" class="bromo-mobile-nav-cta">
             <span>Book Now</span>
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
@@ -1190,7 +1190,7 @@ function bkShortDesc(?string $desc): string {
             A confirmation email is on its way to your inbox.
         </div>
         <div class="bk-party-actions">
-            <a href="booking.php" class="bk-party-btn bk-party-btn-ghost"><i class="fa-regular fa-rotate-left"></i> New Booking</a>
+            <a href="booking" class="bk-party-btn bk-party-btn-ghost"><i class="fa-regular fa-rotate-left"></i> New Booking</a>
             <a href="package.php" class="bk-party-btn bk-party-btn-primary">Explore More <i class="fa-regular fa-arrow-right"></i></a>
         </div>
     </div>
@@ -1531,7 +1531,7 @@ function bkShortDesc(?string $desc): string {
                 <li><a href="package.php" class="main">Packages</a></li>
                 <li><a href="about.html" class="main">About</a></li>
                 <li><a href="contact.html" class="main">Contact Us</a></li>
-                <li><a href="booking.php" class="main">Book Now</a></li>
+                <li><a href="booking" class="main">Book Now</a></li>
             </ul>
         </nav>
     </div>
