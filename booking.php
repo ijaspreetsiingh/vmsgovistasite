@@ -1514,7 +1514,7 @@ function bkShortDesc(?string $desc): string {
 
     <!-- Video Section with travel footage -->
     <div class="vms-video-section">
-        <video src="assets/videofotte.mp4" alt="VMS Go Vista" class="vms-video-bg" autoplay muted loop playsinline></video>
+        <video src="assets/videofotte.mp4" class="vms-video-bg" autoplay muted loop playsinline></video>
         <div class="vms-video-gradient"></div>
         <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista Pvt Ltd</div>
     </div>
