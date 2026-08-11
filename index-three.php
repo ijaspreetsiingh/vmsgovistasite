@@ -1222,7 +1222,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
 
     <!-- Video Section with travel footage -->
     <div class="vms-video-section">
-        <img src="assets/videofotter.gif" alt="VMS Go Vista" class="vms-video-bg" loading="lazy">
+        <video src="assets/videofotte.mp4" class="vms-video-bg" autoplay muted loop playsinline></video>
         <div class="vms-video-gradient"></div>
         <div class="vms-big-text" style="font-family:Sunsive">VMS Go Vista PVT LTD</div>
     </div>
