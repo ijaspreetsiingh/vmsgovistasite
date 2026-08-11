@@ -10,3 +10,7 @@ Thumbs.db
 # Node modules (reinstall with npm install)
 node_modules/
 package-lock.json
+
+# Files >50MB (GitHub limit - upload these to server directly)
+assets/video4.mp4
+assets/videofotter.gif
