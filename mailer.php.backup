@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — Wanderlust Premium Travel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+/* ================================================================
+   DESIGN TOKENS
+================================================================ */
+:root{
+  --bg:#ffffff;
+  --bg-soft:#f5f8fb;
+  --ink:#0b1f2a;
+  --ink-mid:#3a5060;
+  --ink-soft:#6b8294;
+  --gold:#c9a96e;
+  --gold-deep:#b08d57;
+  --gold-light:#e8d9b8;
+  --sky:#e8f0f5;
+  --sky-mid:#c5dae8;
+  --sky-deep:#9bc1d9;
+  --teal:#2a7a8a;
+  --coral:#e8836b;
+  --glass:rgba(255,255,255,0.55);
+  --glass-strong:rgba(255,255,255,0.75);
+  --glass-border:rgba(255,255,255,0.8);
+  --shadow-sm:0 2px 8px rgba(11,31,42,.06);
+  --shadow-md:0 8px 30px rgba(11,31,42,.08);
+  --shadow-lg:0 20px 60px rgba(11,31,42,.12);
+  --shadow-xl:0 40px 120px rgba(11,31,42,.16);
+  --radius:24px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+
+/* ================================================================
+   SECTION SHELL
+================================================================ */
+.hiw{
+  position:relative;
+  background:var(--bg);
+}
+
+/* Subtle grain/noise overlay for texture */
+.hiw::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ================================================================
+   INTRO HEADER
+================================================================ */
+.hiw-intro{
+  text-align:center;
+  padding:140px 24px 60px;
+  position:relative;
+  z-index:5;
+}
+.hiw-eyebrow{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.4em;
+  color:var(--gold-deep);
+  text-transform:uppercase;
+  margin-bottom:20px;
+  opacity:0;
+  transform:translateY(20px);
+}
+.hiw-title{
+  font-size:clamp(40px,7vw,88px);
+  font-weight:800;
+  letter-spacing:-.04em;
+  line-height:1;
+  background:linear-gradient(135deg,var(--ink) 0%,var(--ink-mid) 60%,var(--teal) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+  opacity:0;
+  transform:translateY(30px);
+}
+.hiw-subtitle{
+  font-size:clamp(16px,2vw,20px);
+  color:var(--ink-soft);
+  font-weight:400;
+  max-width:540px;
+  margin:0 auto 40px;
+  opacity:0;
+  transform:translateY(20px);
+}
+.scroll-hint{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  opacity:0;
+}
+.scroll-hint span{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  font-weight:600;
+}
+.scroll-mouse{
+  width:26px;height:42px;
+  border:2px solid var(--ink-soft);
+  border-radius:14px;
+  position:relative;
+}
+.scroll-mouse::after{
+  content:'';
+  position:absolute;
+  top:7px;left:50%;
+  width:4px;height:8px;
+  margin-left:-2px;
+  border-radius:2px;
+  background:var(--gold);
+  animation:scrollDot 1.6s var(--ease) infinite;
+}
+@keyframes scrollDot{
+  0%{opacity:0;transform:translateY(-4px)}
+  40%{opacity:1}
+  100%{opacity:0;transform:translateY(14px)}
+}
+
+/* ================================================================
+   JOURNEY CONTAINER
+================================================================ */
+.hiw-journey{
+  position:relative;
+  height:520vh; /* scroll room for 4 steps + finale */
+}
+.hiw-sticky{
+  position:sticky;
+  top:0;
+  height:100vh;
+  width:100%;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ================================================================
+   PROGRESS SIDEBAR
+================================================================ */
+.hiw-progress{
+  position:absolute;
+  left:40px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:50;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:0;
+}
+.progress-step{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  cursor:pointer;
+  padding:6px 0;
+  transition:all .4s var(--ease);
+}
+.progress-dot{
+  width:12px;height:12px;
+  border-radius:50%;
+  background:transparent;
+  border:2px solid var(--sky-deep);
+  transition:all .4s var(--ease);
+  position:relative;
+  flex-shrink:0;
+}
+.progress-dot::after{
+  content:'';
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  background:var(--gold);
+  opacity:0;
+  transform:scale(.5);
+  transition:all .4s var(--ease);
+}
+.progress-step.active .progress-dot{
+  border-color:var(--gold);
+  background:var(--gold);
+}
+.progress-step.active .progress-dot::after{
+  opacity:.2;
+  transform:scale(1);
+}
+.progress-step.done .progress-dot{
+  background:var(--sky-mid);
+  border-color:var(--sky-mid);
+}
+.progress-label{
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.05em;
+  color:var(--ink-soft);
+  opacity:.4;
+  transition:all .4s var(--ease);
+  white-space:nowrap;
+}
+.progress-step.active .progress-label{
+  opacity:1;
+  color:var(--ink);
+  font-weight:700;
+}
+.progress-step.done .progress-label{opacity:.6}
+.progress-line{
+  width:2px;
+  height:36px;
+  background:var(--sky);
+  margin-left:5px;
+  position:relative;
+  overflow:hidden;
+}
+.progress-fill{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:0%;
+  background:linear-gradient(to bottom,var(--gold),var(--gold-deep));
+  transition:height .4s var(--ease);
+}
+
+/* ================================================================
+   VISUAL STAGE
+================================================================ */
+.hiw-stage{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  perspective:1200px;
+  transform-style:preserve-3d;
+}
+
+/* Background gradient that shifts per step */
+.stage-bg{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,#f5f8fb 0%,#eaf2f7 40%,#e8f0f5 70%,#f0f5f8 100%);
+  transition:background 1.2s var(--ease);
+  z-index:0;
+}
+.stage-glow{
+  position:absolute;
+  width:900px;height:900px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(201,169,110,.06) 0%,transparent 60%);
+  z-index:1;
+  will-change:transform;
+}
+
+/* ================================================================
+   CLOUDS
+================================================================ */
+.cloud{
+  position:absolute;
+  z-index:3;
+  opacity:0;
+  will-change:transform,opacity;
+}
+.cloud svg{display:block;filter:drop-shadow(0 8px 20px rgba(155,193,217,.15))}
+.cloud-1{top:8%;left:-10%;width:180px}
+.cloud-2{top:18%;right:-5%;width:220px}
+.cloud-3{top:55%;left:5%;width:150px}
+.cloud-4{top:30%;right:15%;width:120px}
+.cloud-5{top:70%;right:8%;width:160px}
+
+/* ================================================================
+   WORLD MAP / GLOBE
+================================================================ */
+.world-map{
+  position:absolute;
+  z-index:4;
+  width:min(680px,80vw);
+  opacity:0;
+  transform:scale(.85) translateY(30px);
+  will-change:transform,opacity;
+}
+.world-map svg{width:100%;height:auto;display:block;overflow:visible}
+.map-continent{
+  fill:#dbe7f0;
+  stroke:#c5dae8;
+  stroke-width:1;
+  transition:fill 1s var(--ease);
+}
+.map-grid line{
+  stroke:#e8f0f5;
+  stroke-width:.5;
+  stroke-dasharray:2 4;
+}
+.map-route{
+  fill:none;
+  stroke:url(#routeGrad);
+  stroke-width:2.5;
+  stroke-linecap:round;
+  stroke-dasharray:1200;
+  stroke-dashoffset:1200;
+}
+.route-glow{
+  fill:none;
+  stroke:var(--gold);
+  stroke-width:6;
+  stroke-linecap:round;
+  opacity:.15;
+  filter:blur(4px);
+  stroke-dasharray:1200;
+  stroke-dashoffset:1200;
+}
+
+/* Location pins */
+.loc-pin{
+  position:absolute;
+  z-index:5;
+  opacity:0;
+  transform:translateY(-10px) scale(.5);
+  will-change:transform,opacity;
+}
+.loc-pin svg{display:block;filter:drop-shadow(0 4px 8px rgba(201,169,110,.3))}
+.pin-pulse{
+  position:absolute;
+  top:-4px;left:50%;
+  width:16px;height:16px;
+  margin-left:-8px;
+  border-radius:50%;
+  background:var(--gold);
+  opacity:0;
+}
+.loc-pin.active .pin-pulse{
+  animation:pinPulse 2s ease-out infinite;
+}
+@keyframes pinPulse{
+  0%{transform:scale(.5);opacity:.4}
+  100%{transform:scale(3);opacity:0}
+}
+
+/* ================================================================
+   COMPASS
+================================================================ */
+.compass{
+  position:absolute;
+  z-index:5;
+  top:15%;right:12%;
+  width:90px;height:90px;
+  opacity:0;
+  will-change:transform,opacity;
+  filter:drop-shadow(0 8px 24px rgba(11,31,42,.12));
+}
+.compass-needle{
+  transform-origin:50% 50%;
+  will-change:transform;
+}
+
+/* ================================================================
+   SUITCASE
+================================================================ */
+.suitcase{
+  position:absolute;
+  z-index:6;
+  bottom:12%;left:50%;
+  margin-left:-120px;
+  width:200px;
+  opacity:0;
+  transform:translateY(40px) scale(.9);
+  will-change:transform,opacity;
+  filter:drop-shadow(0 20px 40px rgba(11,31,42,.18));
+  perspective:600px;
+}
+.suitcase-body{
+  position:relative;
+  width:200px;
+  height:140px;
+}
+.suitcase-lid{
+  position:absolute;
+  top:0;left:0;
+  width:100%;
+  height:50%;
+  transform-origin:bottom center;
+  transform:rotateX(0deg);
+  will-change:transform;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+}
+.suitcase-bottom{
+  position:absolute;
+  bottom:0;left:0;
+  width:100%;
+  height:50%;
+}
+/* Suitcase interior items */
+.suitcase-items{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  width:80%;
+  will-change:transform,opacity;
+  opacity:0;
+  z-index:-1;
+}
+
+/* ================================================================
+   AIRPLANE
+================================================================ */
+.airplane{
+  position:absolute;
+  z-index:8;
+  width:80px;
+  opacity:0;
+  will-change:transform,opacity;
+  filter:drop-shadow(0 6px 16px rgba(11,31,42,.15));
+}
+.plane-trail{
+  position:absolute;
+  z-index:7;
+  width:100%;height:100%;
+  pointer-events:none;
+  opacity:0;
+  will-change:opacity;
+}
+
+/* ================================================================
+   BOARDING PASS
+================================================================ */
+.boarding-pass{
+  position:absolute;
+  z-index:7;
+  top:22%;right:8%;
+  width:280px;
+  opacity:0;
+  transform:translateY(20px) rotate(-3deg);
+  will-change:transform,opacity;
+  filter:drop-shadow(0 16px 40px rgba(11,31,42,.15));
+}
+.bp-card{
+  background:linear-gradient(135deg,#ffffff 0%,#f5f8fb 100%);
+  border-radius:16px;
+  padding:20px 22px;
+  border:1px solid rgba(201,169,110,.15);
+  position:relative;
+  overflow:hidden;
+}
+.bp-card::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:6px;
+  background:linear-gradient(to bottom,var(--gold),var(--gold-deep));
+}
+.bp-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+.bp-brand{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.15em;
+  color:var(--gold-deep);
+}
+.bp-class{
+  font-size:9px;
+  font-weight:600;
+  color:var(--ink-soft);
+  background:var(--sky);
+  padding:3px 8px;
+  border-radius:6px;
+}
+.bp-route{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+.bp-city{
+  text-align:center;
+}
+.bp-code{
+  font-size:24px;
+  font-weight:800;
+  color:var(--ink);
+  letter-spacing:-.02em;
+}
+.bp-cityname{
+  font-size:9px;
+  color:var(--ink-soft);
+  font-weight:500;
+}
+.bp-dash{
+  flex:1;
+  height:1px;
+  background:repeating-linear-gradient(to right,var(--sky-deep) 0,var(--sky-deep) 3px,transparent 3px,transparent 6px);
+  margin:0 10px;
+  position:relative;
+}
+.bp-dash::after{
+  content:'✈';
+  position:absolute;
+  top:-8px;left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  color:var(--gold);
+}
+.bp-details{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.bp-detail{
+  flex:1;
+}
+.bp-label{
+  font-size:8px;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin-bottom:3px;
+}
+.bp-value{
+  font-size:12px;
+  font-weight:700;
+  color:var(--ink);
+}
+.bp-barcode{
+  display:flex;
+  gap:1px;
+  margin-top:14px;
+  height:24px;
+  align-items:flex-end;
+}
+.bp-barcode span{
+  display:block;
+  width:2px;
+  background:var(--ink);
+}
+
+/* ================================================================
+   PASSPORT
+================================================================ */
+.passport{
+  position:absolute;
+  z-index:7;
+  bottom:15%;right:10%;
+  width:160px;
+  opacity:0;
+  transform:translateY(20px) rotate(4deg);
+  will-change:transform,opacity;
+  filter:drop-shadow(0 16px 36px rgba(11,31,42,.18));
+  perspective:400px;
+}
+.passport-book{
+  position:relative;
+  width:160px;
+  height:110px;
+  border-radius:6px 10px 10px 6px;
+  background:linear-gradient(135deg,#1a3540 0%,#0b1f2a 100%);
+  border-left:4px solid var(--gold-deep);
+  padding:16px 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+.passport-book::before{
+  content:'';
+  position:absolute;
+  inset:6px;
+  border:.5px solid rgba(201,169,110,.3);
+  border-radius:4px;
+  pointer-events:none;
+}
+.passport-emblem{
+  width:32px;height:32px;
+  border:2px solid var(--gold);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:6px;
+}
+.passport-emblem svg{width:18px;height:18px}
+.passport-title{
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.15em;
+  color:var(--gold);
+  text-transform:uppercase;
+}
+.passport-sub{
+  font-size:7px;
+  color:rgba(201,169,110,.6);
+  letter-spacing:.1em;
+  margin-top:2px;
+}
+.passport-stamp{
+  position:absolute;
+  top:-8px;right:-8px;
+  width:70px;height:70px;
+  border:2.5px solid var(--coral);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transform:rotate(-18deg) scale(0);
+  opacity:0;
+  will-change:transform,opacity;
+}
+.passport-stamp::before{
+  content:'APPROVED';
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.1em;
+  color:var(--coral);
+  text-align:center;
+  line-height:1.2;
+}
+.passport-stamp::after{
+  content:'';
+  position:absolute;
+  inset:4px;
+  border:1px dashed var(--coral);
+  border-radius:50%;
+  opacity:.5;
+}
+
+/* ================================================================
+   LUGGAGE TAG
+================================================================ */
+.luggage-tag{
+  position:absolute;
+  z-index:7;
+  bottom:20%;left:15%;
+  width:100px;
+  opacity:0;
+  transform:translateY(20px) rotate(-6deg);
+  will-change:transform,opacity;
+  filter:drop-shadow(0 10px 24px rgba(11,31,42,.12));
+}
+.lt-string{
+  width:2px;
+  height:20px;
+  background:var(--ink-soft);
+  margin:0 auto;
+  opacity:.4;
+}
+.lt-body{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-deep) 100%);
+  border-radius:6px 6px 10px 10px;
+  padding:10px 12px;
+  position:relative;
+}
+.lt-body::before{
+  content:'';
+  position:absolute;
+  top:-4px;left:50%;
+  width:12px;height:12px;
+  margin-left:-6px;
+  border-radius:50%;
+  background:var(--bg);
+  border:2px solid var(--gold-deep);
+}
+.lt-label{
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:.1em;
+  color:rgba(255,255,255,.7);
+  text-transform:uppercase;
+}
+.lt-value{
+  font-size:11px;
+  font-weight:800;
+  color:#fff;
+  margin-top:2px;
+}
+
+/* ================================================================
+   CONFETTI
+================================================================ */
+.confetti-container{
+  position:absolute;
+  inset:0;
+  z-index:9;
+  pointer-events:none;
+  overflow:hidden;
+  opacity:0;
+  will-change:opacity;
+}
+.confetti-piece{
+  position:absolute;
+  width:8px;height:8px;
+  top:50%;left:50%;
+  will-change:transform,opacity;
+}
+
+/* ================================================================
+   STEP 4 SCENE ELEMENTS
+================================================================ */
+.scene-layer{
+  position:absolute;
+  inset:0;
+  z-index:6;
+  opacity:0;
+  will-change:transform,opacity;
+  pointer-events:none;
+}
+
+/* Mountains */
+.scene-mountains{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:45%;
+  z-index:6;
+}
+.mountain{
+  position:absolute;
+  bottom:0;
+  will-change:transform;
+}
+.mtn-1{left:-5%;width:340px}
+.mtn-2{left:15%;width:280px}
+.mtn-3{right:5%;width:300px}
+.mtn-4{right:-8%;width:240px}
+
+/* Beach */
+.scene-beach{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:35%;
+  z-index:6;
+}
+.palm-tree{
+  position:absolute;
+  bottom:0;
+  will-change:transform;
+}
+.palm-1{left:8%;width:80px}
+.palm-2{right:12%;width:70px}
+.sun{
+  position:absolute;
+  bottom:20%;right:20%;
+  width:80px;height:80px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffd89e 0%,var(--gold) 50%,transparent 70%);
+  opacity:.7;
+  will-change:transform,opacity;
+}
+
+/* City skyline */
+.scene-city{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:40%;
+  z-index:6;
+}
+.building{
+  position:absolute;
+  bottom:0;
+  background:linear-gradient(180deg,#c5dae8 0%,#9bc1d9 100%);
+  border-radius:4px 4px 0 0;
+  will-change:transform;
+}
+
+/* Cruise ship */
+.cruise-ship{
+  position:absolute;
+  bottom:10%;left:50%;
+  margin-left:-90px;
+  width:180px;
+  z-index:6;
+  will-change:transform;
+  filter:drop-shadow(0 10px 20px rgba(11,31,42,.1));
+}
+
+/* Train */
+.train-scene{
+  position:absolute;
+  bottom:8%;left:0;right:0;
+  z-index:6;
+  height:120px;
+  will-change:transform;
+}
+.train-bridge{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:60px;
+}
+.train{
+  position:absolute;
+  bottom:45px;left:-200px;
+  width:160px;
+  will-change:transform;
+}
+
+/* Hot air balloons */
+.balloons{
+  position:absolute;
+  inset:0;
+  z-index:6;
+}
+.balloon{
+  position:absolute;
+  will-change:transform;
+}
+.balloon-1{top:30%;left:15%;width:50px}
+.balloon-2{top:25%;right:20%;width:60px}
+.balloon-3{top:40%;left:60%;width:45px}
+
+/* Sunrise */
+.sunrise{
+  position:absolute;
+  top:5%;left:50%;
+  margin-left:-200px;
+  width:400px;height:400px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,216,158,.3) 0%,rgba(201,169,110,.1) 40%,transparent 60%);
+  z-index:2;
+  opacity:0;
+  will-change:transform,opacity;
+}
+
+/* ================================================================
+   POLAROIDS
+================================================================ */
+.polaroids{
+  position:absolute;
+  inset:0;
+  z-index:10;
+  pointer-events:none;
+}
+.polaroid{
+  position:absolute;
+  width:140px;
+  background:#fff;
+  padding:10px 10px 36px;
+  border-radius:4px;
+  box-shadow:0 12px 32px rgba(11,31,42,.15);
+  opacity:0;
+  will-change:transform,opacity;
+}
+.polaroid-img{
+  width:100%;
+  aspect-ratio:1;
+  border-radius:2px;
+  overflow:hidden;
+  background:var(--sky);
+}
+.polaroid-img svg{width:100%;height:100%;display:block}
+.polaroid-caption{
+  position:absolute;
+  bottom:8px;left:0;right:0;
+  text-align:center;
+  font-size:11px;
+  font-weight:600;
+  color:var(--ink-mid);
+  font-family:'Inter',sans-serif;
+}
+.pol-1{top:15%;left:8%}
+.pol-2{top:20%;right:10%}
+.pol-3{top:50%;left:12%}
+.pol-4{top:55%;right:8%}
+.pol-5{top:35%;left:45%}
+
+/* ================================================================
+   STEP CARDS (text content)
+================================================================ */
+.hiw-cards{
+  position:absolute;
+  inset:0;
+  z-index:20;
+  pointer-events:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.step-card{
+  position:absolute;
+  width:min(380px,42vw);
+  padding:36px 34px;
+  background:var(--glass);
+  backdrop-filter:blur(20px) saturate(1.2);
+  -webkit-backdrop-filter:blur(20px) saturate(1.2);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
+  opacity:0;
+  visibility:hidden;
+  will-change:transform,opacity;
+  pointer-events:auto;
+  transition:box-shadow .4s var(--ease),transform .4s var(--ease);
+}
+.step-card:hover{
+  box-shadow:var(--shadow-xl);
+  transform:translateY(-4px) !important;
+}
+.step-card[data-step="1"]{left:6%;top:50%;transform:translateY(-50%)}
+.step-card[data-step="2"]{right:6%;top:50%;transform:translateY(-50%)}
+.step-card[data-step="3"]{left:6%;top:50%;transform:translateY(-50%)}
+.step-card[data-step="4"]{right:6%;top:50%;transform:translateY(-50%)}
+
+.step-card.active{
+  opacity:1;
+  visibility:visible;
+}
+.step-card.prev{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-50%) translateX(-30px) scale(.95);
+}
+.step-card[data-step="2"].prev,.step-card[data-step="4"].prev{
+  transform:translateY(-50%) translateX(30px) scale(.95);
+}
+.step-card.next{
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-50%) translateX(30px) scale(.95);
+  filter:blur(8px);
+}
+.step-card[data-step="2"].next,.step-card[data-step="4"].next{
+  transform:translateY(-50%) translateX(-30px) scale(.95);
+}
+
+.step-number{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.3em;
+  color:var(--gold-deep);
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.step-number::after{
+  content:'';
+  width:32px;height:2px;
+  background:var(--gold);
+  border-radius:1px;
+}
+.step-card h3{
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  line-height:1.15;
+  margin-bottom:14px;
+  color:var(--ink);
+}
+.step-card p{
+  font-size:15px;
+  color:var(--ink-mid);
+  line-height:1.6;
+  margin-bottom:20px;
+}
+.step-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.step-tag{
+  font-size:12px;
+  font-weight:600;
+  padding:6px 14px;
+  background:rgba(201,169,110,.1);
+  color:var(--gold-deep);
+  border-radius:20px;
+  border:1px solid rgba(201,169,110,.2);
+  transition:all .3s var(--ease);
+}
+.step-tag:hover{
+  background:var(--gold);
+  color:#fff;
+  transform:translateY(-2px);
+}
+.step-features{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.step-feature{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--ink-mid);
+}
+.step-feature-icon{
+  width:32px;height:32px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--sky) 0%,var(--sky-mid) 100%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+.step-feature-icon svg{width:16px;height:16px}
+
+/* ================================================================
+   FINALE
+================================================================ */
+.hiw-finale{
+  text-align:center;
+  padding:80px 24px 140px;
+  position:relative;
+  z-index:5;
+  opacity:0;
+  transform:translateY(40px);
+  will-change:transform,opacity;
+}
+.finale-eyebrow{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.4em;
+  color:var(--gold-deep);
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.finale-title{
+  font-size:clamp(36px,6vw,72px);
+  font-weight:800;
+  letter-spacing:-.04em;
+  line-height:1;
+  background:linear-gradient(135deg,var(--ink) 0%,var(--teal) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:20px;
+}
+.finale-sub{
+  font-size:18px;
+  color:var(--ink-soft);
+  max-width:480px;
+  margin:0 auto 40px;
+}
+
+/* CTA Button with magnetic effect */
+.cta-btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  padding:18px 40px;
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:#fff;
+  background:linear-gradient(135deg,var(--ink) 0%,var(--teal) 100%);
+  border:none;
+  border-radius:50px;
+  cursor:pointer;
+  box-shadow:0 12px 40px rgba(11,31,42,.2);
+  transition:box-shadow .4s var(--ease);
+  will-change:transform;
+  overflow:hidden;
+}
+.cta-btn::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-deep) 100%);
+  opacity:0;
+  transition:opacity .4s var(--ease);
+}
+.cta-btn:hover::before{opacity:1}
+.cta-btn:hover{
+  box-shadow:0 16px 50px rgba(201,169,110,.35);
+}
+.cta-btn span,.cta-btn svg{
+  position:relative;
+  z-index:1;
+}
+.cta-btn svg{
+  width:18px;height:18px;
+  transition:transform .3s var(--ease);
+}
+.cta-btn:hover svg{transform:translateX(4px)}
+
+/* Decorative floating elements in finale */
+.finale-deco{
+  position:absolute;
+  pointer-events:none;
+  opacity:.3;
+}
+.finale-deco.fd1{top:10%;left:10%;width:60px;animation:floatY 6s ease-in-out infinite}
+.finale-deco.fd2{bottom:20%;right:15%;width:50px;animation:floatY 5s ease-in-out infinite .5s}
+.finale-deco.fd3{top:30%;right:8%;width:40px;animation:floatY 7s ease-in-out infinite 1s}
+@keyframes floatY{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-20px) rotate(5deg)}
+}
+
+/* ================================================================
+   PARTICLES (ambient floating dots)
+================================================================ */
+.particles{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  overflow:hidden;
+}
+.particle{
+  position:absolute;
+  width:4px;height:4px;
+  border-radius:50%;
+  background:var(--gold);
+  opacity:0;
+  will-change:transform,opacity;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media(max-width:1024px){
+  .hiw-progress{left:20px}
+  .step-card{width:min(340px,40vw)}
+  .world-map{width:min(500px,70vw)}
+  .boarding-pass{width:240px;right:4%}
+  .compass{width:70px;right:6%}
+}
+@media(max-width:768px){
+  .hiw-intro{padding:100px 20px 40px}
+  .hiw-progress{display:none}
+  .step-card{
+    width:min(360px,88vw);
+    left:50% !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:5% !important;
+    transform:translateX(-50%) !important;
+    padding:24px 22px;
+  }
+  .step-card[data-step]{transform:translateX(-50%) !important}
+  .step-card.prev{transform:translateX(-50%) translateY(30px) scale(.95) !important}
+  .step-card.next{transform:translateX(-50%) translateY(-30px) scale(.95) !important;filter:blur(6px)}
+  .step-card h3{font-size:22px}
+  .step-card p{font-size:14px}
+  .world-map{width:min(400px,85vw)}
+  .suitcase{width:140px;margin-left:-70px;bottom:30%}
+  .boarding-pass{width:200px;top:10%;right:3%}
+  .passport{width:120px;bottom:28%;right:5%}
+  .compass{width:56px;top:8%;right:5%}
+  .luggage-tag{width:80px;bottom:30%;left:5%}
+  .hiw-journey{height:480vh}
+  .scene-mountains,.scene-beach,.scene-city{height:30%}
+  .polaroid{width:100px}
+}
+@media(max-width:480px){
+  .step-card{padding:20px 18px}
+  .step-card h3{font-size:20px}
+  .world-map{width:90vw}
+  .suitcase{width:120px;margin-left:-60px}
+  .boarding-pass{width:170px}
+  .passport{width:100px}
+  .polaroid{width:84px}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01s !important;transition-duration:.01s !important}
+}
+</style>
+</head>
+<body>
+
+<section class="hiw" id="howItWorks">
+
+  <!-- ====================== INTRO ====================== -->
+  <div class="hiw-intro">
+    <div class="hiw-eyebrow" id="eyebrow">How It Works</div>
+    <h2 class="hiw-title" id="hiwTitle">Your Journey Starts Here</h2>
+    <p class="hiw-subtitle" id="hiwSub">Scroll to experience the journey — from the first spark of wanderlust to the moment your adventure begins.</p>
+    <div class="scroll-hint" id="scrollHint">
+      <span>Scroll to begin</span>
+      <div class="scroll-mouse"></div>
+    </div>
+  </div>
+
+  <!-- ====================== JOURNEY ====================== -->
+  <div class="hiw-journey" id="journey">
+    <div class="hiw-sticky">
+
+      <!-- Progress Sidebar -->
+      <div class="hiw-progress" id="progress">
+        <div class="progress-step active" data-step="1"><div class="progress-dot"></div><div class="progress-label">Plan</div></div>
+        <div class="progress-line"><div class="progress-fill" data-fill="1"></div></div>
+        <div class="progress-step" data-step="2"><div class="progress-dot"></div><div class="progress-label">Quote</div></div>
+        <div class="progress-line"><div class="progress-fill" data-fill="2"></div></div>
+        <div class="progress-step" data-step="3"><div class="progress-dot"></div><div class="progress-label">Confirm</div></div>
+        <div class="progress-line"><div class="progress-fill" data-fill="3"></div></div>
+        <div class="progress-step" data-step="4"><div class="progress-dot"></div><div class="progress-label">Enjoy</div></div>
+      </div>
+
+      <!-- Visual Stage -->
+      <div class="hiw-stage" id="stage">
+        <div class="stage-bg" id="stageBg"></div>
+        <div class="stage-glow" id="stageGlow"></div>
+
+        <!-- Ambient particles -->
+        <div class="particles" id="particles"></div>
+
+        <!-- Clouds -->
+        <div class="cloud cloud-1" id="cloud1">
+          <svg viewBox="0 0 120 60"><path d="M20,45 Q10,45 10,35 Q10,25 22,25 Q25,15 38,15 Q50,5 65,15 Q80,10 85,25 Q100,25 100,38 Q100,48 88,48 L25,48 Q20,48 20,45Z" fill="#ffffff"/><path d="M20,45 Q10,45 10,35 Q10,25 22,25 Q25,15 38,15 Q50,5 65,15 Q80,10 85,25 Q100,25 100,38 Q100,48 88,48 L25,48 Q20,48 20,45Z" fill="none" stroke="#e8f0f5" stroke-width="1"/></svg>
+        </div>
+        <div class="cloud cloud-2" id="cloud2">
+          <svg viewBox="0 0 140 70"><path d="M25,52 Q12,52 12,40 Q12,28 27,28 Q31,16 46,16 Q60,4 78,16 Q95,10 100,28 Q118,28 118,42 Q118,54 104,54 L30,54 Q25,54 25,52Z" fill="#ffffff"/><path d="M25,52 Q12,52 12,40 Q12,28 27,28 Q31,16 46,16 Q60,4 78,16 Q95,10 100,28 Q118,28 118,42 Q118,54 104,54 L30,54 Q25,54 25,52Z" fill="none" stroke="#e8f0f5" stroke-width="1"/></svg>
+        </div>
+        <div class="cloud cloud-3" id="cloud3">
+          <svg viewBox="0 0 100 50"><path d="M18,38 Q8,38 8,28 Q8,18 20,18 Q23,10 35,10 Q46,2 58,10 Q70,6 75,18 Q88,18 88,30 Q88,40 78,40 L23,40 Q18,40 18,38Z" fill="#ffffff"/><path d="M18,38 Q8,38 8,28 Q8,18 20,18 Q23,10 35,10 Q46,2 58,10 Q70,6 75,18 Q88,18 88,30 Q88,40 78,40 L23,40 Q18,40 18,38Z" fill="none" stroke="#e8f0f5" stroke-width="1"/></svg>
+        </div>
+        <div class="cloud cloud-4" id="cloud4">
+          <svg viewBox="0 0 90 45"><path d="M16,34 Q7,34 7,25 Q7,16 18,16 Q21,8 31,8 Q42,2 52,8 Q63,4 68,16 Q80,16 80,27 Q80,36 70,36 L21,36 Q16,36 16,34Z" fill="#ffffff" opacity=".8"/></svg>
+        </div>
+        <div class="cloud cloud-5" id="cloud5">
+          <svg viewBox="0 0 110 55"><path d="M20,42 Q9,42 9,31 Q9,20 23,20 Q26,10 39,10 Q52,2 66,10 Q82,6 86,20 Q100,20 100,34 Q100,44 88,44 L25,44 Q20,44 20,42Z" fill="#ffffff" opacity=".7"/></svg>
+        </div>
+
+        <!-- Sunrise glow (step 4) -->
+        <div class="sunrise" id="sunrise"></div>
+
+        <!-- World Map -->
+        <div class="world-map" id="worldMap">
+          <svg viewBox="0 0 800 440" id="mapSvg">
+            <defs>
+              <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#c9a96e"/>
+                <stop offset="50%" stop-color="#e8836b"/>
+                <stop offset="100%" stop-color="#c9a96e"/>
+              </linearGradient>
+              <filter id="mapShadow">
+                <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.06"/>
+              </filter>
+            </defs>
+            <!-- Grid -->
+            <g class="map-grid" opacity=".5">
+              <line x1="0" y1="110" x2="800" y2="110"/>
+              <line x1="0" y1="220" x2="800" y2="220"/>
+              <line x1="0" y1="330" x2="800" y2="330"/>
+              <line x1="160" y1="0" x2="160" y2="440"/>
+              <line x1="320" y1="0" x2="320" y2="440"/>
+              <line x1="480" y1="0" x2="480" y2="440"/>
+              <line x1="640" y1="0" x2="640" y2="440"/>
+            </g>
+            <!-- Continents (simplified) -->
+            <g filter="url(#mapShadow)">
+              <!-- North America -->
+              <path class="map-continent" d="M80,80 Q60,70 65,90 Q55,120 70,140 Q60,160 80,170 Q90,190 110,185 Q130,195 140,180 Q155,165 150,145 Q165,130 155,110 Q150,90 130,85 Q120,75 100,78 Q90,72 80,80Z"/>
+              <!-- South America -->
+              <path class="map-continent" d="M140,210 Q130,205 135,225 Q125,245 140,265 Q145,290 155,310 Q150,335 165,340 Q175,335 170,310 Q180,285 175,260 Q170,235 165,215 Q155,205 140,210Z"/>
+              <!-- Europe -->
+              <path class="map-continent" d="M320,95 Q310,90 315,105 Q305,115 320,120 Q315,130 330,128 Q340,135 350,125 Q345,115 355,110 Q350,98 335,100 Q328,92 320,95Z"/>
+              <!-- Africa -->
+              <path class="map-continent" d="M340,150 Q325,145 330,165 Q320,185 335,205 Q330,230 350,250 Q360,270 375,265 Q385,250 380,225 Q390,200 380,180 Q375,160 365,150 Q350,145 340,150Z"/>
+              <!-- Asia -->
+              <path class="map-continent" d="M380,80 Q370,75 375,95 Q365,110 385,120 Q380,140 400,145 Q410,160 430,155 Q450,170 470,160 Q490,170 510,155 Q530,160 550,150 Q560,135 545,125 Q555,110 540,100 Q525,90 505,95 Q490,85 470,90 Q455,80 435,85 Q420,75 400,80 Q390,72 380,80Z"/>
+              <!-- Australia -->
+              <path class="map-continent" d="M560,290 Q545,285 550,305 Q540,315 555,325 Q560,335 575,330 Q585,335 595,325 Q605,320 595,305 Q600,295 585,292 Q575,285 560,290Z"/>
+            </g>
+            <!-- Route glow -->
+            <path class="route-glow" id="routeGlow" d="M110,140 Q250,40 400,100 Q550,160 580,300"/>
+            <!-- Route line -->
+            <path class="map-route" id="routeLine" d="M110,140 Q250,40 400,100 Q550,160 580,300"/>
+            <!-- Route endpoints -->
+            <circle id="routeStart" cx="110" cy="140" r="5" fill="#c9a96e" opacity="0"/>
+            <circle id="routeStartRing" cx="110" cy="140" r="10" fill="none" stroke="#c9a96e" stroke-width="2" opacity="0"/>
+            <circle id="routeEnd" cx="580" cy="300" r="5" fill="#e8836b" opacity="0"/>
+            <circle id="routeEndRing" cx="580" cy="300" r="10" fill="none" stroke="#e8836b" stroke-width="2" opacity="0"/>
+          </svg>
+        </div>
+
+        <!-- Location Pins (on map) -->
+        <div class="loc-pin" id="pin1" style="left:14%;top:32%">
+          <div class="pin-pulse"></div>
+          <svg viewBox="0 0 24 32" width="28" height="36"><path d="M12,0 C5,0 0,5 0,12 C0,20 12,32 12,32 C12,32 24,20 24,12 C24,5 19,0 12,0Z" fill="#c9a96e"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg>
+        </div>
+        <div class="loc-pin" id="pin2" style="left:50%;top:23%">
+          <div class="pin-pulse"></div>
+          <svg viewBox="0 0 24 32" width="28" height="36"><path d="M12,0 C5,0 0,5 0,12 C0,20 12,32 12,32 C12,32 24,20 24,12 C24,5 19,0 12,0Z" fill="#e8836b"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg>
+        </div>
+        <div class="loc-pin" id="pin3" style="left:72%;top:68%">
+          <div class="pin-pulse"></div>
+          <svg viewBox="0 0 24 32" width="28" height="36"><path d="M12,0 C5,0 0,5 0,12 C0,20 12,32 12,32 C12,32 24,20 24,12 C24,5 19,0 12,0Z" fill="#2a7a8a"/><circle cx="12" cy="12" r="4.5" fill="#fff"/></svg>
+        </div>
+
+        <!-- Compass -->
+        <div class="compass" id="compass">
+          <svg viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="#fff" stroke="#e8f0f5" stroke-width="2"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#f0f5f8" stroke-width="1"/>
+            <!-- Cardinal markers -->
+            <text x="50" y="16" text-anchor="middle" font-size="9" font-weight="800" fill="#0b1f2a" font-family="Inter">N</text>
+            <text x="50" y="90" text-anchor="middle" font-size="8" font-weight="600" fill="#6b8294" font-family="Inter">S</text>
+            <text x="14" y="54" text-anchor="middle" font-size="8" font-weight="600" fill="#6b8294" font-family="Inter">W</text>
+            <text x="86" y="54" text-anchor="middle" font-size="8" font-weight="600" fill="#6b8294" font-family="Inter">E</text>
+            <!-- Tick marks -->
+            <g stroke="#c5dae8" stroke-width="1">
+              <line x1="50" y1="20" x2="50" y2="25"/>
+              <line x1="50" y1="75" x2="50" y2="80"/>
+              <line x1="20" y1="50" x2="25" y2="50"/>
+              <line x1="75" y1="50" x2="80" y2="50"/>
+            </g>
+            <!-- Needle -->
+            <g class="compass-needle" id="compassNeedle">
+              <path d="M50,22 L46,50 L50,48 L54,50 Z" fill="#c9a96e"/>
+              <path d="M50,78 L46,50 L50,52 L54,50 Z" fill="#9bc1d9"/>
+              <circle cx="50" cy="50" r="3" fill="#0b1f2a"/>
+              <circle cx="50" cy="50" r="1.5" fill="#c9a96e"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Suitcase -->
+        <div class="suitcase" id="suitcase">
+          <div class="suitcase-body">
+            <!-- Lid (top half) -->
+            <div class="suitcase-lid" id="suitcaseLid">
+              <svg viewBox="0 0 200 70" width="200" height="70">
+                <defs>
+                  <linearGradient id="lidGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#3a5060"/>
+                    <stop offset="100%" stop-color="#2a3a48"/>
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="196" height="66" rx="10" fill="url(#lidGrad)" stroke="#1a2a35" stroke-width="1"/>
+                <!-- Stitching -->
+                <rect x="8" y="8" width="184" height="54" rx="6" fill="none" stroke="#c9a96e" stroke-width=".5" stroke-dasharray="3 3" opacity=".4"/>
+                <!-- Handle -->
+                <rect x="80" y="-2" width="40" height="8" rx="4" fill="#1a2a35"/>
+                <rect x="84" y="0" width="32" height="4" rx="2" fill="#c9a96e" opacity=".6"/>
+                <!-- Clasps -->
+                <rect x="30" y="58" width="16" height="8" rx="2" fill="#c9a96e"/>
+                <rect x="154" y="58" width="16" height="8" rx="2" fill="#c9a96e"/>
+              </svg>
+            </div>
+            <!-- Interior items (visible when open) -->
+            <div class="suitcase-items" id="suitcaseItems">
+              <svg viewBox="0 0 160 50" width="160">
+                <!-- Folded clothes -->
+                <rect x="10" y="5" width="50" height="35" rx="4" fill="#c5dae8" opacity=".7"/>
+                <rect x="35" y="10" width="45" height="28" rx="4" fill="#e8d9b8" opacity=".7"/>
+                <!-- Camera -->
+                <rect x="85" y="12" width="30" height="22" rx="4" fill="#3a5060"/>
+                <circle cx="100" cy="23" r="7" fill="#1a2a35" stroke="#c9a96e" stroke-width="1"/>
+                <circle cx="100" cy="23" r="4" fill="#9bc1d9"/>
+                <rect x="90" y="8" width="10" height="6" rx="2" fill="#3a5060"/>
+                <!-- Toiletries bag -->
+                <rect x="120" y="10" width="30" height="28" rx="6" fill="#2a7a8a" opacity=".7"/>
+              </svg>
+            </div>
+            <!-- Bottom half -->
+            <div class="suitcase-bottom">
+              <svg viewBox="0 0 200 70" width="200" height="70" style="position:absolute;bottom:0;left:0">
+                <defs>
+                  <linearGradient id="botGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#2a3a48"/>
+                    <stop offset="100%" stop-color="#1a2a35"/>
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="196" height="66" rx="10" fill="url(#botGrad)" stroke="#1a2a35" stroke-width="1"/>
+                <rect x="8" y="8" width="184" height="54" rx="6" fill="none" stroke="#c9a96e" stroke-width=".5" stroke-dasharray="3 3" opacity=".3"/>
+                <!-- Wheels -->
+                <circle cx="20" cy="66" r="6" fill="#1a2a35" stroke="#c9a96e" stroke-width="1"/>
+                <circle cx="180" cy="66" r="6" fill="#1a2a35" stroke="#c9a96e" stroke-width="1"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Airplane -->
+        <div class="airplane" id="airplane">
+          <svg viewBox="0 0 120 60" width="80">
+            <defs>
+              <linearGradient id="fuselage" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f5f8fb"/>
+                <stop offset="50%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#d8e2ec"/>
+              </linearGradient>
+              <linearGradient id="wingGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#e8f0f5"/>
+                <stop offset="100%" stop-color="#c5dae8"/>
+              </linearGradient>
+            </defs>
+            <!-- Fuselage -->
+            <path d="M5,30 Q15,24 55,26 L90,27 Q105,28 112,30 Q105,32 90,33 L55,34 Q15,36 5,30Z" fill="url(#fuselage)" stroke="#b0c0d0" stroke-width=".5"/>
+            <!-- Main wings -->
+            <path d="M32,30 L52,10 L60,10 L48,30Z" fill="url(#wingGrad)" stroke="#b0c0d0" stroke-width=".5"/>
+            <path d="M32,30 L52,50 L60,50 L48,30Z" fill="url(#wingGrad)" stroke="#b0c0d0" stroke-width=".5"/>
+            <!-- Tail wings -->
+            <path d="M92,30 L106,16 L112,16 L102,30Z" fill="url(#wingGrad)" stroke="#b0c0d0" stroke-width=".5"/>
+            <path d="M92,30 L106,44 L112,44 L102,30Z" fill="url(#wingGrad)" stroke="#b0c0d0" stroke-width=".5"/>
+            <!-- Vertical stabilizer -->
+            <path d="M98,30 L104,18 L108,18 L104,30Z" fill="url(#wingGrad)" stroke="#b0c0d0" stroke-width=".5"/>
+            <!-- Cockpit -->
+            <path d="M98,28 Q106,28 110,30 Q106,32 98,32Z" fill="#2a4055" opacity=".8"/>
+            <!-- Windows -->
+            <g fill="#7aa0c0" opacity=".5">
+              <circle cx="30" cy="30" r="1.3"/>
+              <circle cx="40" cy="30" r="1.3"/>
+              <circle cx="50" cy="30" r="1.3"/>
+              <circle cx="60" cy="30" r="1.3"/>
+              <circle cx="70" cy="30" r="1.3"/>
+              <circle cx="80" cy="30" r="1.3"/>
+              <circle cx="88" cy="30" r="1.3"/>
+            </g>
+            <!-- Gold stripe -->
+            <line x1="15" y1="30" x2="95" y2="30" stroke="#c9a96e" stroke-width=".8" opacity=".4"/>
+          </svg>
+        </div>
+
+        <!-- Boarding Pass -->
+        <div class="boarding-pass" id="boardingPass">
+          <div class="bp-card">
+            <div class="bp-header">
+              <div class="bp-brand">WANDERLUST · BOARDING</div>
+              <div class="bp-class">BUSINESS</div>
+            </div>
+            <div class="bp-route">
+              <div class="bp-city">
+                <div class="bp-code">JFK</div>
+                <div class="bp-cityname">New York</div>
+              </div>
+              <div class="bp-dash"></div>
+              <div class="bp-city">
+                <div class="bp-code">CDG</div>
+                <div class="bp-cityname">Paris</div>
+              </div>
+            </div>
+            <div class="bp-details">
+              <div class="bp-detail"><div class="bp-label">Date</div><div class="bp-value">Jul 27</div></div>
+              <div class="bp-detail"><div class="bp-label">Seat</div><div class="bp-value">3A</div></div>
+              <div class="bp-detail"><div class="bp-label">Gate</div><div class="bp-value">B12</div></div>
+              <div class="bp-detail"><div class="bp-label">Boarding</div><div class="bp-value">08:30</div></div>
+            </div>
+            <div class="bp-barcode" id="bpBarcode"></div>
+          </div>
+        </div>
+
+        <!-- Passport -->
+        <div class="passport" id="passport">
+          <div class="passport-book">
+            <div class="passport-emblem">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c9a96e" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2,12 L22,12 M12,2 Q16,12 12,22 M12,2 Q8,12 12,22"/></svg>
+            </div>
+            <div class="passport-title">Passport</div>
+            <div class="passport-sub">Wanderlust</div>
+          </div>
+          <div class="passport-stamp" id="passportStamp"></div>
+        </div>
+
+        <!-- Luggage Tag -->
+        <div class="luggage-tag" id="luggageTag">
+          <div class="lt-string"></div>
+          <div class="lt-body">
+            <div class="lt-label">Destination</div>
+            <div class="lt-value">PARIS ✦ CDG</div>
+          </div>
+        </div>
+
+        <!-- Scene: Mountains -->
+        <div class="scene-layer" id="sceneMountains">
+          <div class="scene-mountains">
+            <div class="mountain mtn-1">
+              <svg viewBox="0 0 340 200" width="340"><path d="M0,200 L80,40 L130,90 L170,200Z" fill="#9bc1d9" opacity=".6"/><path d="M65,60 L80,40 L95,60 L88,55 L80,48 L72,55Z" fill="#fff" opacity=".8"/><path d="M100,200 L180,60 L230,110 L260,200Z" fill="#c5dae8" opacity=".5"/><path d="M168,75 L180,60 L192,75 L185,70 L180,64 L175,70Z" fill="#fff" opacity=".7"/></svg>
+            </div>
+            <div class="mountain mtn-2">
+              <svg viewBox="0 0 280 180" width="280"><path d="M0,180 L100,30 L160,100 L200,180Z" fill="#b0c8d8" opacity=".5"/><path d="M88,48 L100,30 L112,48 L105,42 L100,35 L95,42Z" fill="#fff" opacity=".8"/></svg>
+            </div>
+            <div class="mountain mtn-3">
+              <svg viewBox="0 0 300 190" width="300"><path d="M0,190 L90,50 L140,95 L190,50 L240,120 L300,190Z" fill="#9bc1d9" opacity=".4"/><path d="M78,65 L90,50 L102,65 L95,58 L90,52 L85,58Z" fill="#fff" opacity=".7"/><path d="M178,65 L190,50 L202,65 L195,58 L190,52 L185,58Z" fill="#fff" opacity=".6"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene: Beach -->
+        <div class="scene-layer" id="sceneBeach">
+          <div class="scene-beach">
+            <div class="sun" id="beachSun"></div>
+            <div class="palm-tree palm-1">
+              <svg viewBox="0 0 80 140" width="80"><path d="M38,140 Q36,100 38,60 Q40,30 38,10" stroke="#8B6F47" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M38,12 Q15,5 5,18 Q0,28 15,25 Q28,22 38,18Z" fill="#2a8a5a" opacity=".8"/><path d="M38,12 Q60,5 72,15 Q78,25 65,24 Q50,22 38,18Z" fill="#2a8a5a" opacity=".8"/><path d="M38,10 Q25,-5 10,5 Q5,12 18,14 Q30,12 38,12Z" fill="#3a9a6a" opacity=".7"/><path d="M38,10 Q55,-5 70,5 Q75,12 60,14 Q48,12 38,12Z" fill="#3a9a6a" opacity=".7"/></svg>
+            </div>
+            <div class="palm-tree palm-2">
+              <svg viewBox="0 0 70 120" width="70"><path d="M33,120 Q31,85 33,50 Q35,25 33,8" stroke="#8B6F47" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M33,10 Q12,4 4,15 Q0,24 12,22 Q24,19 33,16Z" fill="#2a8a5a" opacity=".8"/><path d="M33,10 Q54,4 66,13 Q70,22 56,21 Q44,19 33,16Z" fill="#2a8a5a" opacity=".8"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene: City -->
+        <div class="scene-layer" id="sceneCity">
+          <div class="scene-city" id="cityScene">
+            <!-- Buildings generated by JS -->
+          </div>
+        </div>
+
+        <!-- Cruise Ship -->
+        <div class="scene-layer" id="sceneCruise">
+          <div class="cruise-ship" id="cruiseShip">
+            <svg viewBox="0 0 180 80" width="180">
+              <defs><linearGradient id="shipGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#e8f0f5"/></linearGradient></defs>
+              <!-- Hull -->
+              <path d="M10,55 Q10,65 25,68 L155,68 Q170,65 170,55 L165,50 L15,50Z" fill="url(#shipGrad)" stroke="#c5dae8" stroke-width="1"/>
+              <!-- Deck -->
+              <rect x="20" y="40" width="140" height="12" rx="2" fill="#fff" stroke="#c5dae8" stroke-width=".5"/>
+              <!-- Cabins -->
+              <rect x="35" y="22" width="50" height="20" rx="3" fill="#fff" stroke="#c5dae8" stroke-width=".5"/>
+              <rect x="90" y="28" width="40" height="14" rx="3" fill="#fff" stroke="#c5dae8" stroke-width=".5"/>
+              <!-- Windows -->
+              <g fill="#9bc1d9" opacity=".6"><rect x="28" y="44" width="4" height="4" rx="1"/><rect x="36" y="44" width="4" height="4" rx="1"/><rect x="44" y="44" width="4" height="4" rx="1"/><rect x="52" y="44" width="4" height="4" rx="1"/><rect x="60" y="44" width="4" height="4" rx="1"/><rect x="68" y="44" width="4" height="4" rx="1"/><rect x="76" y="44" width="4" height="4" rx="1"/><rect x="84" y="44" width="4" height="4" rx="1"/><rect x="92" y="44" width="4" height="4" rx="1"/><rect x="100" y="44" width="4" height="4" rx="1"/><rect x="108" y="44" width="4" height="4" rx="1"/><rect x="116" y="44" width="4" height="4" rx="1"/><rect x="124" y="44" width="4" height="4" rx="1"/><rect x="132" y="44" width="4" height="4" rx="1"/><rect x="140" y="44" width="4" height="4" rx="1"/><rect x="148" y="44" width="4" height="4" rx="1"/></g>
+              <!-- Smokestacks -->
+              <rect x="48" y="14" width="8" height="10" rx="2" fill="#c9a96e"/><rect x="100" y="20" width="7" height="9" rx="2" fill="#c9a96e"/>
+              <!-- Water line -->
+              <path d="M5,68 Q45,72 90,68 Q135,72 175,68" fill="none" stroke="#c5dae8" stroke-width="1.5" opacity=".5"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Train -->
+        <div class="scene-layer" id="sceneTrain">
+          <div class="train-scene">
+            <svg class="train-bridge" viewBox="0 0 1400 60" preserveAspectRatio="none" style="width:100%;height:100%">
+              <path d="M0,55 L1400,55 L1400,60 L0,60Z" fill="#c5dae8" opacity=".4"/>
+              <!-- Bridge pillars -->
+              <g fill="#c5dae8" opacity=".3"><rect x="100" y="30" width="12" height="30"/><rect x="300" y="30" width="12" height="30"/><rect x="500" y="30" width="12" height="30"/><rect x="700" y="30" width="12" height="30"/><rect x="900" y="30" width="12" height="30"/><rect x="1100" y="30" width="12" height="30"/><rect x="1300" y="30" width="12" height="30"/></g>
+              <line x1="0" y1="45" x2="1400" y2="45" stroke="#9bc1d9" stroke-width="2" opacity=".4"/>
+              <line x1="0" y1="50" x2="1400" y2="50" stroke="#9bc1d9" stroke-width="2" opacity=".3"/>
+            </svg>
+            <div class="train" id="trainEl">
+              <svg viewBox="0 0 160 50" width="160">
+                <defs><linearGradient id="trainGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#e8f0f5"/></linearGradient></defs>
+                <!-- Locomotive -->
+                <rect x="5" y="12" width="45" height="28" rx="6" fill="url(#trainGrad)" stroke="#c5dae8" stroke-width="1"/>
+                <rect x="10" y="16" width="14" height="12" rx="2" fill="#9bc1d9" opacity=".5"/>
+                <circle cx="15" cy="42" r="5" fill="#3a5060"/><circle cx="40" cy="42" r="5" fill="#3a5060"/>
+                <!-- Car 1 -->
+                <rect x="52" y="15" width="40" height="25" rx="4" fill="url(#trainGrad)" stroke="#c5dae8" stroke-width="1"/>
+                <g fill="#9bc1d9" opacity=".5"><rect x="56" y="19" width="6" height="8" rx="1"/><rect x="65" y="19" width="6" height="8" rx="1"/><rect x="74" y="19" width="6" height="8" rx="1"/><rect x="83" y="19" width="6" height="8" rx="1"/></g>
+                <circle cx="60" cy="42" r="4" fill="#3a5060"/><circle cx="84" cy="42" r="4" fill="#3a5060"/>
+                <!-- Car 2 -->
+                <rect x="94" y="15" width="40" height="25" rx="4" fill="url(#trainGrad)" stroke="#c5dae8" stroke-width="1"/>
+                <g fill="#9bc1d9" opacity=".5"><rect x="98" y="19" width="6" height="8" rx="1"/><rect x="107" y="19" width="6" height="8" rx="1"/><rect x="116" y="19" width="6" height="8" rx="1"/><rect x="125" y="19" width="6" height="8" rx="1"/></g>
+                <circle cx="102" cy="42" r="4" fill="#3a5060"/><circle cx="126" cy="42" r="4" fill="#3a5060"/>
+                <!-- Front detail -->
+                <path d="M5,20 L0,26 L5,28Z" fill="#c9a96e"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hot Air Balloons -->
+        <div class="scene-layer" id="sceneBalloons">
+          <div class="balloons">
+            <div class="balloon balloon-1">
+              <svg viewBox="0 0 50 70" width="50"><path d="M25,5 Q8,10 8,30 Q8,45 25,50 Q42,45 42,30 Q42,10 25,5Z" fill="#e8836b" opacity=".8"/><path d="M25,5 Q15,15 12,30 Q12,40 25,48" fill="none" stroke="#d06b50" stroke-width=".5" opacity=".4"/><path d="M25,50 L22,58 L28,58Z" fill="#c9a96e"/><rect x="20" y="58" width="10" height="8" rx="2" fill="#8B6F47"/></svg>
+            </div>
+            <div class="balloon balloon-2">
+              <svg viewBox="0 0 60 80" width="60"><path d="M30,5 Q10,12 10,35 Q10,52 30,58 Q50,52 50,35 Q50,12 30,5Z" fill="#c9a96e" opacity=".8"/><path d="M30,5 Q18,18 14,35 Q14,46 30,55" fill="none" stroke="#b08d57" stroke-width=".5" opacity=".4"/><path d="M30,58 L26,67 L34,67Z" fill="#b08d57"/><rect x="24" y="67" width="12" height="9" rx="2" fill="#8B6F47"/></svg>
+            </div>
+            <div class="balloon balloon-3">
+              <svg viewBox="0 0 45 65" width="45"><path d="M22,5 Q7,10 7,28 Q7,42 22,47 Q37,42 37,28 Q37,10 22,5Z" fill="#9bc1d9" opacity=".7"/><path d="M22,47 L19,54 L25,54Z" fill="#7aa8c8"/><rect x="17" y="54" width="9" height="7" rx="2" fill="#8B6F47"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polaroids -->
+        <div class="polaroids" id="polaroids">
+          <div class="polaroid pol-1" id="pol1">
+            <div class="polaroid-img"><svg viewBox="0 0 100 100"><rect width="100" height="60" fill="#9bc1d9"/><path d="M0,60 L20,40 L40,55 L60,30 L80,50 L100,45 L100,60Z" fill="#3a5060" opacity=".7"/><rect y="60" width="100" height="40" fill="#e8d9b8"/><circle cx="75" cy="20" r="8" fill="#ffd89e" opacity=".8"/></svg></div>
+            <div class="polaroid-caption">Paris, France</div>
+          </div>
+          <div class="polaroid pol-2" id="pol2">
+            <div class="polaroid-img"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#c5dae8"/><path d="M0,70 L25,45 L50,60 L75,35 L100,55 L100,100 L0,100Z" fill="#3a5060" opacity=".6"/><path d="M20,50 L25,45 L30,50 L27,47 L25,44 L23,47Z" fill="#fff" opacity=".8"/></svg></div>
+            <div class="polaroid-caption">Swiss Alps</div>
+          </div>
+          <div class="polaroid pol-3" id="pol3">
+            <div class="polaroid-img"><svg viewBox="0 0 100 100"><rect width="100" height="50" fill="#9bc1d9"/><rect y="50" width="100" height="50" fill="#e8d9b8"/><circle cx="80" cy="20" r="10" fill="#ffd89e"/><path d="M30,50 Q15,55 10,40 Q12,35 20,38 Q25,30 35,35 Q42,32 45,42 Q48,48 38,50Z" fill="#2a8a5a" opacity=".7"/></svg></div>
+            <div class="polaroid-caption">Maldives</div>
+          </div>
+          <div class="polaroid pol-4" id="pol4">
+            <div class="polaroid-img"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#1a2a35"/><g fill="#c9a96e" opacity=".6"><rect x="20" y="40" width="8" height="20"/><rect x="32" y="30" width="8" height="30"/><rect x="44" y="35" width="8" height="25"/><rect x="56" y="25" width="8" height="35"/><rect x="68" y="38" width="8" height="22"/><rect x="80" y="32" width="8" height="28"/></g><g fill="#ffd89e" opacity=".7"><circle cx="24" cy="45" r="1.5"/><circle cx="36" cy="38" r="1.5"/><circle cx="60" cy="32" r="1.5"/></g></svg></div>
+            <div class="polaroid-caption">Tokyo Night</div>
+          </div>
+          <div class="polaroid pol-5" id="pol5">
+            <div class="polaroid-img"><svg viewBox="0 0 100 100"><rect width="100" height="100" fill="#e8836b" opacity=".3"/><path d="M0,60 Q30,50 50,55 Q70,60 100,50 L100,100 L0,100Z" fill="#c9a96e" opacity=".4"/><circle cx="50" cy="30" r="15" fill="#ffd89e" opacity=".6"/></svg></div>
+            <div class="polaroid-caption">Santorini</div>
+          </div>
+        </div>
+
+        <!-- Confetti -->
+        <div class="confetti-container" id="confetti"></div>
+
+      </div><!-- /stage -->
+
+      <!-- Step Cards -->
+      <div class="hiw-cards">
+        <div class="step-card active" data-step="1" id="card1">
+          <div class="step-number">STEP 01</div>
+          <h3>Tell Us Your Travel Plans</h3>
+          <p>Share your dream destination, budget, and travel dates. Our AI travel curator begins crafting your perfect journey instantly.</p>
+          <div class="step-tags">
+            <span class="step-tag">🗺️ Destination</span>
+            <span class="step-tag">💳 Budget</span>
+            <span class="step-tag">📅 Travel Dates</span>
+          </div>
+        </div>
+        <div class="step-card" data-step="2" id="card2">
+          <div class="step-number">STEP 02</div>
+          <h3>Receive a Customized Quote</h3>
+          <p>Within 24 hours, you'll get a personalized itinerary with transparent pricing, handpicked stays, and curated experiences.</p>
+          <div class="step-features">
+            <div class="step-feature"><div class="step-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#0b1f2a" stroke-width="2"><path d="M2,8 L6,12 L14,4"/></svg></div>Personalized itinerary</div>
+            <div class="step-feature"><div class="step-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#0b1f2a" stroke-width="2"><path d="M2,8 L6,12 L14,4"/></svg></div>Transparent pricing</div>
+            <div class="step-feature"><div class="step-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#0b1f2a" stroke-width="2"><path d="M2,8 L6,12 L14,4"/></svg></div>24-hour delivery</div>
+          </div>
+        </div>
+        <div class="step-card" data-step="3" id="card3">
+          <div class="step-number">STEP 03</div>
+          <h3>Confirm Your Booking</h3>
+          <p>Review every detail and confirm with a single tap. Tickets, passport stamps, and luggage tags — all handled seamlessly.</p>
+          <div class="step-features">
+            <div class="step-feature"><div class="step-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#0b1f2a" stroke-width="2"><path d="M2,8 L6,12 L14,4"/></svg></div>One-tap confirmation</div>
+            <div class="step-feature"><div class="step-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#0b1f2a" stroke-width="2"><path d="M2,8 L6,12 L14,4"/></svg></div>Instant ticket generation</div>
+            <div class="step-feature"><div class="step-feature-icon"><svg viewBox="0 0 16 16" fill="none" stroke="#0b1f2a" stroke-width="2"><path d="M2,8 L6,12 L14,4"/></svg></div>Secure payment</div>
+          </div>
+        </div>
+        <div class="step-card" data-step="4" id="card4">
+          <div class="step-number">STEP 04</div>
+          <h3>Travel & Enjoy</h3>
+          <p>From snow-capped mountains to sun-soaked beaches, buzzing cities to serene cruises — your adventure unfolds. Just pack and go.</p>
+          <div class="step-tags">
+            <span class="step-tag">🏔️ Mountains</span>
+            <span class="step-tag">🏖️ Beaches</span>
+            <span class="step-tag">🌆 Cities</span>
+            <span class="step-tag">🚢 Cruises</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /sticky -->
+  </div><!-- /journey -->
+
+  <!-- ====================== FINALE ====================== -->
+  <div class="hiw-finale" id="finale">
+    <svg class="finale-deco fd1" viewBox="0 0 60 60"><circle cx="30" cy="30" r="26" fill="none" stroke="#c9a96e" stroke-width="1" stroke-dasharray="4 4"/><circle cx="30" cy="30" r="3" fill="#c9a96e"/></svg>
+    <svg class="finale-deco fd2" viewBox="0 0 50 50"><path d="M25,5 L30,20 L45,20 L33,30 L38,45 L25,35 L12,45 L17,30 L5,20 L20,20Z" fill="none" stroke="#c9a96e" stroke-width="1"/></svg>
+    <svg class="finale-deco fd3" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#9bc1d9" stroke-width="1"/><path d="M20,4 L20,36 M4,20 L36,20" stroke="#9bc1d9" stroke-width=".5"/></svg>
+    <div class="finale-eyebrow">The Journey Awaits</div>
+    <h3 class="finale-title">Your Adventure Begins</h3>
+    <p class="finale-sub">Join thousands of travelers who've turned dreams into unforgettable journeys. Your story starts with a single step.</p>
+    <button class="cta-btn" id="ctaBtn">
+      <span>Start Planning Your Trip</span>
+      <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3,9 L15,9 M10,4 L15,9 L10,14"/></svg>
+    </button>
+  </div>
+
+</section>
+
+<script>
+/* ================================================================
+   GSAP SETUP
+================================================================ */
+gsap.registerPlugin(ScrollTrigger);
+
+const isMobile = window.matchMedia('(max-width: 768px)').matches;
+const isTablet = window.matchMedia('(max-width: 1024px)').matches;
+
+/* ================================================================
+   GENERATE: Boarding Pass Barcode
+================================================================ */
+(function genBarcode(){
+  const bar = document.getElementById('bpBarcode');
+  if(!bar) return;
+  let html = '';
+  for(let i=0;i<40;i++){
+    const h = 8 + Math.random()*16;
+    const w = 1 + Math.random()*2;
+    html += `<span style="height:${h}px;width:${w}px;opacity:${.5+Math.random()*.5}"></span>`;
+  }
+  bar.innerHTML = html;
+})();
+
+/* ================================================================
+   GENERATE: City Buildings
+================================================================ */
+(function genCity(){
+  const city = document.getElementById('cityScene');
+  if(!city) return;
+  const buildings = [
+    {left:'2%',w:50,h:120},{left:'8%',w:40,h:90},{left:'14%',w:55,h:150},
+    {left:'22%',w:35,h:70},{left:'28%',w:48,h:110},{left:'36%',w:60,h:160},
+    {left:'44%',w:38,h:85},{left:'50%',w:45,h:130},{left:'57%',w:52,h:100},
+    {left:'65%',w:35,h:75},{left:'71%',w:58,h:145},{left:'79%',w:42,h:95},
+    {left:'86%',w:50,h:120},{left:'93%',w:38,h:80}
+  ];
+  buildings.forEach((b,i)=>{
+    const d = document.createElement('div');
+    d.className = 'building';
+    d.style.left = b.left;
+    d.style.width = b.w+'px';
+    d.style.height = b.h+'px';
+    d.style.opacity = .4 + (i%3)*.15;
+    // Windows
+    let winHTML = '';
+    const cols = Math.floor(b.w/12);
+    const rows = Math.floor(b.h/16);
+    for(let r=0;r<rows;r++){
+      for(let c=0;c<cols;c++){
+        if(Math.random()>.4){
+          winHTML += `<div style="position:absolute;left:${4+c*12}px;top:${6+r*16}px;width:5px;height:7px;background:#ffd89e;opacity:.5;border-radius:1px"></div>`;
+        }
+      }
+    }
+    d.innerHTML = winHTML;
+    city.appendChild(d);
+  });
+})();
+
+/* ================================================================
+   GENERATE: Confetti Pieces
+================================================================ */
+const confettiColors = ['#c9a96e','#e8836b','#9bc1d9','#2a7a8a','#ffd89e','#b08d57'];
+(function genConfetti(){
+  const c = document.getElementById('confetti');
+  if(!c) return;
+  for(let i=0;i<60;i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    const color = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+    const size = 6 + Math.random()*8;
+    p.style.width = size+'px';
+    p.style.height = (size*.6)+'px';
+    p.style.background = color;
+    p.style.borderRadius = Math.random()>.5 ? '50%' : '2px';
+    p.dataset.x = (Math.random()-.5)*600;
+    p.dataset.y = -(Math.random()*400+100);
+    p.dataset.rot = Math.random()*720;
+    p.dataset.delay = Math.random()*.3;
+    c.appendChild(p);
+  }
+})();
+
+/* ================================================================
+   GENERATE: Ambient Particles
+================================================================ */
+(function genParticles(){
+  const p = document.getElementById('particles');
+  if(!p) return;
+  for(let i=0;i<20;i++){
+    const dot = document.createElement('div');
+    dot.className = 'particle';
+    dot.style.left = Math.random()*100+'%';
+    dot.style.top = Math.random()*100+'%';
+    dot.style.opacity = .15 + Math.random()*.15;
+    dot.dataset.speed = .3 + Math.random()*.5;
+    p.appendChild(dot);
+  }
+})();
+
+/* ================================================================
+   INTRO ANIMATIONS
+================================================================ */
+gsap.timeline({scrollTrigger:{trigger:'.hiw-intro',start:'top 80%'}})
+  .to('#eyebrow',{opacity:1,y:0,duration:.6,ease:'power2.out'})
+  .to('#hiwTitle',{opacity:1,y:0,duration:.8,ease:'power3.out'},'-.3')
+  .to('#hiwSub',{opacity:1,y:0,duration:.6,ease:'power2.out'},'-.4')
+  .to('#scrollHint',{opacity:1,duration:.5,ease:'power2.out'},'-.3');
+
+/* ================================================================
+   MAIN JOURNEY TIMELINE (scroll-driven)
+================================================================ */
+const journey = document.getElementById('journey');
+const stage = document.getElementById('stage');
+
+const tl = gsap.timeline({
+  scrollTrigger:{
+    trigger:journey,
+    start:'top top',
+    end:'bottom bottom',
+    scrub: isMobile ? 0.5 : 1,
+  }
+});
+
+/* ---------- STEP 1 (0 → 0.25) : Tell Us Your Travel Plans ---------- */
+// Clouds drift in
+tl.to('#cloud1',{opacity:.8,x:120,duration:.25,ease:'none'},0)
+  .to('#cloud2',{opacity:.7,x:-100,duration:.25,ease:'none'},0)
+  .to('#cloud3',{opacity:.5,x:80,duration:.25,ease:'none'},0)
+  .to('#cloud4',{opacity:.4,x:-60,duration:.25,ease:'none'},0)
+  .to('#cloud5',{opacity:.4,x:70,duration:.25,ease:'none'},0)
+
+// World map unfolds
+  .to('#worldMap',{opacity:1,scale:1,y:0,duration:.2,ease:'power2.out'},.02)
+  .to('#routeStart',{opacity:1,duration:.05},.15)
+  .to('#routeStartRing',{opacity:.6,duration:.05},.15)
+
+// Location pins pop in
+  .to('#pin1',{opacity:1,y:0,scale:1,duration:.05,ease:'back.out(2)'},.12)
+  .to('#pin2',{opacity:1,y:0,scale:1,duration:.05,ease:'back.out(2)'},.16)
+  .to('#pin3',{opacity:1,y:0,scale:1,duration:.05,ease:'back.out(2)'},.20)
+
+// Compass appears and rotates
+  .to('#compass',{opacity:1,duration:.1},.08)
+  .to('#compassNeedle',{rotation:120,duration:.25,ease:'none'},0)
+
+// Suitcase appears and opens
+  .to('#suitcase',{opacity:1,y:0,scale:1,duration:.15,ease:'power2.out'},.05)
+  .to('#suitcaseLid',{rotationX:-105,duration:.12,ease:'power2.inOut'},.12)
+  .to('#suitcaseItems',{opacity:1,scale:1,duration:.1,ease:'back.out(1.5)'},.16)
+
+// Airplane appears (preparing)
+  .to('#airplane',{opacity:1,duration:.1,ease:'power2.out'},.18)
+  .to('#airplane',{x:30,duration:.07,ease:'none'},.18);
+
+/* ---------- STEP 2 (0.25 → 0.5) : Receive a Customized Quote ---------- */
+// Suitcase closes
+tl.to('#suitcaseLid',{rotationX:0,duration:.1,ease:'power2.inOut'},.25)
+  .to('#suitcaseItems',{opacity:0,scale:0,duration:.08},.25)
+  .to('#suitcase',{opacity:0,y:30,scale:.9,duration:.1,ease:'power2.in'},.30)
+
+// Compass continues rotating
+  .to('#compassNeedle',{rotation:240,duration:.25,ease:'none'},.25)
+
+// Airplane takes off and flies along route
+  .to('#airplane',{opacity:1,duration:.05},.25)
+  .to('#airplane',{x:180,y:-80,rotation:-15,duration:.1,ease:'power1.inOut'},.25)
+  .to('#airplane',{x:320,y:20,rotation:10,duration:.1,ease:'power1.inOut'},.35)
+  .to('#airplane',{x:460,y:-30,rotation:-8,duration:.1,ease:'power1.inOut'},.40)
+
+// Route line draws on map
+  .to('#routeLine',{strokeDashoffset:0,duration:.2,ease:'none'},.28)
+  .to('#routeGlow',{strokeDashoffset:0,duration:.2,ease:'none'},.28)
+  .to('#routeEnd',{opacity:1,duration:.05},.45)
+  .to('#routeEndRing',{opacity:.6,duration:.05},.45)
+
+// Boarding pass floats in
+  .to('#boardingPass',{opacity:1,y:0,rotation:-3,duration:.12,ease:'power2.out'},.32)
+
+// Clouds continue drifting (parallax)
+  .to('#cloud1',{x:240,duration:.25,ease:'none'},.25)
+  .to('#cloud2',{x:-200,duration:.25,ease:'none'},.25)
+  .to('#cloud3',{x:160,duration:.25,ease:'none'},.25)
+  .to('#cloud4',{x:-120,duration:.25,ease:'none'},.25)
+  .to('#cloud5',{x:140,duration:.25,ease:'none'},.25);
+
+/* ---------- STEP 3 (0.5 → 0.75) : Confirm Your Booking ---------- */
+// Airplane descends (lands)
+tl.to('#airplane',{x:480,y:60,rotation:5,duration:.08,ease:'power2.in'},.50)
+  .to('#airplane',{x:500,y:80,rotation:0,duration:.08,ease:'power2.out'},.55)
+  .to('#airplane',{opacity:.3,duration:.05},.62)
+  .to('#airplane',{opacity:0,duration:.05},.67)
+
+// Boarding pass fades out
+  .to('#boardingPass',{opacity:0,y:-30,duration:.1,ease:'power2.in'},.50)
+
+// Passport appears and gets stamped
+  .to('#passport',{opacity:1,y:0,rotation:4,duration:.12,ease:'power2.out'},.52)
+  .to('#passportStamp',{opacity:1,scale:1,rotation:-18,duration:.08,ease:'back.out(2)'},.60)
+
+// Luggage tag appears
+  .to('#luggageTag',{opacity:1,y:0,rotation:-6,duration:.1,ease:'power2.out'},.55)
+
+// Confetti bursts
+  .to('#confetti',{opacity:1,duration:.05},.60);
+
+// Confetti pieces animate
+document.querySelectorAll('.confetti-piece').forEach((piece)=>{
+  const x = parseFloat(piece.dataset.x);
+  const y = parseFloat(piece.dataset.y);
+  const rot = parseFloat(piece.dataset.rot);
+  const delay = parseFloat(piece.dataset.delay);
+  tl.to(piece,{x:x,y:y,rotation:rot,opacity:0,duration:.12,ease:'power2.out'},.60+delay);
+});
+
+tl.to('#confetti',{opacity:0,duration:.05},.70)
+  .to('#passport',{opacity:0,y:30,duration:.1,ease:'power2.in'},.68)
+  .to('#luggageTag',{opacity:0,y:30,duration:.1,ease:'power2.in'},.68)
+  .to('#compassNeedle',{rotation:360,duration:.25,ease:'none'},.50)
+  .to('#compass',{opacity:0,duration:.08},.70)
+  .to('#cloud1',{x:360,opacity:.5,duration:.25,ease:'none'},.50)
+  .to('#cloud2',{x:-300,opacity:.5,duration:.25,ease:'none'},.50)
+  .to('#cloud3',{x:240,opacity:.3,duration:.25,ease:'none'},.50)
+  .to('#cloud4',{x:-180,opacity:.3,duration:.25,ease:'none'},.50)
+  .to('#cloud5',{x:210,opacity:.3,duration:.25,ease:'none'},.50);
+
+/* ---------- STEP 4 (0.75 → 1.0) : Travel & Enjoy ---------- */
+// Stage zoom out slightly
+tl.to('#stage',{scale:.95,duration:.25,ease:'power2.inOut'},.75)
+
+// Sunrise glow appears
+  .to('#sunrise',{opacity:1,scale:1.2,duration:.15,ease:'none'},.75)
+
+// Mountains rise
+  .to('#sceneMountains',{opacity:1,duration:.1,ease:'none'},.76)
+  .to('.mtn-1',{y:-10,duration:.1,ease:'none'},.76)
+  .to('.mtn-2',{y:-15,duration:.1,ease:'none'},.78)
+  .to('.mtn-3',{y:-8,duration:.1,ease:'none'},.80)
+
+// Beach appears
+  .to('#sceneBeach',{opacity:1,duration:.1,ease:'none'},.80)
+  .to('#beachSun',{opacity:.7,y:-20,duration:.1,ease:'none'},.82)
+
+// City skyline
+  .to('#sceneCity',{opacity:1,duration:.1,ease:'none'},.83)
+
+// Cruise ship sails
+  .to('#sceneCruise',{opacity:1,duration:.08,ease:'none'},.84)
+  .to('#cruiseShip',{x:60,duration:.15,ease:'none'},.84)
+
+// Train crosses bridge
+  .to('#sceneTrain',{opacity:1,duration:.08,ease:'none'},.86)
+  .to('#trainEl',{x:1500,duration:.18,ease:'none'},.86)
+
+// Hot air balloons rise
+  .to('#sceneBalloons',{opacity:1,duration:.08,ease:'none'},.87)
+  .to('.balloon-1',{y:-30,duration:.12,ease:'none'},.87)
+  .to('.balloon-2',{y:-40,duration:.12,ease:'none'},.88)
+  .to('.balloon-3',{y:-25,duration:.12,ease:'none'},.89)
+
+// Polaroids float in
+  .to('#pol1',{opacity:1,y:0,rotation:-8,duration:.06,ease:'power2.out'},.90)
+  .to('#pol2',{opacity:1,y:0,rotation:6,duration:.06,ease:'power2.out'},.92)
+  .to('#pol3',{opacity:1,y:0,rotation:-4,duration:.06,ease:'power2.out'},.94)
+  .to('#pol4',{opacity:1,y:0,rotation:8,duration:.06,ease:'power2.out'},.95)
+  .to('#pol5',{opacity:1,y:0,rotation:-3,duration:.06,ease:'power2.out'},.96)
+
+// World map & pins fade
+  .to('#worldMap',{opacity:.15,duration:.15,ease:'none'},.75)
+  .to('#pin1, #pin2, #pin3',{opacity:.15,duration:.1,ease:'none'},.75)
+  .to('#routeLine, #routeGlow',{opacity:.3,duration:.1,ease:'none'},.75);
+
+/* ================================================================
+   STEP CARD TRANSITIONS (driven by scroll progress)
+================================================================ */
+const cards = [
+  document.getElementById('card1'),
+  document.getElementById('card2'),
+  document.getElementById('card3'),
+  document.getElementById('card4')
+];
+const progressSteps = document.querySelectorAll('.progress-step');
+const progressFills = document.querySelectorAll('.progress-fill');
+
+function updateCards(progress){
+  // progress 0..1 across journey
+  let activeStep = 0;
+  if(progress < .25) activeStep = 0;
+  else if(progress < .5) activeStep = 1;
+  else if(progress < .75) activeStep = 2;
+  else activeStep = 3;
+
+  cards.forEach((card,i)=>{
+    card.classList.remove('active','prev','next');
+    if(i === activeStep) card.classList.add('active');
+    else if(i < activeStep) card.classList.add('prev');
+    else card.classList.add('next');
+  });
+
+  // Update progress sidebar
+  progressSteps.forEach((ps,i)=>{
+    ps.classList.remove('active','done');
+    if(i === activeStep) ps.classList.add('active');
+    else if(i < activeStep) ps.classList.add('done');
+  });
+  progressFills.forEach((pf,i)=>{
+    pf.style.height = (i < activeStep) ? '100%' : '0%';
+  });
+}
+
+ScrollTrigger.create({
+  trigger:journey,
+  start:'top top',
+  end:'bottom bottom',
+  onUpdate:(self)=>{
+    updateCards(self.progress);
+  }
+});
+
+/* ================================================================
+   FINALE ANIMATION
+================================================================ */
+gsap.timeline({
+  scrollTrigger:{
+    trigger:'#finale',
+    start:'top 70%',
+    end:'top 30%',
+    scrub:1
+  }
+})
+.to('#finale',{opacity:1,y:0,duration:1,ease:'power2.out'});
+
+/* ================================================================
+   MAGNETIC CTA BUTTON
+================================================================ */
+const ctaBtn = document.getElementById('ctaBtn');
+if(ctaBtn && !isMobile){
+  ctaBtn.addEventListener('mousemove',(e)=>{
+    const rect = ctaBtn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    gsap.to(ctaBtn,{x:x*.3,y:y*.4,duration:.4,ease:'power3.out'});
+  });
+  ctaBtn.addEventListener('mouseleave',()=>{
+    gsap.to(ctaBtn,{x:0,y:0,duration:.5,ease:'elastic.out(1,0.4)'});
+  });
+  ctaBtn.addEventListener('click',()=>{
+    gsap.timeline()
+      .to(ctaBtn,{scale:.95,duration:.1,ease:'power2.in'})
+      .to(ctaBtn,{scale:1,duration:.3,ease:'back.out(3)'});
+  });
+}
+
+/* ================================================================
+   PROGRESS SIDEBAR CLICK → SCROLL TO STEP
+================================================================ */
+progressSteps.forEach((ps)=>{
+  ps.addEventListener('click',()=>{
+    const step = parseInt(ps.dataset.step);
+    const journeyTop = journey.offsetTop;
+    const journeyHeight = journey.offsetHeight;
+    const targetY = journeyTop + (journeyHeight * (step-1) * 0.25) - (step===1 ? 0 : 0);
+    window.scrollTo({top:targetY,behavior:'smooth'});
+  });
+});
+
+/* ================================================================
+   AMBIENT PARTICLE FLOATING ANIMATION
+================================================================ */
+if(!isMobile){
+  gsap.utils.toArray('.particle').forEach((p)=>{
+    const speed = parseFloat(p.dataset.speed) || .5;
+    gsap.to(p,{
+      y:-100,
+      opacity:0,
+      duration:8/speed,
+      repeat:-1,
+      ease:'none',
+      delay:Math.random()*5,
+      onRepeat:function(){
+        gsap.set(p,{y:0,opacity:.2});
+      }
+    });
+  });
+}
+
+/* ================================================================
+   CLOUD CONTINUOUS FLOATING (subtle idle motion)
+================================================================ */
+gsap.to('#cloud4',{y:15,duration:4,repeat:-1,yoyo:true,ease:'sine.inOut'});
+gsap.to('#cloud5',{y:-12,duration:5,repeat:-1,yoyo:true,ease:'sine.inOut'});
+
+/* ================================================================
+   COMPASS IDLE ROTATION (before scroll)
+================================================================ */
+gsap.to('#compassNeedle',{rotation:360,duration:20,repeat:-1,ease:'none'});
+
+/* ================================================================
+   POLAROID IDLE FLOATING (when visible)
+================================================================ */
+gsap.to('#pol1',{y:-8,duration:3,repeat:-1,yoyo:true,ease:'sine.inOut',delay:.2});
+gsap.to('#pol2',{y:-10,duration:3.5,repeat:-1,yoyo:true,ease:'sine.inOut',delay:.5});
+gsap.to('#pol3',{y:-6,duration:2.8,repeat:-1,yoyo:true,ease:'sine.inOut',delay:.1});
+gsap.to('#pol4',{y:-12,duration:3.2,repeat:-1,yoyo:true,ease:'sine.inOut',delay:.4});
+gsap.to('#pol5',{y:-9,duration:3.8,repeat:-1,yoyo:true,ease:'sine.inOut',delay:.6});
+
+/* ================================================================
+   BALLOON IDLE SWAY
+================================================================ */
+gsap.to('.balloon-1',{x:8,duration:3,repeat:-1,yoyo:true,ease:'sine.inOut'});
+gsap.to('.balloon-2',{x:-10,duration:4,repeat:-1,yoyo:true,ease:'sine.inOut'});
+gsap.to('.balloon-3',{x:6,duration:3.5,repeat:-1,yoyo:true,ease:'sine.inOut'});
+
+/* ================================================================
+   STAGE GLOW PARALLAX (mouse)
+================================================================ */
+if(!isMobile){
+  const glow = document.getElementById('stageGlow');
+  document.getElementById('stage').addEventListener('mousemove',(e)=>{
+    const rect = stage.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width/2) * .15;
+    const y = (e.clientY - rect.top - rect.height/2) * .15;
+    gsap.to(glow,{x:x,y:y,duration:1,ease:'power2.out'});
+  });
+}
+
+/* ================================================================
+   STEP TAG / FEATURE HOVER LIFT (CSS handles most, enhance with JS)
+================================================================ */
+document.querySelectorAll('.step-tag').forEach(tag=>{
+  tag.addEventListener('mouseenter',()=>{
+    gsap.to(tag,{y:-3,duration:.3,ease:'power2.out'});
+  });
+  tag.addEventListener('mouseleave',()=>{
+    gsap.to(tag,{y:0,duration:.3,ease:'power2.out'});
+  });
+});
+
+/* ================================================================
+   REFRESH ON LOAD
+================================================================ */
+window.addEventListener('load',()=>{
+  ScrollTrigger.refresh();
+});
+
+/* ================================================================
+   REFRESH ON RESIZE
+================================================================ */
+let resizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(()=>{
+    ScrollTrigger.refresh();
+  },200);
+});
+</script>
+
+</body>
+</html>
