@@ -1103,7 +1103,7 @@ function bkShortDesc(?string $desc): string {
         <a href="contact">Contact</a>
     </nav>
     <div class="bromo-book-btn">
-        <a href="booking" class="active">
+        <a href="booking">
             Book now
             <span class="bromo-arrow"><i class="fa-regular fa-arrow-up-right"></i></span>
         </a>
