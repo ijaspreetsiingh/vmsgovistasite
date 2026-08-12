@@ -410,7 +410,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="package-wrapper radius-10 image-transform wow fadeInRight" data-wow-delay="<?= $delay ?>s">
                             <div class="image-area">
-                                <img class="hover-image" src="<?= e($imgUrl) ?>" alt="<?= e($pkg['title']) ?>">
+                                <img class="hover-image" src="<?= e($imgUrl) ?>" alt="<?= e($pkg['title']) ?>" loading="lazy">
                             </div>
                             <a href="package-details/<?= $slug ?>" class="wishlist"><i class="fa-light fa-heart"></i></a>
                             <?php if (!empty($pkg['discount_percent'])): ?>
@@ -584,7 +584,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                     <div class="swiper-slide">
                         <div class="package-wrapper image-transform radius-10">
                             <div class="image-area">
-                                <img class="hover-image" src="<?= e($imgUrl) ?>" alt="<?= e($pkg['title']) ?>">
+                                <img class="hover-image" src="<?= e($imgUrl) ?>" alt="<?= e($pkg['title']) ?>" loading="lazy">
                             </div>
                             <a href="package-details/<?= $slug ?>" class="wishlist"><i class="fa-light fa-heart"></i></a>
                             <span class="tag"><?= $disc ?></span>
@@ -785,7 +785,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
                                 </div>
                                 <div class="col-md-6 order-md-2 order-1">
                                     <div class="holiday-package-thumb">
-                                        <img src="assets/imh2.png" alt="Corporate Travel" loading="lazy">
+                                        <img src="assets/imh2.webp" alt="Corporate Travel" loading="lazy">
                                     </div>
                                 </div>
                             </div>
