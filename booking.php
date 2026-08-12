@@ -145,23 +145,25 @@ function bkShortDesc(?string $desc): string {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ===== HEADER (matches index-three.php) ===== */
-        .bromo-header .vms-logo-img { height: 80px; width: auto; }
-        .bromo-logo span { white-space: nowrap; font-size: 16px; }
+        /* ===== HEADER (matches package.php exactly) ===== */
+        .vms-logo-img {
+            height: 70px;
+            width: auto;
+        }
+        /* Header logo text — hide when zoomed 110%+ */
+        .bromo-logo span {
+            white-space: nowrap;
+            font-size: 16px;
+        }
         @media (min-width: 768px) and (max-width: 1400px) {
             .bromo-logo span { display: none !important; }
         }
         @media (max-width: 767px) {
             .bromo-logo span { display: block !important; font-size: 12px !important; white-space: nowrap !important; }
             .bromo-header .bromo-logo { gap: 6px; }
-            .bromo-header .vms-logo-img { height: 50px; }
             .bromo-nav { display: none; }
             .bromo-book-btn { display: none; }
             .bromo-mobile-menu { display: flex; }
-        }
-        @media (max-width: 575px) {
-            .bromo-header .vms-logo-img { height: 42px; }
-            .bromo-logo span { font-size: 11px !important; }
         }
         .bromo-book-btn a:hover .bromo-arrow{background:#003A59;color:#fff;}
         /* ===== STICKY HEADER ===== */
@@ -1130,7 +1132,7 @@ function bkShortDesc(?string $desc): string {
             .booking-hero { padding: 80px 0 60px; }
             .booking-hero h1 { font-size: 28px; }
             .booking-hero p { font-size: 14px; max-width: 100%; }
-            .booking-hero-badge { padding: 7px 16px; font-size: 12px; margin-bottom: 18px; }
+            .booking-hero-badge { padding: 7px 16px; font-size: 12px; margin-top: 34px; margin-bottom: 18px; }
             .booking-hero-stats { flex-direction: column; align-items: stretch; }
             .booking-hero-stat { min-width: auto; padding: 12px; }
 
