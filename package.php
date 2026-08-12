@@ -61,7 +61,7 @@ $tourTypes    = getSettings('tour_type');
     <link rel="stylesheet preload" href="assets/css/plugins/nice-select.css" as="style">
     <link rel="stylesheet preload" href="assets/css/style.css" as="style">
     <link rel="stylesheet preload" href="assets/css/bromo-theme.css" as="style">
-    <link rel="preload" href="assets/hero2.png" as="image">
+    <link rel="preload" href="assets/images/package.webp" as="image">
     <style>
         /* Page-specific overrides */
         body.dark-mode .rts-tour-area,body.dark-mode section{background-color:#0d1117!important;}
@@ -782,7 +782,7 @@ $tourTypes    = getSettings('tour_type');
 </div>
 
 <!-- breadcrumb -->
-<div class="rts-breadcrumb-area two" data-bg-src="assets/images/breadcrumb/03.webp">
+<div class="rts-breadcrumb-area two" data-bg-src="assets/images/package.webp">
     <div class="container h-100">
         <div class="breadcrumb-area-wrapper">
             <div class="nav-bread-crumb">
