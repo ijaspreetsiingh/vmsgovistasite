@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign In — VMS Go Vista</title>
+    <link rel="icon" type="image/png" href="https://shankygroup.com/images/logo_icon.png">
 <link rel="stylesheet preload" href="<?= SITE_URL ?>/assets/css/plugins/swiper.min.css" as="style">
 <link rel="stylesheet preload" href="<?= SITE_URL ?>/assets/fonts/custom-font.css" as="style">
 <link rel="stylesheet preload" href="<?= SITE_URL ?>/assets/css/plugins/magnific-popup.css" as="style">

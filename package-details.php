@@ -34,6 +34,7 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
     <meta name="description" content="<?= $pkg ? htmlspecialchars(mb_substr(strip_tags((string)($pkg['short_desc'] ?? $pkg['overview'] ?? '')), 0, 155), ENT_QUOTES, 'UTF-8') : 'Package not found — explore domestic and international tour packages by VMS Go Vista.' ?>">
     <link rel="canonical" href="https://vmsgovista.com/package-details/<?= $pkg ? e($pkg['slug']) : '' ?>">
     <title><?= $pkg ? e($pkg['title']).' – VMS Go Vista' : 'Package Not Found – VMS Go Vista' ?></title>
+    <link rel="icon" type="image/png" href="https://shankygroup.com/images/logo_icon.png">
     <meta property="og:type" content="product">
     <meta property="og:title" content="<?= $pkg ? e($pkg['title']).' – VMS Go Vista' : 'Package Not Found – VMS Go Vista' ?>">
     <meta property="og:description" content="<?= $pkg ? htmlspecialchars(mb_substr(strip_tags((string)($pkg['short_desc'] ?? $pkg['overview'] ?? '')), 0, 155), ENT_QUOTES, 'UTF-8') : 'Explore domestic and international tour packages by VMS Go Vista.' ?>">
