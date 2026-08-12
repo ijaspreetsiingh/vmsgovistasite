@@ -115,7 +115,6 @@ function bkShortDesc(?string $desc): string {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/fav.svg">
     <title>Book Your Trip – VMS Go Vista</title>
     <!-- PERFORMANCE: Preconnect & DNS-prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -147,6 +146,14 @@ function bkShortDesc(?string $desc): string {
         @media (max-width: 767px) {
             .bromo-logo span { display: block !important; font-size: 12px !important; white-space: nowrap !important; }
             .bromo-header .bromo-logo { gap: 6px; }
+            .bromo-header .vms-logo-img { height: 50px; }
+            .bromo-nav { display: none; }
+            .bromo-book-btn { display: none; }
+            .bromo-mobile-menu { display: flex; }
+        }
+        @media (max-width: 575px) {
+            .bromo-header .vms-logo-img { height: 42px; }
+            .bromo-logo span { font-size: 11px !important; }
         }
         .bromo-book-btn a:hover .bromo-arrow{background:#003A59;color:#fff;}
         /* ===== STICKY HEADER ===== */
@@ -1009,32 +1016,214 @@ function bkShortDesc(?string $desc): string {
             .bk-pkg-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 767px) {
-            .bk-stepper { gap: 6px; }
-            .bk-step-line { width: 20px; }
-            .bk-step-label { display: none; }
-            .bk-panel { padding: 26px 22px; }
-            .bk-pkg-grid { grid-template-columns: 1fr; }
-            .booking-form-row { grid-template-columns: 1fr; }
-            .booking-form-group.full-width { grid-column: span 1; }
-            .bk-dt-grid { grid-template-columns: 1fr; }
-            .bk-details-info { padding: 18px; }
-            .bk-details-info h3 { font-size: 20px; }
-            .bk-chip { flex-wrap: wrap; }
-            .bk-chip .bk-chip-price { margin-left: auto; }
-            .bk-nav { flex-direction: column-reverse; }
-            .bk-nav .bk-btn { width: 100%; }
-            .bk-info-grid { grid-template-columns: 1fr; }
-            .bk-tabs-nav { gap: 4px; }
-            .bk-tab-btn { padding: 10px 16px; font-size: 13px; }
-        }
-        @media (max-width: 575px) {
-            .booking-hero { padding: 120px 0 70px; }
+            /* Hero Section */
+            .booking-hero { padding: 100px 0 80px; }
+            .booking-hero h1 { font-size: 32px; }
+            .booking-hero p { font-size: 15px; margin-bottom: 24px; }
+            .booking-hero-stats { gap: 8px; }
+            .booking-hero-stat { min-width: 120px; padding: 12px 16px; }
+            .booking-hero-stat-number { font-size: 24px; }
+            .booking-hero-stat-label { font-size: 11px; }
+
+            /* Booking Section */
+            .booking-section { padding: 50px 0 70px; }
+            .booking-container { padding: 0 16px; }
             .booking-form-header h2 { font-size: 24px; }
-            .booking-section { padding: 60px 0 80px; }
-            .bk-details-hero img { height: 220px; }
-            .bk-info-item { padding: 14px 16px; }
+            .booking-form-header p { font-size: 14px; }
+
+            /* Wizard */
+            .bk-wizard { border-radius: 20px; }
+            .bk-panel { padding: 24px 18px; }
+            .bk-stepper { gap: 4px; margin-bottom: 24px; }
+            .bk-step-line { width: 16px; }
+            .bk-step-label { display: none; }
+            .bk-step-num { width: 32px; height: 32px; font-size: 13px; }
+
+            /* Package Cards */
+            .bk-pkg-grid { grid-template-columns: 1fr; gap: 16px; }
+            .bk-pkg-card { border-radius: 16px; }
+            .bk-pkg-card img { height: 160px; }
+            .bk-pkg-body { padding: 14px 16px 16px; }
+            .bk-pkg-title { font-size: 15px; }
+            .bk-pkg-price .amount { font-size: 20px; }
+
+            /* Form */
+            .booking-form-row { grid-template-columns: 1fr; gap: 16px; }
+            .booking-form-group { margin-bottom: 18px; }
+            .booking-form-group.full-width { grid-column: span 1; }
+            .booking-form-input, .booking-form-select, .booking-form-textarea {
+                padding: 12px 16px;
+                font-size: 14px;
+                border-radius: 12px;
+            }
+            .booking-form-label { font-size: 13px; margin-bottom: 8px; }
+
+            /* Details */
+            .bk-dt-grid { grid-template-columns: 1fr; gap: 14px; }
+            .bk-details-hero { border-radius: 16px; margin-bottom: 20px; }
+            .bk-details-hero img { height: 200px; }
+            .bk-details-info { padding: 16px; }
+            .bk-details-info h3 { font-size: 20px; }
+            .bk-details-info .bk-dt-price .amount { font-size: 24px; }
+            .bk-info-grid { grid-template-columns: 1fr; gap: 12px; }
+            .bk-info-item { padding: 12px 14px; }
             .bk-info-icon { width: 38px; height: 38px; font-size: 16px; }
             .bk-info-value { font-size: 13px; }
+
+            /* Tabs */
+            .bk-tabs-nav { gap: 4px; margin-bottom: 16px; }
+            .bk-tab-btn { padding: 10px 14px; font-size: 13px; border-radius: 8px 8px 0 0; }
+            .bk-dt-section { margin-bottom: 18px; }
+            .bk-dt-section h4 { font-size: 14px; }
+
+            /* Chip */
+            .bk-chip { flex-wrap: wrap; padding: 10px 14px; border-radius: 14px; }
+            .bk-chip img { width: 48px; height: 48px; }
+            .bk-chip .bk-chip-name { font-size: 14px; }
+            .bk-chip .bk-chip-price { margin-left: auto; font-size: 15px; }
+
+            /* Navigation */
+            .bk-nav { flex-direction: row; gap: 12px; margin-top: 24px; }
+            .bk-nav .bk-btn { flex: 1; padding: 14px 20px; font-size: 14px; border-radius: 12px; }
+
+            /* Review */
+            .bk-review { padding: 16px 18px; border-radius: 14px; }
+            .bk-review-row { font-size: 13px; padding: 10px 0; gap: 12px; }
+            .bk-total { padding: 16px 18px; border-radius: 14px; }
+            .bk-total .val { font-size: 24px; }
+
+            /* Search */
+            .bk-search-wrapper { border-radius: 12px; }
+            .bk-search-icon { width: 44px; height: 44px; font-size: 15px; }
+            .bk-search-input { padding: 12px 44px 12px 14px; font-size: 14px; }
+
+            /* Trust badges */
+            .booking-trust { font-size: 11px; gap: 16px; margin-top: 12px; }
+
+            /* Gallery */
+            .bk-gallery-strip { gap: 8px; }
+            .bk-gallery-thumb { width: 64px; height: 50px; border-radius: 10px; }
+
+            /* FAQ */
+            .bk-faq-q { padding: 12px 16px; font-size: 13px; }
+            .bk-faq-a p { font-size: 13px; }
+
+            /* Itinerary */
+            .bk-itinerary::before { left: 16px; }
+            .bk-itinerary li { padding-left: 44px; }
+            .bk-itin-day { width: 34px; height: 34px; }
+            .bk-day-lbl { font-size: 7px; }
+            .bk-day-num { font-size: 13px; }
+            .bk-itin-title { font-size: 14px; }
+            .bk-itin-desc { font-size: 12.5px; }
+        }
+        @media (max-width: 575px) {
+            /* Hero */
+            .booking-hero { padding: 80px 0 60px; }
+            .booking-hero h1 { font-size: 28px; }
+            .booking-hero p { font-size: 14px; max-width: 100%; }
+            .booking-hero-badge { padding: 7px 16px; font-size: 12px; margin-bottom: 18px; }
+            .booking-hero-stats { flex-direction: column; align-items: stretch; }
+            .booking-hero-stat { min-width: auto; padding: 12px; }
+
+            /* Section */
+            .booking-section { padding: 40px 0 60px; }
+            .booking-form-header h2 { font-size: 22px; }
+            .booking-form-header p { font-size: 13px; }
+
+            /* Wizard */
+            .bk-wizard { border-radius: 16px; }
+            .bk-panel { padding: 20px 16px; }
+            .bk-stepper { margin-bottom: 20px; }
+
+            /* Package Cards */
+            .bk-pkg-grid { gap: 14px; }
+            .bk-pkg-card img { height: 140px; }
+            .bk-pkg-body { padding: 12px 14px 14px; }
+            .bk-pkg-title { font-size: 14px; }
+            .bk-pkg-price .amount { font-size: 18px; }
+            .bk-pkg-badge { font-size: 10.5px; padding: 4px 9px; }
+
+            /* Form */
+            .booking-form-row { gap: 14px; }
+            .booking-form-group { margin-bottom: 16px; }
+            .booking-form-input, .booking-form-select, .booking-form-textarea {
+                padding: 11px 14px;
+                font-size: 14px;
+            }
+            .booking-form-textarea { min-height: 80px; }
+
+            /* Details */
+            .bk-details-hero img { height: 180px; }
+            .bk-details-info { padding: 14px; }
+            .bk-details-info h3 { font-size: 18px; }
+            .bk-details-info .bk-dt-price .amount { font-size: 22px; }
+            .bk-info-item { padding: 12px; }
+            .bk-info-icon { width: 36px; height: 36px; font-size: 15px; }
+            .bk-info-label { font-size: 10.5px; }
+            .bk-info-value { font-size: 12.5px; }
+
+            /* Tabs */
+            .bk-tabs-nav { gap: 3px; }
+            .bk-tab-btn { padding: 9px 12px; font-size: 12px; }
+            .bk-dt-section h4 { font-size: 13px; }
+            .bk-dt-overview { font-size: 13.5px; }
+            .bk-dt-list li { font-size: 13px; }
+
+            /* Chip */
+            .bk-chip { padding: 10px 12px; }
+            .bk-chip img { width: 44px; height: 44px; }
+            .bk-chip .bk-chip-name { font-size: 13px; }
+            .bk-chip .bk-chip-price { font-size: 14px; }
+
+            /* Navigation */
+            .bk-nav { flex-direction: row; gap: 10px; }
+            .bk-nav .bk-btn { padding: 13px 18px; font-size: 13px; flex: 1; }
+
+            /* Review */
+            .bk-review { padding: 14px 16px; }
+            .bk-total { padding: 14px 16px; }
+            .bk-total .val { font-size: 22px; }
+            .bk-price-breakdown { padding: 14px 16px; }
+            .bk-breakdown-label { font-size: 12px; }
+            .bk-breakdown-value { font-size: 13px; }
+
+            /* Search */
+            .bk-search-icon { width: 40px; height: 40px; }
+            .bk-search-input { padding: 11px 40px 11px 12px; font-size: 13px; }
+
+            /* Gallery */
+            .bk-gallery-thumb { width: 56px; height: 44px; }
+
+            /* Popup */
+            .bk-party-card { padding: 40px 28px 32px; border-radius: 24px; }
+            .bk-party-card h3 { font-size: 22px; }
+            .bk-party-sub { font-size: 13.5px; }
+            .bk-party-icon { width: 100px; height: 100px; }
+            .bk-party-circle svg { width: 48px; height: 48px; }
+
+            /* Itinerary */
+            .bk-itin-tag { font-size: 11px; padding: 3px 9px; }
+        }
+
+        /* Extra small devices (iPhone SE, etc.) */
+        @media (max-width: 375px) {
+            .booking-hero h1 { font-size: 24px; }
+            .bk-pkg-card img { height: 120px; }
+            .bk-panel { padding: 18px 14px; }
+            .booking-form-input, .booking-form-select, .booking-form-textarea {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+            .bk-nav .bk-btn { padding: 12px 16px; font-size: 12.5px; }
+        }
+
+        /* Landscape mobile */
+        @media (max-width: 767px) and (orientation: landscape) {
+            .booking-hero { padding: 60px 0 40px; }
+            .booking-hero h1 { font-size: 24px; }
+            .booking-section { padding: 30px 0 40px; }
+            .bk-panel { padding: 16px 18px; }
         }
 
         /* ===== VMS FOOTER (matches index-three.php) ===== */
@@ -1296,7 +1485,7 @@ function bkShortDesc(?string $desc): string {
                             <i class="fa-regular fa-arrow-left"></i> Back
                         </button>
                         <button type="button" class="bk-btn bk-btn-primary" id="step2Next">
-                            Continue to Your Details <i class="fa-regular fa-arrow-right"></i>
+                            Continue Details <i class="fa-regular fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
