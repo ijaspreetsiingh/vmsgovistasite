@@ -1042,6 +1042,146 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
         @media (max-width: 400px) {
             .vms-big-text { font-size: clamp(20px, 4.5vw, 32px) !important; bottom: 20px !important; }
         }
+
+        /* ===== SUCCESS PARTY POPUP (same as booking page) ===== */
+        .bk-party-overlay {
+            position: fixed; inset: 0; z-index: 99999;
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px;
+            background: rgba(2, 18, 30, 0.62);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            opacity: 0; visibility: hidden;
+            transition: opacity .45s ease, visibility .45s ease;
+        }
+        .bk-party-overlay.show { opacity: 1; visibility: visible; }
+        .bk-party-card {
+            position: relative;
+            width: 100%; max-width: 470px;
+            background: #ffffff;
+            border-radius: 30px;
+            text-align: center;
+            padding: 52px 40px 38px;
+            box-shadow: 0 40px 90px -24px rgba(0,58,89,0.45), 0 0 0 1px rgba(0,58,89,0.06);
+            transform: translateY(34px) scale(.92);
+            opacity: 0;
+            transition: transform .55s cubic-bezier(.22,.9,.3,1.2), opacity .4s ease;
+        }
+        .bk-party-overlay.show .bk-party-card {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        .bk-party-close {
+            position: absolute; top: 16px; right: 16px;
+            width: 38px; height: 38px; border-radius: 50%;
+            background: #f0f4f8; border: 1px solid #e0e7ee;
+            color: #003A59; font-size: 15px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all .25s ease;
+        }
+        .bk-party-close:hover { background: #003A59; color: #fff; border-color: #003A59; transform: rotate(90deg); }
+
+        /* Animated tick icon */
+        .bk-party-icon { position: relative; width: 120px; height: 120px; margin: 0 auto 22px; }
+        .bk-party-ring {
+            position: absolute; inset: 0; border-radius: 50%;
+            border: 2px solid rgba(15,106,148,0.35);
+            animation: bkRingPulse 2.2s cubic-bezier(.2,.6,.3,1) infinite;
+        }
+        .bk-party-ring.r2 { animation-delay: .5s; border-color: rgba(0,58,89,0.28); }
+        @keyframes bkRingPulse {
+            0% { transform: scale(.72); opacity: .9; }
+            70% { transform: scale(1.25); opacity: 0; }
+            100% { transform: scale(1.25); opacity: 0; }
+        }
+        .bk-party-circle {
+            position: absolute; inset: 8px;
+            background: linear-gradient(145deg, #003A59 0%, #0f6a94 100%);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 16px 36px -10px rgba(0,58,89,0.55);
+            transform: scale(0);
+            animation: bkCircleIn .5s cubic-bezier(.3,1.4,.4,1) .15s forwards;
+        }
+        @keyframes bkCircleIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        .bk-party-circle svg { width: 58px; height: 58px; }
+        .bk-tick-path {
+            stroke-dasharray: 46;
+            stroke-dashoffset: 46;
+            animation: bkTickDraw .5s cubic-bezier(.5,1.4,.4,1) .65s forwards;
+        }
+        @keyframes bkTickDraw { 100% { stroke-dashoffset: 0; } }
+        .bk-party-spark {
+            position: absolute; width: 7px; height: 7px; border-radius: 50%;
+            background: #8CC7E8; opacity: 0;
+            animation: bkSpark .9s ease-out infinite;
+        }
+        @keyframes bkSpark {
+            0% { transform: scale(0); opacity: 1; }
+            70% { transform: scale(1.4); opacity: 0; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        /* Confetti */
+        .bk-confetti { position: absolute; inset: 0; overflow: hidden; border-radius: 30px; pointer-events: none; }
+        .bk-confetti-piece {
+            position: absolute; top: -14px;
+            width: 9px; height: 15px; border-radius: 2px;
+            opacity: 0;
+            animation: bkConfettiFall linear infinite;
+        }
+        @keyframes bkConfettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(560px) rotate(720deg); opacity: .0; }
+        }
+
+        /* Popup content */
+        .bk-party-eyebrow {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 11.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+            color: #0f6a94; margin-bottom: 10px;
+        }
+        .bk-party-card h3 {
+            font-size: 26px; font-weight: 800; color: #003A59;
+            margin: 0 0 10px; letter-spacing: -0.4px; line-height: 1.2;
+        }
+        .bk-party-card .bk-party-sub {
+            font-size: 14.5px; color: #667085; line-height: 1.65;
+            margin: 0 0 24px;
+        }
+        .bk-party-note {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: #f0f6fa; border: 1px solid #d5e6ef;
+            border-radius: 14px; padding: 13px 16px;
+            font-size: 13px; color: #0f6a94; font-weight: 600;
+            margin-bottom: 22px;
+        }
+        .bk-party-note i { color: #003A59; }
+        .bk-party-actions { display: flex; gap: 12px; }
+        .bk-party-btn {
+            flex: 1;
+            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+            padding: 15px 20px; border-radius: 14px;
+            font-size: 14.5px; font-weight: 700;
+            text-decoration: none; cursor: pointer; border: none;
+            transition: all .25s ease;
+        }
+        .bk-party-btn-primary {
+            background: linear-gradient(135deg, #003A59 0%, #0f6a94 100%);
+            color: #fff; box-shadow: 0 10px 26px -8px rgba(0,58,89,0.5);
+        }
+        .bk-party-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -8px rgba(0,58,89,0.55); }
+        .bk-party-btn-ghost {
+            background: #f0f4f8; color: #003A59; border: 1px solid #dbe4ec;
+        }
+        .bk-party-btn-ghost:hover { background: #e2ecf3; }
+        @media (max-width: 575px) {
+            .bk-party-card { padding: 40px 28px 32px; border-radius: 24px; }
+            .bk-party-card h3 { font-size: 22px; }
+            .bk-party-sub { font-size: 13.5px; }
+            .bk-party-icon { width: 100px; height: 100px; }
+            .bk-party-circle svg { width: 48px; height: 48px; }
+            .bk-party-actions { flex-direction: column; }
+        }
     </style>
     <link rel="stylesheet" href="assets/css/loader.css">
     <link rel="stylesheet" href="assets/css/page-transition.css">
@@ -1434,11 +1574,7 @@ $days        = (int)($pkg['days']               ?? 0);
                 <!-- ===== ENQUIRY FORM ===== -->
                 <div class="contact-area content-box radius-10 border overflow-hidden" id="contact-form">
                     <h5 class="title mb--30">Send your enquiry via the form below.</h5>
-                    <?php if (isset($_GET['enquiry']) && $_GET['enquiry'] === 'sent'): ?>
-                    <div style="background:rgba(52,199,89,.12);border:1px solid rgba(52,199,89,.35);color:#248a3d;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-weight:600;">
-                        <i class="fa-solid fa-circle-check me-2"></i>Your enquiry has been sent! We will get back to you soon.
-                    </div>
-                    <?php elseif (isset($_GET['enquiry']) && $_GET['enquiry'] === 'error'): ?>
+                    <?php if (isset($_GET['enquiry']) && $_GET['enquiry'] === 'error'): ?>
                     <div style="background:rgba(255,59,48,.1);border:1px solid rgba(255,59,48,.3);color:#d70015;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-weight:600;">
                         <i class="fa-solid fa-circle-exclamation me-2"></i>
                         <?php
@@ -1786,6 +1922,42 @@ $days        = (int)($pkg['days']               ?? 0);
 </div>
 <div class="slider-drag-cursor"><i class="fas fa-angle-left me-2"></i> DRAG <i class="fas fa-angle-right ms-2"></i></div>
 
+<?php if (isset($_GET['enquiry']) && $_GET['enquiry'] === 'sent'): ?>
+<!-- ===== SUCCESS PARTY POPUP (enquiry sent) ===== -->
+<div class="bk-party-overlay" id="partyOverlay" role="dialog" aria-modal="true" aria-labelledby="partyTitle">
+    <div class="bk-confetti" id="confettiWrap"></div>
+    <div class="bk-party-card">
+        <button type="button" class="bk-party-close" id="partyClose" aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="bk-party-icon">
+            <span class="bk-party-ring r1"></span>
+            <span class="bk-party-ring r2"></span>
+            <span class="bk-party-spark" style="top:8%;left:12%;animation-delay:.2s;"></span>
+            <span class="bk-party-spark" style="top:4%;right:18%;animation-delay:.5s;"></span>
+            <span class="bk-party-spark" style="bottom:16%;left:4%;animation-delay:.35s;"></span>
+            <span class="bk-party-spark" style="bottom:6%;right:8%;animation-delay:.65s;"></span>
+            <div class="bk-party-circle">
+                <svg viewBox="0 0 52 52" fill="none">
+                    <path class="bk-tick-path" d="M15 27.5 L23 35.5 L38 18" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
+        <div class="bk-party-eyebrow"><i class="fa-solid fa-sparkles"></i> Enquiry Sent</div>
+        <h3 id="partyTitle">Thank You!</h3>
+        <p class="bk-party-sub">Your enquiry has been received. Our travel expert will get back to you within 24 hours.</p>
+        <div class="bk-party-note">
+            <i class="fa-solid fa-envelope-circle-check"></i>
+            A confirmation email is on its way to your inbox.
+        </div>
+        <div class="bk-party-actions">
+            <a href="<?= $slug !== '' ? 'package-details/' . e($slug) . '#contact-form' : 'package.php' ?>" class="bk-party-btn bk-party-btn-ghost"><i class="fa-regular fa-rotate-left"></i> Send Another Enquiry</a>
+            <a href="package.php" class="bk-party-btn bk-party-btn-primary">Explore More <i class="fa-regular fa-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+
 <!-- Scripts loaded once with error handling -->
 <script src="assets/js/plugins/jquery.min.js"></script>
 <script src="assets/js/plugins/bootstrap.min.js"></script>
@@ -1928,6 +2100,61 @@ document.addEventListener('DOMContentLoaded', function() {
             '<span class="vms-glass-spinner"><i class="fa-solid fa-circle-notch"></i></span>' +
             'Sending...';
     });
+})();
+</script>
+
+<script>
+// ===== SUCCESS PARTY POPUP (same as booking page) =====
+(function () {
+    var overlay = document.getElementById('partyOverlay');
+    if (!overlay) return;
+
+    // Confetti generator (fresh burst each open)
+    var confettiWrap = document.getElementById('confettiWrap');
+    var colors = ['#003A59', '#0f6a94', '#8CC7E8', '#12b76a', '#FFD9A0', '#5fa8c9'];
+    var pieces = 46;
+    function spawnConfetti() {
+        if (!confettiWrap) return;
+        var html = '';
+        for (var i = 0; i < pieces; i++) {
+            var left = (Math.random() * 100).toFixed(1);
+            var delay = (Math.random() * 2.4).toFixed(2);
+            var dur = (2.4 + Math.random() * 2.2).toFixed(2);
+            var color = colors[i % colors.length];
+            var w = 6 + Math.random() * 6;
+            var h = 9 + Math.random() * 9;
+            var round = Math.random() > 0.5 ? 'border-radius:50%;' : '';
+            html += '<div class="bk-confetti-piece" style="left:' + left + '%;width:' + w.toFixed(1) + 'px;height:' + h.toFixed(1) + 'px;background:' + color + ';' + round + 'animation-duration:' + dur + 's;animation-delay:' + delay + 's;"></div>';
+        }
+        confettiWrap.innerHTML = html;
+    }
+
+    var lastFocus = null;
+    function openParty() {
+        lastFocus = document.activeElement;
+        overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        spawnConfetti();
+        var closeBtn = document.getElementById('partyClose');
+        if (closeBtn) setTimeout(function () { closeBtn.focus(); }, 600);
+    }
+    function closeParty() {
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    var closeBtn = document.getElementById('partyClose');
+    if (closeBtn) closeBtn.addEventListener('click', closeParty);
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeParty();
+    });
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeParty();
+    });
+
+    // Show after a beat so the page paints first
+    setTimeout(openParty, 350);
 })();
 </script>
 <script src="assets/js/page-transition.js"></script>

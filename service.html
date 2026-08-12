@@ -838,7 +838,7 @@
         }
 
         .rts-service-area .service-wrapper:hover .icon {
-            background: #003A59;
+            background: #fff;
             transform: scale(1.05);
         }
 
@@ -848,8 +848,20 @@
             transition: color 0.3s ease;
         }
 
+        .rts-service-area .service-wrapper .icon svg {
+            width: 30px;
+            height: 30px;
+            display: block;
+            fill: #003A59;
+            transition: fill 0.3s ease;
+        }
+
         .rts-service-area .service-wrapper:hover .icon i {
             color: #fff;
+        }
+
+        .rts-service-area .service-wrapper:hover .icon svg {
+            fill: #fff;
         }
 
         .rts-service-area .service-wrapper .title {
@@ -942,7 +954,7 @@
         }
 
         body.dark-mode .rts-service-area .service-wrapper:hover .icon {
-            background: #58a6ff;
+            background: #161b22;
         }
 
         body.dark-mode .rts-service-area .service-wrapper:hover .icon i {
@@ -1000,8 +1012,20 @@
             transition: color 0.3s ease;
         }
 
+        .services-why-choose .swc-card .swc-icon svg {
+            width: 32px;
+            height: 32px;
+            display: block;
+            fill: #003A59;
+            transition: fill 0.3s ease;
+        }
+
         .services-why-choose .swc-card:hover .swc-icon i {
             color: #fff;
+        }
+
+        .services-why-choose .swc-card:hover .swc-icon svg {
+            fill: #fff;
         }
 
         .services-why-choose .swc-card h4 {
@@ -1195,6 +1219,15 @@
         .rts-service-area .service-wrapper .icon i {
             font-size: 34px !important;
             color: #003A59 !important;
+        }
+        .rts-service-area .service-wrapper .icon svg {
+            width: 34px !important;
+            height: 34px !important;
+            display: block;
+            fill: #003A59 !important;
+        }
+        .rts-service-area .service-wrapper:hover .icon svg {
+            fill: #fff !important;
         }
         .services-why-choose .swc-card h4 {
             font-size: 18px !important;
@@ -1703,7 +1736,7 @@
                 <!-- Service 9 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="service-wrapper">
-                        <div class="icon"><i class="fa-solid fa-people-group"></i></div>
+                        <div class="icon"><i class="fa-solid fa-globe"></i></div>
                         <h4 class="title">Group Tours</h4>
                         <p class="desc">Exciting group travel experiences for friends, school trips, and organizations. Perfectly coordinated transport, stays, and activities with dedicated group guides.</p>
                         <a href="contact" class="service-learn-more">
@@ -1725,7 +1758,7 @@
                 <!-- Service 11 -->
                 <div class="col-lg-4 col-md-6">
                     <div class="service-wrapper">
-                        <div class="icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="icon"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z"/></svg></div>
                         <h4 class="title">Travel Insurance</h4>
                         <p class="desc">Comprehensive coverage for medical emergencies, trip cancellations, lost baggage, and more — so you explore the world with complete peace of mind.</p>
                         <a href="contact" class="service-learn-more">
@@ -1795,7 +1828,7 @@
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
                     <div class="swc-card">
-                        <div class="swc-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div class="swc-icon"><svg viewBox="0 0 512 512" aria-hidden="true"><path d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0zm0 66.8V444.8C394 378 431.1 230.1 432 141.4L256 66.8l0 0z"/></svg></div>
                         <h4>100% Secure Booking</h4>
                         <p>Your payments and personal information are protected with enterprise-grade encryption. Book with complete peace of mind.</p>
                     </div>
