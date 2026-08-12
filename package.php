@@ -46,7 +46,14 @@ $tourTypes    = getSettings('tour_type');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Package – VMS Go Vista</title>
+    <meta name="description" content="Explore domestic &amp; international tour packages by VMS Go Vista — Kashmir, Goa, Kerala, Andaman, Ladakh and more at the best prices.">
+    <link rel="canonical" href="https://vmsgovista.com/package">
+    <title>Tour Packages – VMS Go Vista</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tour Packages – VMS Go Vista">
+    <meta property="og:description" content="Explore domestic &amp; international tour packages by VMS Go Vista.">
+    <meta property="og:url" content="https://vmsgovista.com/package">
+    <meta property="og:site_name" content="VMS Go Vista">
     <link rel="stylesheet preload" href="assets/css/plugins/swiper.min.css" as="style">
     <link rel="stylesheet preload" href="assets/fonts/custom-font.css" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1118,7 +1125,7 @@ $tourTypes    = getSettings('tour_type');
             <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
             <span class="vms-author" style="font-weight: 900; color: black;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                VMS Go Vista Team
+                Vipin Kumar (Owner)
             </span>
         </div>
     </div>

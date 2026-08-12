@@ -1632,7 +1632,7 @@ $days        = (int)($pkg['days']               ?? 0);
             <span>Crafted with dedication by</span>
             <span class="vms-author">
                 <span class="vms-author-avatar"></span>
-                VMS Go Vista Team
+                Vipin Kumar (Owner)
             </span>
         </div>
     </div>

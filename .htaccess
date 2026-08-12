@@ -105,6 +105,16 @@ FileETag None
 # Make index-three.php the default homepage
 DirectoryIndex index-three.php
 
+# =============================================
+# SEO: Serve the dynamic sitemap at /sitemap.xml
+# =============================================
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# =============================================
+# SEO: Serve robots.txt directly (already a static file)
+# =============================================
+# robots.txt is a real file, served automatically.
+
 # Redirect /index to / (optional)
 RewriteRule ^index$ / [R=301,L]
 

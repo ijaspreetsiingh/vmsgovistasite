@@ -11,7 +11,49 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="q04Fea95irY7FaPfYtP6EPUb-i7h7W0CVsklNRdT590" />
+    <meta name="description" content="VMS Go Vista Pvt Ltd — domestic &amp; international tour packages, honeymoons, family holidays, group tours, visa assistance and 24/7 travel support. Book your dream journey today.">
+    <link rel="canonical" href="https://vmsgovista.com/">
     <title>VMS Go Vista – Travel &amp; Tour Booking</title>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VMS Go Vista – Travel &amp; Tour Booking">
+    <meta property="og:description" content="Domestic &amp; international tour packages, honeymoons, family holidays and group tours with 24/7 support.">
+    <meta property="og:url" content="https://vmsgovista.com/">
+    <meta property="og:site_name" content="VMS Go Vista">
+    <meta property="og:image" content="https://vmsgovista.com/assets/newlogo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TravelAgency",
+      "name": "VMS Go Vista Pvt Ltd",
+      "alternateName": "VMS Go Vista",
+      "url": "https://vmsgovista.com",
+      "logo": "https://vmsgovista.com/assets/newlogo.png",
+      "description": "Domestic and international tour packages, honeymoons, family holidays, group tours, visa assistance and travel insurance.",
+      "founder": {
+        "@type": "Person",
+        "name": "Vipin Kumar"
+      },
+      "owner": {
+        "@type": "Person",
+        "name": "Vipin Kumar"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Unit no. 04, Ground floor, D-MALL, Netaji Subhash Place, Shakurpur",
+        "addressLocality": "New Delhi",
+        "addressRegion": "Delhi",
+        "postalCode": "110034",
+        "addressCountry": "IN"
+      },
+      "telephone": "+91 98701 82425",
+      "email": "info@vmsgovista.com",
+      "sameAs": [
+        "https://vmsgovista.com"
+      ]
+    }
+    </script>
     
     <!-- PERFORMANCE: Preconnect & DNS-prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -1215,7 +1257,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
             <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
             <span class="vms-author" style="font-weight: 900; color: black;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                VMS Go Vista Team
+                Vipin Kumar (Owner)
             </span>
         </div>
     </div>

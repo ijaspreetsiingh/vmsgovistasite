@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /blog
+Disallow: /blog-details
+
+Sitemap: https://vmsgovista.com/sitemap.xml

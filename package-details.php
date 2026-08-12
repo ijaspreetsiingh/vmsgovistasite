@@ -31,7 +31,15 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<?= $pkg ? htmlspecialchars(mb_substr(strip_tags((string)($pkg['short_desc'] ?? $pkg['overview'] ?? '')), 0, 155), ENT_QUOTES, 'UTF-8') : 'Package not found — explore domestic and international tour packages by VMS Go Vista.' ?>">
+    <link rel="canonical" href="https://vmsgovista.com/package-details/<?= $pkg ? e($pkg['slug']) : '' ?>">
     <title><?= $pkg ? e($pkg['title']).' – VMS Go Vista' : 'Package Not Found – VMS Go Vista' ?></title>
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="<?= $pkg ? e($pkg['title']).' – VMS Go Vista' : 'Package Not Found – VMS Go Vista' ?>">
+    <meta property="og:description" content="<?= $pkg ? htmlspecialchars(mb_substr(strip_tags((string)($pkg['short_desc'] ?? $pkg['overview'] ?? '')), 0, 155), ENT_QUOTES, 'UTF-8') : 'Explore domestic and international tour packages by VMS Go Vista.' ?>">
+    <meta property="og:url" content="https://vmsgovista.com/package-details/<?= $pkg ? e($pkg['slug']) : '' ?>">
+    <meta property="og:site_name" content="VMS Go Vista">
+    <meta name="twitter:card" content="summary_large_image">
     <?php $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'); ?>
     <base href="<?= $basePath ?>/">
     <link rel="stylesheet preload" href="assets/css/plugins/swiper.min.css" as="style">
@@ -1886,7 +1894,7 @@ $days        = (int)($pkg['days']               ?? 0);
             <span style="font-weight: 900; color: black;">Crafted with dedication by</span>
             <span class="vms-author" style="font-weight: 900; color: black;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#e91e63" style="margin-right: 6px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                VMS Go Vista Team
+                Vipin Kumar (Owner)
             </span>
         </div>
     </div>
