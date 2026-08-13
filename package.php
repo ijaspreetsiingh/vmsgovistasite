@@ -49,7 +49,7 @@ $tourTypes    = getSettings('tour_type');
     <meta name="description" content="Explore domestic &amp; international tour packages by VMS Go Vista — Kashmir, Goa, Kerala, Andaman, Ladakh and more at the best prices.">
     <link rel="canonical" href="https://vmsgovista.com/package">
     <title>Tour Packages – VMS Go Vista</title>
-    <link rel="icon" type="image/png" href="https://shankygroup.com/images/logo_icon.png">
+    <link rel="icon" type="image/png" href="assets/fav.png">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Tour Packages – VMS Go Vista">
     <meta property="og:description" content="Explore domestic &amp; international tour packages by VMS Go Vista.">

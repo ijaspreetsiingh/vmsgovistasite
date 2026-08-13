@@ -118,7 +118,7 @@ function bkShortDesc(?string $desc): string {
     <meta name="description" content="Book your dream holiday with VMS Go Vista — domestic &amp; international tour packages with expert planning, best prices and 24/7 support.">
     <link rel="canonical" href="https://vmsgovista.com/booking">
     <title>Book Your Trip – VMS Go Vista</title>
-    <link rel="icon" type="image/png" href="https://shankygroup.com/images/logo_icon.png">
+    <link rel="icon" type="image/png" href="assets/fav.png">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Book Your Trip – VMS Go Vista">
     <meta property="og:description" content="Book your dream holiday with VMS Go Vista.">

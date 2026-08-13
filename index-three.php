@@ -15,7 +15,7 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
     <meta name="description" content="VMS Go Vista Pvt Ltd — domestic &amp; international tour packages, honeymoons, family holidays, group tours, visa assistance and 24/7 travel support. Book your dream journey today.">
     <link rel="canonical" href="https://vmsgovista.com/">
     <title>VMS Go Vista – Travel &amp; Tour Booking</title>
-    <link rel="icon" type="image/png" href="https://shankygroup.com/images/logo_icon.png">
+    <link rel="icon" type="image/png" href="assets/fav.png">
     <meta property="og:type" content="website">
     <meta property="og:title" content="VMS Go Vista – Travel &amp; Tour Booking">
     <meta property="og:description" content="Domestic &amp; international tour packages, honeymoons, family holidays and group tours with 24/7 support.">

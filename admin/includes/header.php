@@ -17,6 +17,7 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= isset($pageTitle) ? e($pageTitle) . ' — ' : '' ?>VMS Go Vista Admin</title>
+<link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/fav.png">
 <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/vendor/bootstrap.min.css">
 <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/plugins/fontawesome.min.css">
 <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/admin-liquid.css">
