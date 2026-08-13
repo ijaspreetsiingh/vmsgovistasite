@@ -165,7 +165,16 @@ function bkShortDesc(?string $desc): string {
             .bromo-book-btn { display: none; }
             .bromo-mobile-menu { display: flex; }
         }
-        .bromo-book-btn a:hover .bromo-arrow{background:#003A59;color:#fff;}
+        /* Normal header Book Now — hover effect as default, default as hover */
+        .bromo-book-btn a{background:rgba(255,255,255,0.9);border-color:rgba(255,255,255,0.9);color:#1a1a1a;}
+        .bromo-book-btn a:hover{background:rgba(255,255,255,0.14);border-color:rgba(255,255,255,0.28);color:#fff;}
+        .bromo-book-btn a .bromo-arrow{background:#003A59;color:#fff;}
+        .bromo-book-btn a:hover .bromo-arrow{background:#fff;color:#003A59;}
+        /* Phone menu ke andar Book Now (bromo-mobile-nav-cta) — hover effect as default, default as hover */
+        .bromo-mobile-nav-cta{background:#003A59;border-color:#003A59;color:#fff;transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(0,58,89,0.45);}
+        .bromo-mobile-nav-cta:hover{background:rgba(0,58,89,0.06);border-color:rgba(0,58,89,0.16);color:#003A59;transform:none;box-shadow:0 10px 26px -12px rgba(0,58,89,0.3);}
+        .bromo-mobile-nav-cta .bromo-arrow{background:#fff;color:#003A59;transform:translate(2px,-2px);}
+        .bromo-mobile-nav-cta:hover .bromo-arrow{background:#003A59;color:#fff;transform:none;}
         /* ===== STICKY HEADER ===== */
         .bromo-header.header--sticky.sticky{
             position:fixed!important;top:0;left:0;right:0;
@@ -181,10 +190,10 @@ function bkShortDesc(?string $desc): string {
         .bromo-header.header--sticky.sticky .bromo-nav a{color:rgba(0,58,89,0.8);}
         .bromo-header.header--sticky.sticky .bromo-nav a:hover,
         .bromo-header.header--sticky.sticky .bromo-nav a.active{background:#003A59;color:#fff;}
-        .bromo-header.header--sticky.sticky .bromo-book-btn a{background:rgba(0,58,89,0.06);border-color:rgba(0,58,89,0.12);color:#003A59;}
-        .bromo-header.header--sticky.sticky .bromo-book-btn a:hover{background:#003A59;color:#fff;}
-        .bromo-header.header--sticky.sticky .bromo-book-btn a .bromo-arrow{background:#003A59;color:#fff;}
-        .bromo-header.header--sticky.sticky .bromo-book-btn a:hover .bromo-arrow{background:#fff;color:#003A59;}
+        .bromo-header.header--sticky.sticky .bromo-book-btn a{background:#003A59;border-color:#003A59;color:#fff;}
+        .bromo-header.header--sticky.sticky .bromo-book-btn a:hover{background:rgba(0,58,89,0.06);border-color:rgba(0,58,89,0.12);color:#003A59;}
+        .bromo-header.header--sticky.sticky .bromo-book-btn a .bromo-arrow{background:#fff;color:#003A59;}
+        .bromo-header.header--sticky.sticky .bromo-book-btn a:hover .bromo-arrow{background:#003A59;color:#fff;}
         .bromo-header.header--sticky.sticky .bromo-mobile-menu{background:rgba(0,58,89,0.06);border-color:rgba(0,58,89,0.1);}
         .bromo-header.header--sticky.sticky .bromo-mobile-menu span{color:#003A59;}
         @media(max-width:991px){
