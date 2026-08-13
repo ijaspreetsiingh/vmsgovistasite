@@ -1101,8 +1101,47 @@
             }
         }
 
-        .why-choose-right-side-content {
-            padding-left: 40px;
+        /* ===== WHY CHOOSE US — MOBILE PERFECT (late overrides, matches index-three.php) ===== */
+        @media (max-width: 991px) {
+            .why-choose-right-side-content {
+                padding-left: 0;
+                padding-bottom: 0;
+            }
+
+            .why-choose-left-image-area {
+                margin-right: 0;
+                padding-bottom: 0;
+            }
+
+            .why-choose-wrapper-list {
+                max-width: 100%;
+                margin-left: 0;
+            }
+
+            .why-choose-wrapper-list li {
+                padding: 16px 18px;
+                gap: 14px;
+            }
+
+            .why-choose-video-wrap {
+                min-height: 380px;
+            }
+
+            .why-choose-video-wrap video {
+                height: 380px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .why-choose-right-side-content {
+                padding-left: 40px;
+            }
+        }
+
+        /* Match index-three.php: container 15px padding (bootstrap loads later here, so scoped override) */
+        .rts-why-choose-us-area .container {
+            padding-left: 15px;
+            padding-right: 15px;
         }
 
         .why-choose-wrapper-list {
@@ -1350,6 +1389,7 @@
             font-weight: 400 !important;
             color: #666 !important;
             line-height: 1.6 !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
         }
         .holiday-package-title {
             font-size: clamp(24px, 3vw, 34px) !important;
@@ -1418,10 +1458,12 @@
                 font-size: 14.5px !important;
             }
             .why-choose-wrapper-list li .content .title {
-                font-size: 17px !important;
+                font-size: 16px !important;
             }
             .why-choose-wrapper-list li .content p {
                 font-size: 14px !important;
+                font-weight: 500 !important;
+                line-height: 1.5 !important;
             }
             .vms-big-text {
                 font-size: clamp(56px, 10vw, 88px) !important;
@@ -1447,7 +1489,9 @@
                 font-size: 16px !important;
             }
             .why-choose-wrapper-list li .content p {
-                font-size: 13.5px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                line-height: 1.5 !important;
             }
             .holiday-package-title {
                 font-size: 24px !important;
@@ -1475,10 +1519,12 @@
                 font-size: 24px !important;
             }
             .why-choose-wrapper-list li .content .title {
-                font-size: 15px !important;
+                font-size: 16px !important;
             }
             .why-choose-wrapper-list li .content p {
-                font-size: 13px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                line-height: 1.5 !important;
             }
             .holiday-package-title {
                 font-size: 22px !important;
@@ -1563,6 +1609,7 @@
             font-weight: 400 !important;
             color: #666 !important;
             line-height: 1.6 !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
         }
         /* Holiday Package Titles */
         .holiday-package-title {
@@ -1613,10 +1660,12 @@
                 font-size: 14.5px !important;
             }
             .why-choose-wrapper-list li .content .title {
-                font-size: 17px !important;
+                font-size: 16px !important;
             }
             .why-choose-wrapper-list li .content p {
                 font-size: 14px !important;
+                font-weight: 500 !important;
+                line-height: 1.5 !important;
             }
         }
         /* =========== SMALL TABLET (≤767px) =========== */
@@ -1638,7 +1687,9 @@
                 font-size: 16px !important;
             }
             .why-choose-wrapper-list li .content p {
-                font-size: 13.5px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                line-height: 1.5 !important;
             }
             .holiday-package-title {
                 font-size: 24px !important;
@@ -1670,10 +1721,12 @@
                 font-size: 24px !important;
             }
             .why-choose-wrapper-list li .content .title {
-                font-size: 15px !important;
+                font-size: 16px !important;
             }
             .why-choose-wrapper-list li .content p {
-                font-size: 13px !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
+                line-height: 1.5 !important;
             }
             .holiday-package-title {
                 font-size: 22px !important;
