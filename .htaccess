@@ -118,6 +118,9 @@ RewriteRule ^sitemap\.xml$ sitemap.php [L]
 # Redirect /index to / (optional)
 RewriteRule ^index$ / [R=301,L]
 
+# index-three.html deleted — redirect any old links to the homepage
+RewriteRule ^index-three\.html$ / [R=301,L]
+
 # ===== 301 REDIRECTS: Old /tour URLs → New /package URLs =====
 # Redirect old /tour to new /package (with or without trailing slash)
 # NOTE: relative targets (no leading /) so the base path is preserved in subfolder installs

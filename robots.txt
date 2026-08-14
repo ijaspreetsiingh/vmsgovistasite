@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /blog
 Disallow: /blog-details
+Disallow: /index-three.html
 
 Sitemap: https://vmsgovista.com/sitemap.xml
