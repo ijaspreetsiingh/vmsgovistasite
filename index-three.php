@@ -55,6 +55,35 @@ $popularPackages  = getPopularPackages(8);    // "Yacht Deals" slider
       ]
     }
     </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "VMS Go Vista",
+      "url": "https://vmsgovista.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://vmsgovista.com/package.php?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SiteNavigationElement",
+      "name": ["Home", "About Us", "Tour Packages", "Services", "Blog", "Contact Us", "Book Now"],
+      "url": [
+        "https://vmsgovista.com/",
+        "https://vmsgovista.com/about.html",
+        "https://vmsgovista.com/package.php",
+        "https://vmsgovista.com/service.html",
+        "https://vmsgovista.com/blog.html",
+        "https://vmsgovista.com/contact.html",
+        "https://vmsgovista.com/booking.php"
+      ]
+    }
+    </script>
     
     <!-- PERFORMANCE: Preconnect & DNS-prefetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>

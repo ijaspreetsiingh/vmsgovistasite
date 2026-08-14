@@ -15,10 +15,10 @@ $today = date('Y-m-d');
 $pages = [
     ['',              '1.0', 'daily'],
     ['package',       '0.9', 'daily'],
-    ['about',         '0.6', 'monthly'],
+    ['about',         '0.8', 'monthly'],
     ['service',       '0.7', 'monthly'],
-    ['contact',       '0.5', 'monthly'],
-    ['booking',       '0.5', 'monthly'],
+    ['contact',       '0.8', 'monthly'],
+    ['booking',       '0.8', 'monthly'],
 ];
 
 $urls = '';

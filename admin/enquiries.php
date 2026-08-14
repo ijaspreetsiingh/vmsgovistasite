@@ -21,6 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         redirect(SITE_URL . '/admin/enquiries.php');
     }
+    // Single delete
+    if (isset($_POST['delete_id'])) {
+        $delId = (int)$_POST['delete_id'];
+        if ($delId) {
+            $db->prepare("DELETE FROM enquiries WHERE id=?")->execute([$delId]);
+            setFlash('success', 'Enquiry deleted.');
+        }
+        redirect(SITE_URL . '/admin/enquiries.php');
+    }
     // Bulk action
     if (isset($_POST['bulk_action']) && isset($_POST['selected'])) {
         $ids = array_map('intval', $_POST['selected']);
@@ -201,6 +210,8 @@ $sc = [
       <td>
         <div class="actions-cell">
           <a href="<?= SITE_URL ?>/admin/enquiry-view.php?id=<?= (int)$e['id'] ?>" class="btn-edit-admin" style="font-size:11px;padding:5px 10px;">Open</a>
+          <a href="<?= SITE_URL ?>/admin/enquiry-edit.php?id=<?= (int)$e['id'] ?>" class="btn-edit-admin" style="font-size:11px;padding:5px 10px;"><i class="fa-solid fa-pen"></i> Edit</a>
+          <button type="button" onclick="deleteEnquiry(<?= (int)$e['id'] ?>)" class="btn-danger-admin" style="font-size:11px;padding:5px 10px;"><i class="fa-solid fa-trash"></i> Delete</button>
           <!-- Move to Lead -->
           <form method="POST" action="<?= SITE_URL ?>/admin/leads.php" style="display:inline;">
             <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
@@ -269,6 +280,16 @@ $sc = [
 <?php endif; ?>
 
 <script>
+// Per-row delete — create a standalone form (table is inside the bulk form, so a nested <form> tag would be ignored by the HTML parser)
+function deleteEnquiry(id) {
+  if (!confirm('Delete this enquiry permanently? This cannot be undone.')) return;
+  var f = document.createElement('form');
+  f.method = 'POST';
+  f.action = '<?= SITE_URL ?>/admin/enquiries.php';
+  f.innerHTML = '<?= addslashes('<input type=hidden name=csrf_token value='.csrfToken().'><input type=hidden name=delete_id value=') ?>' + id + '<?= addslashes('>') ?>';
+  document.body.appendChild(f);
+  f.submit();
+}
 // Select all checkbox
 document.getElementById('selectAll')?.addEventListener('change', function() {
   document.querySelectorAll('.row-check').forEach(c => c.checked = this.checked);
