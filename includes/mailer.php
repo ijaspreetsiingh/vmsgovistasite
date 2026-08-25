@@ -213,6 +213,7 @@ function sendEnquiryEmails(array $enq): array {
     $fullName = trim(($enq['first_name'] ?? '') . ' ' . ($enq['last_name'] ?? ''));
     $pkgTitle = trim($enq['package_title'] ?? 'General enquiry');
     $guestName = $fullName !== '' ? $fullName : 'Valued Traveler';
+    $clientEmail = $enq['email'] ?? '';
 
     // 1) Admin notification
     $adminHtml = emailTemplate(
@@ -225,15 +226,22 @@ function sendEnquiryEmails(array $enq): array {
     $admin = sendAdminNotification('New Package Enquiry: ' . $pkgTitle, $adminHtml);
 
     // 2) Client thank-you
-    $clientHtml = emailTemplate(
-        'Thank you for your enquiry',
-        '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Dear ' . e($guestName) . ',</p>'
-        . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Thank you for your interest in <strong style="color:#0a2540;">' . e($pkgTitle) . '</strong>. Our travel experts are currently reviewing your request and will get back to you within <strong style="color:#f26522;">24 hours</strong> with the best available options and pricing.</p>'
-        . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">We truly appreciate the opportunity to help you plan a memorable journey with comfort, care, and the best possible experience.</p>'
-        . '<p style="margin:0;font-size:14px;color:#475467;line-height:1.8;">If your travel plan is urgent, you can contact our team directly using the support details below.</p>'
-    );
+    error_log('VMS sendEnquiryEmails: Attempting to send client email to: ' . $clientEmail);
+    if (!$clientEmail || !filter_var($clientEmail, FILTER_VALIDATE_EMAIL)) {
+        error_log('VMS sendEnquiryEmails: Invalid client email: ' . $clientEmail);
+        $client = ['success' => false, 'message' => 'Invalid client email'];
+    } else {
+        $clientHtml = emailTemplate(
+            'Thank you for your enquiry',
+            '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Dear ' . e($guestName) . ',</p>'
+            . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Thank you for your interest in <strong style="color:#0a2540;">' . e($pkgTitle) . '</strong>. Our travel experts are currently reviewing your request and will get back to you within <strong style="color:#f26522;">24 hours</strong> with the best available options and pricing.</p>'
+            . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">We truly appreciate the opportunity to help you plan a memorable journey with comfort, care, and the best possible experience.</p>'
+            . '<p style="margin:0;font-size:14px;color:#475467;line-height:1.8;">If your travel plan is urgent, you can contact our team directly using the support details below.</p>'
+        );
 
-    $client = sendMail($enq['email'] ?? '', 'Your enquiry — ' . SITE_NAME, $clientHtml);
+        $client = sendMail($clientEmail, 'Your enquiry — ' . SITE_NAME, $clientHtml);
+        error_log('VMS sendEnquiryEmails: Client email result: ' . json_encode($client));
+    }
 
     return ['admin' => $admin, 'client' => $client];
 }
@@ -242,6 +250,7 @@ function sendEnquiryEmails(array $enq): array {
 function sendContactEmails(array $contact): array {
     $name = trim($contact['name'] ?? '');
     $guestName = $name !== '' ? $name : 'Valued Guest';
+    $clientEmail = $contact['email'] ?? '';
 
     // 1) Admin notification
     $adminHtml = emailTemplate(
@@ -254,15 +263,22 @@ function sendContactEmails(array $contact): array {
     $admin = sendAdminNotification('New Contact Message: ' . ($name !== '' ? $name : 'Website visitor'), $adminHtml);
 
     // 2) Client thank-you
-    $clientHtml = emailTemplate(
-        'Thank You for Contacting ' . SITE_NAME . '!',
-        '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Dear ' . e($guestName) . ',</p>'
-        . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">We have received your message and sincerely appreciate you reaching out to us. Our team is reviewing your request and will get back to you within <strong style="color:#f26522;">24 hours</strong>.</p>'
-        . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Whether it is a package enquiry, custom holiday plan, or general travel support, we are here to assist you with the best possible guidance.</p>'
-        . '<p style="margin:0;font-size:14px;color:#475467;line-height:1.8;">If your request is urgent, please feel free to connect with us directly.</p>'
-    );
+    error_log('VMS sendContactEmails: Attempting to send client email to: ' . $clientEmail);
+    if (!$clientEmail || !filter_var($clientEmail, FILTER_VALIDATE_EMAIL)) {
+        error_log('VMS sendContactEmails: Invalid client email: ' . $clientEmail);
+        $client = ['success' => false, 'message' => 'Invalid client email'];
+    } else {
+        $clientHtml = emailTemplate(
+            'Thank You for Contacting ' . SITE_NAME . '!',
+            '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Dear ' . e($guestName) . ',</p>'
+            . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">We have received your message and sincerely appreciate you reaching out to us. Our team is reviewing your request and will get back to you within <strong style="color:#f26522;">24 hours</strong>.</p>'
+            . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Whether it is a package enquiry, custom holiday plan, or general travel support, we are here to assist you with the best possible guidance.</p>'
+            . '<p style="margin:0;font-size:14px;color:#475467;line-height:1.8;">If your request is urgent, please feel free to connect with us directly.</p>'
+        );
 
-    $client = sendMail($contact['email'] ?? '', 'We received your message — ' . SITE_NAME, $clientHtml);
+        $client = sendMail($clientEmail, 'We received your message — ' . SITE_NAME, $clientHtml);
+        error_log('VMS sendContactEmails: Client email result: ' . json_encode($client));
+    }
 
     return ['admin' => $admin, 'client' => $client];
 }
@@ -272,6 +288,7 @@ function sendBookingEmails(array $bk): array {
     $guestName = trim($bk['name'] ?? '');
     $guestName = $guestName !== '' ? $guestName : 'Valued Traveler';
     $pkgTitle  = trim($bk['package_title'] ?? 'Travel Package');
+    $clientEmail = $bk['email'] ?? '';
 
     // 1) Admin notification
     $adminHtml = emailTemplate(
@@ -284,15 +301,22 @@ function sendBookingEmails(array $bk): array {
     $admin = sendAdminNotification('New Booking Request: ' . $pkgTitle, $adminHtml);
 
     // 2) Client thank-you
-    $clientHtml = emailTemplate(
-        'Booking Request Received',
-        '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Dear ' . e($guestName) . ',</p>'
-        . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Thank you for choosing <strong style="color:#0a2540;">' . e($pkgTitle) . '</strong>. Your booking request has been received and our travel experts are reviewing it right now. We will get back to you within <strong style="color:#f26522;">24 hours</strong> with confirmation and the best available pricing.</p>'
-        . buildBookingTableHtml($bk)
-        . '<p style="margin:16px 0 0;font-size:14px;color:#475467;line-height:1.8;">We truly appreciate the opportunity to plan a memorable journey for you. If your travel plan is urgent, please reach our team directly using the support details below.</p>'
-    );
+    error_log('VMS sendBookingEmails: Attempting to send client email to: ' . $clientEmail);
+    if (!$clientEmail || !filter_var($clientEmail, FILTER_VALIDATE_EMAIL)) {
+        error_log('VMS sendBookingEmails: Invalid client email: ' . $clientEmail);
+        $client = ['success' => false, 'message' => 'Invalid client email'];
+    } else {
+        $clientHtml = emailTemplate(
+            'Booking Request Received',
+            '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Dear ' . e($guestName) . ',</p>'
+            . '<p style="margin:0 0 16px;font-size:14px;color:#475467;line-height:1.8;">Thank you for choosing <strong style="color:#0a2540;">' . e($pkgTitle) . '</strong>. Your booking request has been received and our travel experts are reviewing it right now. We will get back to you within <strong style="color:#f26522;">24 hours</strong> with confirmation and the best available pricing.</p>'
+            . buildBookingTableHtml($bk)
+            . '<p style="margin:16px 0 0;font-size:14px;color:#475467;line-height:1.8;">We truly appreciate the opportunity to plan a memorable journey for you. If your travel plan is urgent, please reach our team directly using the support details below.</p>'
+        );
 
-    $client = sendMail($bk['email'] ?? '', 'Booking Request Received — ' . SITE_NAME, $clientHtml);
+        $client = sendMail($clientEmail, 'Booking Request Received — ' . SITE_NAME, $clientHtml);
+        error_log('VMS sendBookingEmails: Client email result: ' . json_encode($client));
+    }
 
     return ['admin' => $admin, 'client' => $client];
 }
