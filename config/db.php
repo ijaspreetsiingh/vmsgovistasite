@@ -1,9 +1,10 @@
 <?php
 // Database configuration - edit these values to match your server
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');       // your MySQL username
-define('DB_PASS', '');           // your MySQL password
-define('DB_NAME', 'vmsgovista');
+// Supports environment variables for production security
+define('DB_HOST', $_ENV['DB_HOST'] ?? '127.0.0.1');
+define('DB_USER', $_ENV['DB_USER'] ?? 'root');
+define('DB_PASS', $_ENV['DB_PASS'] ?? '1234');
+define('DB_NAME', $_ENV['DB_NAME'] ?? 'vmsgovista');
 define('DB_CHARSET', 'utf8mb4');
 
 // Site configuration
@@ -15,6 +16,12 @@ $__https  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
           || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
 $__scheme = $__https ? 'https' : 'http';
 $__host   = $_SERVER['HTTP_HOST'] ?? 'localhost';
+
+// Validate host against allowlist to prevent Host header injection
+$__allowedHosts = ['localhost', '127.0.0.1', 'vmsgovista.com', 'www.vmsgovista.com'];
+if (!in_array($__host, $__allowedHosts, true) && !preg_match('/^192\.168\.\d+\.\d+$/', $__host)) {
+    $__host = 'localhost';
+}
 
 // Base path = project folder relative to the web root (e.g. /vms/touriza-htm)
 $__docRoot = rtrim(str_replace('\\', '/', (string)($_SERVER['DOCUMENT_ROOT'] ?? '')), '/');
@@ -31,7 +38,7 @@ if ($__base === '' && isset($_SERVER['SCRIPT_NAME'])) {
     $__base = preg_replace('#/(config|admin|api|includes)$#', '', $__scriptDir) ?? '';
 }
 define('SITE_URL', $__scheme . '://' . $__host . $__base);  // no trailing slash
-unset($__https, $__scheme, $__host, $__docRoot, $__projDir, $__base, $__scriptDir);
+unset($__https, $__scheme, $__host, $__docRoot, $__projDir, $__base, $__scriptDir, $__allowedHosts);
 define('SITE_NAME', 'VMS Go Vista');
 define('UPLOAD_DIR', __DIR__ . '/../uploads/packages/');
 define('UPLOAD_URL', SITE_URL . '/uploads/packages/');
@@ -48,11 +55,22 @@ function getDB(): PDO {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES   => false,
         ];
+        // Only add SSL CA if explicitly set (for production)
+        $sslCa = $_ENV['DB_SSL_CA'] ?? null;
+        if ($sslCa && is_file($sslCa)) {
+            $options[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
+        }
         try {
             $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (PDOException $e) {
+            error_log('DB connection failed: ' . $e->getMessage());
             http_response_code(500);
-            die(json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]));
+            // Don't expose internal error details
+            if (php_sapi_name() !== 'cli') {
+                header('Content-Type: application/json');
+                echo json_encode(['error' => 'Database connection failed']);
+            }
+            exit;
         }
     }
     return $pdo;

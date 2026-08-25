@@ -41,16 +41,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($to === '') {
             $to = getSetting('admin_notify_email', '');
         }
+        // Validate email format
         if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
             setFlash('error', 'Enter a valid test recipient email address.');
         } else {
-            $res = sendMail(
-                $to,
-                'Test Email — ' . SITE_NAME,
-                emailTemplate('SMTP Test Email',
-                    '<p style="margin:0;font-size:14px;color:#475467;line-height:1.7;">If you are reading this, your <strong>SMTP configuration is working perfectly</strong>. Great job! &#127881;</p>')
-            );
-            setFlash($res['success'] ? 'success' : 'error', ($res['success'] ? 'Test email sent to ' . e($to) . '. ' : 'Test failed: ') . e($res['message']));
+            // Restrict test emails to admin notification domain(s) to prevent open relay
+            $adminEmails = array_map('trim', explode(',', getSetting('admin_notify_email', '')));
+            $allowed = false;
+            foreach ($adminEmails as $adminEmail) {
+                if (filter_var($adminEmail, FILTER_VALIDATE_EMAIL)) {
+                    $domain = strtolower(substr(strrchr($adminEmail, '@'), 1));
+                    $toDomain = strtolower(substr(strrchr($to, '@'), 1));
+                    if ($toDomain === $domain) {
+                        $allowed = true;
+                        break;
+                    }
+                }
+            }
+            // Also allow if no admin email configured (first-time setup)
+            if (!$allowed && getSetting('admin_notify_email', '') === '') {
+                $allowed = true;
+            }
+            if (!$allowed) {
+                setFlash('error', 'Test emails can only be sent to configured admin notification domain(s).');
+            } else {
+                $res = sendMail(
+                    $to,
+                    'Test Email — ' . SITE_NAME,
+                    emailTemplate('SMTP Test Email',
+                        '<p style="margin:0;font-size:14px;color:#475467;line-height:1.7;">If you are reading this, your <strong>SMTP configuration is working perfectly</strong>. Great job! &#127881;</p>')
+                );
+                setFlash($res['success'] ? 'success' : 'error', ($res['success'] ? 'Test email sent to ' . e($to) . '. ' : 'Test failed: ') . e($res['message']));
+            }
         }
         redirect(SITE_URL . '/admin/settings.php#email-smtp');
     }

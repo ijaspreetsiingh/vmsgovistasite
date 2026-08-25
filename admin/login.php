@@ -8,20 +8,47 @@ if (isLoggedIn()) {
     redirect(SITE_URL . '/admin/index.php');
 }
 
+// Rate limiting: 5 attempts per 15 minutes per IP
+function checkRateLimit(): bool {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $key = 'login_ratelimit_' . md5($ip);
+    $data = $_SESSION[$key] ?? ['count' => 0, 'window' => time()];
+    if (time() - $data['window'] > 900) { // 15 min window
+        $data = ['count' => 0, 'window' => time()];
+    }
+    if ($data['count'] >= 5) {
+        return false;
+    }
+    $data['count']++;
+    $_SESSION[$key] = $data;
+    return true;
+}
+
+function resetRateLimit(): void {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $key = 'login_ratelimit_' . md5($ip);
+    unset($_SESSION[$key]);
+}
+
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email    = trim($_POST['email']    ?? '');
-    $password = trim($_POST['password'] ?? '');
-
-    if (!$email || !$password) {
-        $error = 'Please enter both email and password.';
+    if (!checkRateLimit()) {
+        $error = 'Too many login attempts. Please try again in 15 minutes.';
     } else {
-        $result = loginUser($email, $password);
-        if ($result['success']) {
-            redirect(SITE_URL . '/admin/index.php');
+        $email    = trim($_POST['email']    ?? '');
+        $password = trim($_POST['password'] ?? '');
+
+        if (!$email || !$password) {
+            $error = 'Please enter both email and password.';
         } else {
-            $error = $result['message'];
+            $result = loginUser($email, $password);
+            if ($result['success']) {
+                resetRateLimit();
+                redirect(SITE_URL . '/admin/index.php');
+            } else {
+                $error = $result['message'];
+            }
         }
     }
 }

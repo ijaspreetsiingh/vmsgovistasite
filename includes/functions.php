@@ -43,7 +43,7 @@ function uploadImage(array $file, string $subfolder = 'packages'): ?string {
     };
     $name   = uniqid('img_', true) . '.' . $ext;
     $dir    = rtrim(UPLOAD_DIR, '/\\') . '/';
-    if (!is_dir($dir)) mkdir($dir, 0775, true);
+    if (!is_dir($dir)) mkdir($dir, 0750, true);
     $target = $dir . $name;
     if (!move_uploaded_file($file['tmp_name'], $target)) return null;
     return 'uploads/packages/' . $name;

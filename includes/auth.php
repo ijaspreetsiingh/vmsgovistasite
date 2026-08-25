@@ -3,11 +3,13 @@ require_once __DIR__ . '/../config/db.php';
 
 function startSecureSession(): void {
     if (session_status() === PHP_SESSION_NONE) {
+        $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+              || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
         session_set_cookie_params([
             'lifetime' => SESSION_TIMEOUT,
             'path'     => '/',
-            'domain'   => '',  // Empty domain allows cross-IP access
-            'secure'   => false,   // set true when on HTTPS
+            'domain'   => '',  // Empty = current host only (no subdomain leakage)
+            'secure'   => $https,  // true on HTTPS, false on localhost HTTP
             'httponly' => true,
             'samesite' => 'Lax',
         ]);

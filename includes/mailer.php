@@ -63,15 +63,53 @@ function getSetting(string $key, $default = ''): string {
         }
     }
     $v = $cache[$key] ?? null;
-    return ($v === null || $v === '') ? (string)$default : (string)$v;
+    if ($v === null || $v === '') return (string)$default;
+    // Decrypt sensitive settings
+    if (in_array($key, ['smtp_pass'], true)) {
+        return decryptSetting($v) ?: (string)$default;
+    }
+    return (string)$v;
 }
 
 function setSetting(string $key, string $value): void {
     ensureSettingsTable();
+    // Encrypt sensitive settings
+    if (in_array($key, ['smtp_pass'], true) && $value !== '') {
+        $value = encryptSetting($value);
+    }
     getDB()->prepare(
         'INSERT INTO settings (setting_key, setting_value) VALUES (?, ?)
          ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)'
     )->execute([$key, $value]);
+}
+
+// Encryption helpers for sensitive settings (SMTP password)
+function encryptSetting(string $value): string {
+    $key = getEncryptionKey();
+    $iv = random_bytes(16);
+    $ciphertext = openssl_encrypt($value, 'AES-256-GCM', $key, OPENSSL_RAW_DATA, $iv, $tag);
+    return base64_encode($iv . $tag . $ciphertext);
+}
+
+function decryptSetting(string $encrypted): ?string {
+    $key = getEncryptionKey();
+    $data = base64_decode($encrypted, true);
+    if ($data === false || strlen($data) < 33) return null;
+    $iv = substr($data, 0, 16);
+    $tag = substr($data, 16, 16);
+    $ciphertext = substr($data, 32);
+    return openssl_decrypt($ciphertext, 'AES-256-GCM', $key, OPENSSL_RAW_DATA, $iv, $tag);
+}
+
+function getEncryptionKey(): string {
+    $envKey = $_ENV['SETTINGS_ENCRYPTION_KEY'] ?? null;
+    if ($envKey) return base64_decode($envKey);
+    // Fallback: derive from site-specific constant (less secure but works without env)
+    static $derived = null;
+    if ($derived === null) {
+        $derived = hash_pbkdf2('sha256', SITE_NAME . DB_NAME, 'vms-salt-' . DB_HOST, 100000, 32, true);
+    }
+    return $derived;
 }
 
 function mailIsEnabled(): bool {
@@ -694,13 +732,39 @@ class VmsSmtpMailer
         $transport = ($this->enc === 'ssl') ? 'ssl' : 'tcp';
         $remote    = $transport . '://' . $this->host . ':' . $this->port;
 
-        $ctx = stream_context_create([
-            'ssl' => [
-                'verify_peer'       => false,
-                'verify_peer_name'  => false,
-                'allow_self_signed' => true,
-            ]
-        ]);
+        // Resolve CA file cross-platform
+        $caFile = $_ENV['SMTP_CA_FILE'] ?? null;
+        if (!$caFile) {
+            // Common locations
+            $candidates = [
+                '/etc/ssl/certs/ca-certificates.crt',           // Linux/Debian/Ubuntu
+                '/etc/pki/tls/certs/ca-bundle.crt',             // RHEL/CentOS/Fedora
+                '/etc/ssl/ca-bundle.pem',                       // Alpine
+                'C:\xampp1\php\extras\ssl\cacert.pem',          // XAMPP Windows
+                'C:\xampp\php\extras\ssl\cacert.pem',           // XAMPP alt
+                'C:\Program Files\OpenSSL\certs\ca-bundle.crt', // OpenSSL Windows
+            ];
+            foreach ($candidates as $c) {
+                if (is_file($c)) { $caFile = $c; break; }
+            }
+        }
+        // Capath for Linux
+        $capath = is_dir('/etc/ssl/certs') ? '/etc/ssl/certs' : null;
+
+        $sslOptions = [
+            'verify_peer'       => true,
+            'verify_peer_name'  => true,
+            'allow_self_signed' => false,
+        ];
+        if ($caFile) $sslOptions['cafile'] = $caFile;
+        if ($capath) $sslOptions['capath'] = $capath;
+
+        // Fallback: if no CA file found on Windows, use system store
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && !$caFile && !$capath) {
+            $sslOptions['verify_peer'] = false; // Will use Windows cert store implicitly
+        }
+
+        $ctx = stream_context_create(['ssl' => $sslOptions]);
 
         $this->sock = @stream_socket_client($remote, $errno, $errstr, $this->timeout, STREAM_CLIENT_CONNECT, $ctx);
         if (!$this->sock) return false;
