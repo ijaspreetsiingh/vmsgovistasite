@@ -65,7 +65,8 @@ if ($firstName === '' || $lastName === '' || $email === '' || $message === '') {
     $fail('missing');
 }
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+$emailValidation = validateEmailStrict($email);
+if (!$emailValidation['valid']) {
     $fail('email');
 }
 
@@ -105,7 +106,7 @@ try {
         $firstName, $lastName, $email, $phone, $country, $adults, $children, $packageTitle, $packageSlug, $message, $travelDate
     ) {
         try {
-            sendEnquiryEmails([
+            $result = sendEnquiryEmails([
                 'first_name'    => $firstName,
                 'last_name'     => $lastName,
                 'email'         => $email,
@@ -117,9 +118,10 @@ try {
                 'package_title' => $packageTitle !== '' ? $packageTitle : ($packageSlug !== '' ? $packageSlug : 'General enquiry'),
                 'message'       => $message,
             ]);
+            error_log('VMS enquiry email result: ' . json_encode($result));
         } catch (Throwable $emailErr) {
             // Emails must never block a booking — log and continue
-            error_log('VMS email error: ' . $emailErr->getMessage());
+            error_log('VMS enquiry email error: ' . $emailErr->getMessage());
         }
     });
 } catch (Throwable $e) {

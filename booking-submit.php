@@ -50,9 +50,10 @@ $adults   = max(1, (int)$_POST['adults']);
 $children = max(0, (int)($_POST['children'] ?? 0));
 $specialRequests = trim($_POST['special_requests'] ?? '');
 
-// Validate email
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    setFlash('error', 'Please enter a valid email address.');
+// Validate email (strict)
+$emailValidation = validateEmailStrict($email);
+if (!$emailValidation['valid']) {
+    setFlash('error', $emailValidation['message']);
     redirect(SITE_URL . '/booking.php');
 }
 
@@ -143,7 +144,7 @@ try {
         $name, $email, $phone, $package, $travelDate, $adults, $children, $totalPrice, $specialRequests, $bookingId, $currency
     ) {
         try {
-            sendBookingEmails([
+            $result = sendBookingEmails([
                 'name'          => $name,
                 'email'         => $email,
                 'phone'         => $phone,
@@ -155,6 +156,7 @@ try {
                 'booking_id'    => $bookingId,
                 'message'       => $specialRequests,
             ]);
+            error_log('VMS booking email result: ' . json_encode($result));
         } catch (Throwable $emailErr) {
             // Emails must never block a booking — log and continue
             error_log('VMS booking email error: ' . $emailErr->getMessage());

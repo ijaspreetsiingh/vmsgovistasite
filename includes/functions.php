@@ -1,6 +1,76 @@
 <?php
 require_once __DIR__ . '/../config/db.php';
 
+// ── Strict email validation ────────────────────────────────────
+function validateEmailStrict(string $email): array {
+    $email = trim($email);
+    
+    // Basic format check
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return ['valid' => false, 'message' => 'Please enter a valid email address.'];
+    }
+    
+    $domain = strtolower(substr(strrchr($email, '@'), 1));
+    
+    // Block disposable/temporary email domains
+    $disposableDomains = [
+        'mailinator.com', 'guerrillamail.com', '10minutemail.com', 'tempmail.com',
+        'throwaway.email', 'fakeinbox.com', 'trashmail.com', 'yopmail.com',
+        'maildrop.cc', 'dispostable.com', 'getnada.com', 'temp-mail.org',
+        'mailnesia.com', 'spamgourmet.com', 'mintemail.com', 'spambob.com',
+        'spamcowboy.com', 'spamhole.com', 'spamhere.com', 'spamspot.com',
+        'bccto.me', 'chacuo.net', 'ddcrew.com', 'emailondeck.com',
+        'emailmiser.com', 'fakemailgenerator.com', 'incognitomail.com',
+        'lazyinbox.com', 'lukecarriere.com', 'mailcatch.com', 'mailforspam.com',
+        'mailmetrash.com', 'moakt.com', 'mytrashmail.com', 'nospam.ze.tc',
+        'objectmail.com', 'ordinaryamerican.net', 'pookmail.com', 'proxymail.eu',
+        'quickinbox.com', 'rcpt.at', 'recode.me', 'spam4.me', 'spamavert.com',
+        'spamcannon.com', 'spamcero.com', 'spamcon.org', 'spamday.com',
+        'spamex.com', 'spamfree24.com', 'spamfree24.de', 'spamfree24.eu',
+        'spamfree24.net', 'spamfree24.org', 'spamgourmet.net', 'spamherelots.com',
+        'spamhereplease.com', 'spamobox.com', 'spamoff.de', 'spamspot.com',
+        'spamstack.net', 'superrito.com', 'teleworm.com', 'tempalias.com',
+        'tempemail.com', 'tempemail.net', 'tempinbox.com', 'tempmail.de',
+        'tempmail.eu', 'tempmail.it', 'tempmail.net', 'tempmail.org',
+        'tempmail24.com', 'temporaryemail.net', 'temporaryinbox.com',
+        'thankyou2010.com', 'thisisnotmyrealemail.com', 'trash-mail.com',
+        'trash2009.com', 'trashdevil.com', 'trashmail.at', 'trashmail.me',
+        'trashymail.com', 'turual.com', 'twinmail.de', 'uggsrock.com',
+        'wegwerfmail.de', 'wegwerfmail.net', 'wegwerfmail.org', 'whyspam.me',
+        'willselfdestruct.com', 'winemaven.com', 'wronghead.com', 'wuzup.net',
+        'xemaps.com', 'xents.com', 'xmaily.com', 'xoxy.net', 'yep.it',
+        'yogamaven.com', 'yomail.info', 'yopmail.fr', 'yopmail.net',
+        'yuurok.com', 'z1p.biz', 'zepp.dk', 'zoemail.net'
+    ];
+    
+    if (in_array($domain, $disposableDomains, true)) {
+        return ['valid' => false, 'message' => 'Temporary/disposable email addresses are not allowed. Please use a real email address.'];
+    }
+    
+    // Block common fake patterns
+    $fakePatterns = [
+        '/^test@/', '/^fake@/', '/^dummy@/', '/^spam@/', '/^trash@/',
+        '/^noreply@/', '/^no[-_]reply@/', '/^donotreply@/', '/^admin@/',
+        '/^info@/', '/^support@/', '/^sales@/', '/^contact@/',
+        '/^example@/', '/^user@/', '/^demo@/', '/^sample@/',
+        '/@example\.(com|org|net)$/', '/@test\.(com|org|net)$/',
+        '/@localhost/', '/@local/', '/@invalid/'
+    ];
+    
+    foreach ($fakePatterns as $pattern) {
+        if (preg_match($pattern, $email)) {
+            return ['valid' => false, 'message' => 'Please use a real personal email address.'];
+        }
+    }
+    
+    // Optional: Check MX record exists (can be slow, disable if needed)
+    // if (!checkdnsrr($domain, 'MX') && !checkdnsrr($domain, 'A')) {
+    //     return ['valid' => false, 'message' => 'Email domain does not exist.'];
+    // }
+    
+    return ['valid' => true, 'message' => ''];
+}
+
 // ── Slug generator ─────────────────────────────────────────
 function makeSlug(string $text): string {
     $text = strtolower(trim($text));

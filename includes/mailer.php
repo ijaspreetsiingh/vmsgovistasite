@@ -155,6 +155,7 @@ function respondRedirectThen(string $url, callable $background): void {
 // ── Public entry point ────────────────────────────────────────
 function sendMail(string $to, string $subject, string $htmlBody, string $plainText = ''): array {
     if (!mailIsEnabled()) {
+        error_log('VMS sendMail: Email notifications are disabled in settings (to: ' . $to . ')');
         return ['success' => false, 'message' => 'Email notifications are disabled in settings.'];
     }
 
@@ -165,7 +166,10 @@ function sendMail(string $to, string $subject, string $htmlBody, string $plainTe
     $fromName  = getSetting('smtp_from_name', SITE_NAME);
     $host      = trim(getSetting('smtp_host', ''));
 
+    error_log('VMS sendMail: to=' . $to . ', host=' . $host . ', from=' . $fromEmail . ', mail_enabled=' . (mailIsEnabled() ? '1' : '0'));
+
     if ($host === '') {
+        error_log('VMS sendMail: No SMTP host configured, falling back to PHP mail()');
         return sendMailNative($to, $subject, $htmlBody, $plainText, $fromEmail, $fromName);
     }
 
@@ -179,7 +183,9 @@ function sendMail(string $to, string $subject, string $htmlBody, string $plainTe
         'fromName'   => $fromName,
     ]);
 
-    return $mailer->send($to, $subject, $htmlBody, $plainText);
+    $result = $mailer->send($to, $subject, $htmlBody, $plainText);
+    error_log('VMS sendMail result: ' . json_encode($result));
+    return $result;
 }
 
 // ── High-level notification helpers ──────────────────────────
