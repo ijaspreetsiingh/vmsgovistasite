@@ -11,6 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $id     = (int)($_POST['id'] ?? 0);
 
+    if ($action === 'bulk_delete') {
+        $ids = array_filter(array_map('intval', $_POST['ids'] ?? []));
+        if (!empty($ids)) {
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $db->prepare("DELETE FROM contacts WHERE id IN ($placeholders)")->execute($ids);
+            setFlash('success', count($ids) . ' message(s) deleted.');
+        } else {
+            setFlash('error', 'No messages selected.');
+        }
+        redirect(SITE_URL . '/admin/contacts.php');
+    }
+
     if ($id) {
         if ($action === 'mark_read') {
             $db->prepare("UPDATE contacts SET status='read' WHERE id=?")->execute([$id]);
@@ -84,9 +96,22 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
 </div>
 
 <div class="card-box p-0">
+
+<!-- ===== BULK DELETE BAR ===== -->
+<div id="bulkBar" style="display:none;padding:10px 16px;background:#fef3f2;border-bottom:1px solid #fecdca;display:flex;align-items:center;justify-content:space-between;">
+  <span style="font-size:13px;font-weight:600;color:#b42318;"><i class="fa-solid fa-trash-can"></i> <span id="bulkCount">0</span> message(s) selected</span>
+  <form method="POST" id="bulkForm" onsubmit="return confirm('Delete selected messages permanently?')">
+    <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+    <input type="hidden" name="action" value="bulk_delete">
+    <div id="bulkIds"></div>
+    <button type="submit" style="background:#b42318;color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;"><i class="fa-solid fa-trash-can"></i> Delete Selected</button>
+  </form>
+</div>
+
 <table class="admin-table">
   <thead>
     <tr>
+      <th style="width:40px;text-align:center;"><input type="checkbox" id="selectAll" style="cursor:pointer;" title="Select all"></th>
       <th>Name / Email</th>
       <th>Company</th>
       <th>Message</th>
@@ -98,6 +123,7 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
   <tbody>
   <?php foreach ($contacts as $c): ?>
     <tr>
+      <td style="text-align:center;"><input type="checkbox" class="row-cb" value="<?= $c['id'] ?>" style="cursor:pointer;"></td>
       <td class="cell-title">
         <?= e($c['name']) ?>
         <div style="font-size:11px;font-weight:400;color:var(--adm-text-muted);"><?= e($c['email']) ?></div>
@@ -143,7 +169,7 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
     </tr>
   <?php endforeach; ?>
   <?php if (empty($contacts)): ?>
-    <tr><td colspan="6" style="text-align:center;padding:48px;color:var(--adm-text-muted);font-size:14px;">
+    <tr><td colspan="7" style="text-align:center;padding:48px;color:var(--adm-text-muted);font-size:14px;">
       <div style="font-size:40px;margin-bottom:12px;opacity:0.3;"><i class="fa-solid fa-envelope-open-text"></i></div>
       No contact messages yet. Submissions from the website <strong>/contact</strong> form will appear here.
     </td></tr>
@@ -178,6 +204,39 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
 </div>
 
 <script>
+// ── Bulk Select / Delete ──
+(function() {
+  const selectAll = document.getElementById('selectAll');
+  const rowCbs = document.querySelectorAll('.row-cb');
+  const bulkBar = document.getElementById('bulkBar');
+  const bulkCount = document.getElementById('bulkCount');
+  const bulkIds = document.getElementById('bulkIds');
+
+  function updateBulk() {
+    const checked = document.querySelectorAll('.row-cb:checked');
+    const count = checked.length;
+    bulkBar.style.display = count > 0 ? 'flex' : 'none';
+    bulkCount.textContent = count;
+    bulkIds.innerHTML = '';
+    checked.forEach(cb => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'ids[]';
+      input.value = cb.value;
+      bulkIds.appendChild(input);
+    });
+    selectAll.checked = count === rowCbs.length && count > 0;
+    selectAll.indeterminate = count > 0 && count < rowCbs.length;
+  }
+
+  selectAll.addEventListener('change', function() {
+    rowCbs.forEach(cb => { cb.checked = selectAll.checked; });
+    updateBulk();
+  });
+
+  rowCbs.forEach(cb => { cb.addEventListener('change', updateBulk); });
+})();
+
 const contactData = <?= json_encode($contacts) ?>;
 function openContact(id) {
   const c = contactData.find(x => parseInt(x.id) === id);
