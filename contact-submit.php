@@ -19,6 +19,38 @@ if (!empty($_POST['hp_confirm'] ?? '')) {
     exit('Thank you! Your message has been sent. Our team will get back to you within 24 hours.');
 }
 
+// ── reCAPTCHA verification ──
+$recaptchaResponse = $_POST['g-recaptcha-response'] ?? '';
+if (empty($recaptchaResponse)) {
+    http_response_code(422);
+    exit('Please complete the CAPTCHA verification.');
+}
+
+$recaptchaSecret = '6LdDfJktAAAAADuUz7LbLtueqmfLPLdWwkZyRmr6'; // Google reCAPTCHA v2 Secret Key
+$recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
+$recaptchaData = http_build_query([
+    'secret'   => $recaptchaSecret,
+    'response' => $recaptchaResponse,
+    'remoteip' => $_SERVER['REMOTE_ADDR'] ?? '',
+]);
+
+$recaptchaOpts = ['http' => ['method' => 'POST', 'header' => "Content-Type: application/x-www-form-urlencoded\r\n", 'content' => $recaptchaData]];
+$recaptchaContext = stream_context_create($recaptchaOpts);
+$recaptchaResult = @file_get_contents($recaptchaUrl, false, $recaptchaContext);
+
+if ($recaptchaResult !== false) {
+    $recaptchaJson = json_decode($recaptchaResult, true);
+    if (empty($recaptchaJson['success'])) {
+        error_log('VMS contact: reCAPTCHA failed from ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown') . ' — score: ' . ($recaptchaJson['score'] ?? 'N/A'));
+        http_response_code(422);
+        exit('CAPTCHA verification failed. Please try again.');
+    }
+} else {
+    error_log('VMS contact: reCAPTCHA verification request failed');
+    http_response_code(500);
+    exit('Could not verify CAPTCHA. Please try again or email us directly.');
+}
+
 // ── Rate limiting: 3 submissions per 15 minutes per IP ──
 $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $rateKey = 'contact_ratelimit_' . md5($ip);
