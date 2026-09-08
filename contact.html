@@ -564,7 +564,7 @@
             .vms-big-text { font-size: clamp(20px, 4.5vw, 32px) !important; bottom: 20px !important; }
         }
     </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.min.js"></script>
+
     <script>
     // Suppress third-party extension errors (Datadog RUM, etc.)
     window.addEventListener('error', function(e) {
@@ -576,7 +576,7 @@
     </script>
 </head>
 
-<body class="home-bg" data-turbo-cache="false">
+<body class="home-bg">
 
     <!-- ===== CORPORATE LOADER (fast — never blocks the page) ===== -->
     <div class="vms-preloader" id="vmsPreloader">
@@ -1110,7 +1110,7 @@
     <script defer src="assets/js/main.js"></script>
 
     <script>
-document.addEventListener('turbo:load',function(){
+document.addEventListener('DOMContentLoaded',function(){
     document.body.classList.add('loaded');
     if(typeof WOW!=='undefined'){new WOW().init();}
 });
