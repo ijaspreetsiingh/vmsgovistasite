@@ -32,9 +32,23 @@
         if (state === 'success') submitBtn.addClass('success');
     }
 
+    // ── reCAPTCHA validation helper ──────────────────────
+    function isRecaptchaValid() {
+        if (typeof grecaptcha === 'undefined') return false;
+        var response = grecaptcha.getResponse();
+        return response && response.length > 0;
+    }
+
     $(form).submit(function (e) {
         // Stop the browser from submitting the form.
         e.preventDefault();
+
+        // ── Block if reCAPTCHA not solved ──
+        if (!isRecaptchaValid()) {
+            $('#recaptcha-error').show();
+            return false;
+        }
+        $('#recaptcha-error').hide();
 
         // Serialize the form data.
         var formData = $(form).serialize();
@@ -49,6 +63,9 @@
             })
             .done(function (response) {
                 setButtonState('success');
+
+                // Reset reCAPTCHA
+                if (typeof grecaptcha !== 'undefined') { try { grecaptcha.reset(); } catch(e) {} }
 
                 // Make sure that the formMessages div has the 'success' class.
                 $(formMessages).removeClass('error');

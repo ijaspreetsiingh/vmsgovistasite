@@ -122,6 +122,18 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
 <input type="hidden" name="action" value="bulk_delete">
 
 <div class="card-box p-0">
+
+<!-- ===== BULK DELETE BAR ===== -->
+<div id="bulkBar" style="display:none;padding:10px 16px;background:#fef3f2;border-bottom:1px solid #fecdca;display:flex;align-items:center;justify-content:space-between;">
+  <span style="font-size:13px;font-weight:600;color:#b42318;"><i class="fa-solid fa-trash-can"></i> <span id="bulkCount">0</span> message(s) selected</span>
+  <form method="POST" id="bulkForm" onsubmit="return confirm('Delete selected messages permanently?')">
+    <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+    <input type="hidden" name="action" value="bulk_delete">
+    <div id="bulkIds"></div>
+    <button type="submit" style="background:#b42318;color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;"><i class="fa-solid fa-trash-can"></i> Delete Selected</button>
+  </form>
+</div>
+
 <table class="admin-table">
   <thead>
     <tr>
@@ -226,6 +238,39 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
 </div>
 
 <script>
+// ── Bulk Select / Delete ──
+(function() {
+  const selectAll = document.getElementById('selectAll');
+  const rowCbs = document.querySelectorAll('.row-cb');
+  const bulkBar = document.getElementById('bulkBar');
+  const bulkCount = document.getElementById('bulkCount');
+  const bulkIds = document.getElementById('bulkIds');
+
+  function updateBulk() {
+    const checked = document.querySelectorAll('.row-cb:checked');
+    const count = checked.length;
+    bulkBar.style.display = count > 0 ? 'flex' : 'none';
+    bulkCount.textContent = count;
+    bulkIds.innerHTML = '';
+    checked.forEach(cb => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'ids[]';
+      input.value = cb.value;
+      bulkIds.appendChild(input);
+    });
+    selectAll.checked = count === rowCbs.length && count > 0;
+    selectAll.indeterminate = count > 0 && count < rowCbs.length;
+  }
+
+  selectAll.addEventListener('change', function() {
+    rowCbs.forEach(cb => { cb.checked = selectAll.checked; });
+    updateBulk();
+  });
+
+  rowCbs.forEach(cb => { cb.addEventListener('change', updateBulk); });
+})();
+
 const contactData = <?= json_encode($contacts) ?>;
 function openContact(id) {
   const c = contactData.find(x => parseInt(x.id) === id);
