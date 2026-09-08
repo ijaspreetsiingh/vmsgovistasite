@@ -11,6 +11,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     $id     = (int)($_POST['id'] ?? 0);
 
+    // Delete ALL contacts
+    if ($action === 'delete_all') {
+        $db->exec("DELETE FROM contacts");
+        setFlash('success', 'All contact messages have been permanently deleted.');
+        redirect(SITE_URL . '/admin/contacts.php');
+    }
+
+    // Bulk delete
+    if ($action === 'bulk_delete' && isset($_POST['selected'])) {
+        $ids = array_map('intval', $_POST['selected']);
+        if ($ids) {
+            $phs = implode(',', array_fill(0, count($ids), '?'));
+            $db->prepare("DELETE FROM contacts WHERE id IN ($phs)")->execute($ids);
+            setFlash('success', count($ids) . ' message(s) deleted.');
+        }
+        redirect(SITE_URL . '/admin/contacts.php');
+    }
+
     if ($id) {
         if ($action === 'mark_read') {
             $db->prepare("UPDATE contacts SET status='read' WHERE id=?")->execute([$id]);
@@ -80,13 +98,34 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
     <a href="<?= SITE_URL ?>/admin/contacts.php" class="btn-ghost-admin" style="font-size:12px;">Clear</a>
     <?php endif; ?>
   </form>
-  <span class="liquid-pill"><i class="fa-solid fa-inbox me-1"></i> <?= $total ?> messages</span>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span class="liquid-pill"><i class="fa-solid fa-inbox me-1"></i> <?= $total ?> messages</span>
+    <?php if ($total > 0): ?>
+    <button type="button"
+      onclick="confirmDeleteAll()"
+      style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;font-size:12px;font-weight:600;background:#b42318;color:#fff;border:1px solid #b42318;border-radius:8px;cursor:pointer;white-space:nowrap;">
+      <i class="fa-solid fa-trash-can"></i> Delete All
+    </button>
+    <?php endif; ?>
+  </div>
 </div>
+
+<!-- Hidden Delete All form -->
+<form id="deleteAllForm" method="POST" style="display:none;">
+  <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+  <input type="hidden" name="action" value="delete_all">
+</form>
+
+<!-- Bulk actions form -->
+<form method="POST" id="bulkForm">
+<input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+<input type="hidden" name="action" value="bulk_delete">
 
 <div class="card-box p-0">
 <table class="admin-table">
   <thead>
     <tr>
+      <th width="30"><input type="checkbox" id="selectAll" style="accent-color:#2563eb;"></th>
       <th>Name / Email</th>
       <th>Company</th>
       <th>Message</th>
@@ -98,6 +137,7 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
   <tbody>
   <?php foreach ($contacts as $c): ?>
     <tr>
+      <td><input type="checkbox" name="selected[]" value="<?= $c['id'] ?>" class="row-check" style="accent-color:#2563eb;"></td>
       <td class="cell-title">
         <?= e($c['name']) ?>
         <div style="font-size:11px;font-weight:400;color:var(--adm-text-muted);"><?= e($c['email']) ?></div>
@@ -143,7 +183,7 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
     </tr>
   <?php endforeach; ?>
   <?php if (empty($contacts)): ?>
-    <tr><td colspan="6" style="text-align:center;padding:48px;color:var(--adm-text-muted);font-size:14px;">
+    <tr><td colspan="7" style="text-align:center;padding:48px;color:var(--adm-text-muted);font-size:14px;">
       <div style="font-size:40px;margin-bottom:12px;opacity:0.3;"><i class="fa-solid fa-envelope-open-text"></i></div>
       No contact messages yet. Submissions from the website <strong>/contact</strong> form will appear here.
     </td></tr>
@@ -151,6 +191,14 @@ $contacts = fetchAll("SELECT * FROM contacts $whereSQL ORDER BY created_at DESC 
   </tbody>
 </table>
 </div>
+
+<?php if (!empty($contacts)): ?>
+<div style="display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 16px;background:#f9fafb;border:1px solid var(--adm-border);border-radius:10px;">
+  <span style="font-size:13px;font-weight:600;color:var(--adm-text);" id="selCount">0 selected</span>
+  <button type="submit" class="btn-secondary-admin" style="font-size:12px;padding:6px 14px;background:#b42318;color:#fff;border-color:#b42318;" onclick="return confirm('Delete selected messages permanently?')"><i class="fa-solid fa-trash-can"></i> Delete Selected</button>
+</div>
+<?php endif; ?>
+</form>
 
 <?php if ($lastPage > 1): ?>
 <div class="admin-pagination">
@@ -182,7 +230,7 @@ const contactData = <?= json_encode($contacts) ?>;
 function openContact(id) {
   const c = contactData.find(x => parseInt(x.id) === id);
   if (!c) return;
-  const esc = s => (s === null || s === undefined) ? '—' : String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const esc = s => (s === null || s === undefined) ? '—' : String(s).replace(/[&<>"']/g, m => ({'&':'&','<':'<','>':'>','"':'"',"'":'''}[m]));
   document.getElementById('contactModalBody').innerHTML = `
     <dl style="margin:0;font-size:13px;">
       <dt style="color:#667085;font-weight:600;margin-top:12px;">Name</dt><dd style="margin:4px 0 0;">${esc(c.name)}</dd>
@@ -195,12 +243,64 @@ function openContact(id) {
     </dl>
     <div style="display:flex;gap:8px;margin-top:20px;justify-content:flex-end;">
       <a href="mailto:${esc(c.email)}" class="btn-primary-admin" style="padding:8px 16px;text-decoration:none;"><i class="fa-solid fa-reply"></i> Reply</a>
+      <button onclick="deleteFromModal(${parseInt(c.id)})" class="btn-secondary-admin" style="padding:8px 16px;background:#b42318;color:#fff;border-color:#b42318;"><i class="fa-solid fa-trash-can"></i> Delete</button>
       <button onclick="closeContact()" class="btn-secondary-admin" style="padding:8px 16px;">Close</button>
     </div>`;
   document.getElementById('contactModal').style.display = 'flex';
 }
 function closeContact() {
   document.getElementById('contactModal').style.display = 'none';
+}
+
+function deleteFromModal(id) {
+  if (!confirm('Delete this message permanently?')) return;
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.innerHTML = `
+    <input type="hidden" name="csrf_token" value="<?= csrfToken() ?>">
+    <input type="hidden" name="action" value="delete">
+    <input type="hidden" name="id" value="${id}">`;
+  document.body.appendChild(form);
+  form.submit();
+}
+
+// Bulk select all
+document.getElementById('selectAll')?.addEventListener('change', function() {
+  document.querySelectorAll('.row-check').forEach(c => c.checked = this.checked); updateCount();
+});
+document.querySelectorAll('.row-check').forEach(c => c.addEventListener('change', updateCount));
+function updateCount() {
+  document.getElementById('selCount').textContent = document.querySelectorAll('.row-check:checked').length + ' selected';
+}
+
+// Delete All confirmation
+function confirmDeleteAll() {
+  // Custom confirm modal
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.innerHTML = `
+    <div style="background:#fff;border-radius:14px;padding:28px 28px 24px;max-width:420px;width:100%;box-shadow:0 16px 48px rgba(16,24,40,.25);text-align:center;">
+      <div style="width:56px;height:56px;background:#fef3f2;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size:24px;color:#b42318;"></i>
+      </div>
+      <h3 style="margin:0 0 8px;font-size:17px;font-weight:700;color:#101828;">Delete All Messages?</h3>
+      <p style="margin:0 0 24px;font-size:13px;color:#667085;line-height:1.6;">
+        This will permanently delete <strong>all <?= $total ?> contact message(s)</strong> from the database.<br>
+        <span style="color:#b42318;font-weight:600;">This action cannot be undone.</span>
+      </p>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        <button onclick="this.closest('div[style*=fixed]').remove()"
+          style="flex:1;max-width:140px;padding:10px 18px;font-size:13px;font-weight:600;background:#fff;color:#344054;border:1px solid #d0d5dd;border-radius:8px;cursor:pointer;">
+          Cancel
+        </button>
+        <button onclick="document.getElementById('deleteAllForm').submit()"
+          style="flex:1;max-width:140px;padding:10px 18px;font-size:13px;font-weight:600;background:#b42318;color:#fff;border:1px solid #b42318;border-radius:8px;cursor:pointer;">
+          <i class="fa-solid fa-trash-can"></i> Yes, Delete All
+        </button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
 }
 </script>
 

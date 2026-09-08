@@ -59,6 +59,9 @@
 
                 // Clear the form.
                 $('#name, #email, #company, #website, #message').val('');
+                // Reset CAPTCHA after successful submit
+                if (typeof newCaptcha === 'function') { newCaptcha(); }
+                $('#captcha_input').val('');
 
                 // Let the checkmark pop finish, then throw the party.
                 setTimeout(function () {
@@ -68,6 +71,10 @@
             .fail(function (data) {
                 // Reset the button so the user can try again.
                 setButtonState('idle');
+
+                // Refresh CAPTCHA on any failure so bots can't replay the same answer
+                if (typeof newCaptcha === 'function') { newCaptcha(); }
+                $('#captcha_input').val('');
 
                 // Make sure that the formMessages div has the 'error' class.
                 $(formMessages).removeClass('success');

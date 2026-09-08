@@ -671,24 +671,65 @@
                         <div class="left">
                             <div class="single-input-wrapper">
                                 <label for="name">Full Name*</label>
-                                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                                <input type="text" id="name" name="name" placeholder="Enter your full name" required autocomplete="name">
                             </div>
                             <div class="single-input-wrapper">
                                 <label for="email">Email*</label>
-                                <input type="email" id="email" name="email" placeholder="Your email address" required>
+                                <input type="email" id="email" name="email" placeholder="Your email address" required autocomplete="email">
                             </div>
                             <div class="single-input-wrapper">
                                 <label for="company">Company</label>
-                                <input type="text" id="company" name="company" placeholder="Your company name">
+                                <input type="text" id="company" name="company" placeholder="Your company name" autocomplete="organization">
                             </div>
                             <div class="single-input-wrapper">
                                 <label for="website">Website</label>
-                                <input type="text" id="website" name="website" placeholder="Your website">
+                                <input type="text" id="website" name="website" placeholder="Your website" autocomplete="url">
                             </div>
-                            <!-- Honeypot field (hidden from humans, filled by bots) -->
-                            <div class="single-input-wrapper hp-field" style="display:none !important; position:absolute; left:-9999px; opacity:0; visibility:hidden; height:0; pointer-events:none;" aria-hidden="true">
+
+                            <!-- ═══ HONEYPOT #1 — classic hidden field ═══ -->
+                            <div style="display:none !important;position:absolute;left:-9999px;opacity:0;visibility:hidden;height:0;pointer-events:none;" aria-hidden="true">
                                 <label for="hp_confirm">Leave this empty</label>
                                 <input type="text" id="hp_confirm" name="hp_confirm" tabindex="-1" autocomplete="off">
+                            </div>
+                            <!-- ═══ HONEYPOT #2 — attractive field name that bots love ═══ -->
+                            <div style="display:none !important;position:absolute;left:-9999px;opacity:0;visibility:hidden;height:0;pointer-events:none;" aria-hidden="true">
+                                <label for="phone_number">Phone</label>
+                                <input type="text" id="phone_number" name="phone_number" tabindex="-1" autocomplete="off">
+                            </div>
+                            <!-- ═══ HONEYPOT #3 — url/link field bots often fill ═══ -->
+                            <div style="display:none !important;position:absolute;left:-9999px;opacity:0;visibility:hidden;height:0;pointer-events:none;" aria-hidden="true">
+                                <label for="url_field">URL</label>
+                                <input type="text" id="url_field" name="url_field" tabindex="-1" autocomplete="off">
+                            </div>
+
+                            <!-- ═══ JS TOKEN — only set by JavaScript, bots without JS can't fill ═══ -->
+                            <input type="hidden" name="js_token" id="js_token" value="">
+                            <!-- ═══ TIME TOKEN — page load timestamp, server checks min 4s ═══ -->
+                            <input type="hidden" name="form_time" id="form_time" value="">
+                            <!-- ═══ MATH CAPTCHA answer ═══ -->
+                            <input type="hidden" name="captcha_answer" id="captcha_answer" value="">
+
+                            <!-- ═══ VISIBLE MATH CAPTCHA ═══ -->
+                            <div class="single-input-wrapper" id="captchaWrapper" style="margin-top:4px;">
+                                <label for="captcha_input" style="display:flex;align-items:center;gap:8px;">
+                                    <i class="fa-solid fa-shield-halved" style="color:#003A59;font-size:13px;"></i>
+                                    Human Verification*
+                                </label>
+                                <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                                    <div id="captchaQuestion" style="background:rgba(0,58,89,0.06);border:1px solid rgba(0,58,89,0.15);border-radius:10px;padding:10px 18px;font-size:16px;font-weight:700;color:#003A59;letter-spacing:1px;min-width:130px;text-align:center;user-select:none;"></div>
+                                    <span style="font-size:18px;font-weight:700;color:#003A59;">=</span>
+                                    <input type="number" id="captcha_input" name="captcha_input" placeholder="?" required
+                                        style="width:80px;text-align:center;font-size:18px;font-weight:700;"
+                                        autocomplete="off" inputmode="numeric" min="0" max="99">
+                                    <button type="button" onclick="newCaptcha()" title="New question"
+                                        style="background:none;border:1px solid rgba(0,58,89,0.2);border-radius:8px;padding:8px 10px;cursor:pointer;color:#003A59;font-size:13px;transition:background .2s;"
+                                        onmouseover="this.style.background='rgba(0,58,89,0.08)'" onmouseout="this.style.background='none'">
+                                        <i class="fa-solid fa-rotate"></i>
+                                    </button>
+                                </div>
+                                <div id="captchaError" style="display:none;color:#b42318;font-size:12px;margin-top:6px;font-weight:600;">
+                                    <i class="fa-solid fa-circle-exclamation"></i> Wrong answer. Please try again.
+                                </div>
                             </div>
                         </div>
                         <div class="right">
@@ -1132,6 +1173,99 @@ document.addEventListener('turbo:load',function(){
 </script>
 
 <script src="assets/js/page-transition.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  VMS ANTI-BOT SYSTEM — Math CAPTCHA + JS Token + Time Gate
+// ═══════════════════════════════════════════════════════════
+
+// 1. Math CAPTCHA
+var _captchaA = 0, _captchaB = 0, _captchaOp = '+', _captchaResult = 0;
+
+function newCaptcha() {
+    _captchaA = Math.floor(Math.random() * 15) + 1;
+    _captchaB = Math.floor(Math.random() * 15) + 1;
+    // randomly pick + or *
+    _captchaOp = Math.random() > 0.5 ? '+' : '-';
+    if (_captchaOp === '-' && _captchaB > _captchaA) {
+        var tmp = _captchaA; _captchaA = _captchaB; _captchaB = tmp;
+    }
+    _captchaResult = _captchaOp === '+' ? _captchaA + _captchaB : _captchaA - _captchaB;
+
+    var words = ['What is', 'Solve:', 'Calculate:', 'Answer:'];
+    var w = words[Math.floor(Math.random() * words.length)];
+    document.getElementById('captchaQuestion').textContent = w + ' ' + _captchaA + ' ' + _captchaOp + ' ' + _captchaB;
+    document.getElementById('captcha_answer').value = _captchaResult;
+    document.getElementById('captcha_input').value = '';
+    document.getElementById('captchaError').style.display = 'none';
+}
+
+// 2. JS Token — proves JavaScript ran (bots without JS can't set this)
+function generateJsToken() {
+    var ts = Date.now().toString(36);
+    var rand = Math.random().toString(36).substring(2, 10);
+    // simple obfuscation: reverse + XOR marker
+    var raw = ts + '_' + rand + '_vms';
+    return btoa(raw);
+}
+
+// 3. Time gate — record when page loaded
+var _pageLoadTime = Date.now();
+
+// Init on DOM ready
+document.addEventListener('DOMContentLoaded', function () {
+    // Set JS token
+    document.getElementById('js_token').value = generateJsToken();
+    // Set page-load timestamp
+    document.getElementById('form_time').value = Math.floor(_pageLoadTime / 1000);
+    // Generate first CAPTCHA
+    newCaptcha();
+
+    // Form submit interception
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+        var userAns = parseInt(document.getElementById('captcha_input').value, 10);
+        if (isNaN(userAns) || userAns !== _captchaResult) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            document.getElementById('captchaError').style.display = 'block';
+            document.getElementById('captcha_input').focus();
+            // Refresh CAPTCHA so they get a new one
+            newCaptcha();
+            return false;
+        }
+        // Update hidden answer right before submit (double safety)
+        document.getElementById('captcha_answer').value = _captchaResult;
+        // Update time token
+        document.getElementById('form_time').value = Math.floor(_pageLoadTime / 1000);
+    });
+
+    // Hide CAPTCHA error when user starts typing
+    document.getElementById('captcha_input').addEventListener('input', function () {
+        document.getElementById('captchaError').style.display = 'none';
+    });
+});
+
+// Dark mode fix for captcha question box
+(function() {
+    var obs = new MutationObserver(function() {
+        var q = document.getElementById('captchaQuestion');
+        if (!q) return;
+        if (document.body.classList.contains('dark-mode')) {
+            q.style.background = 'rgba(255,255,255,0.07)';
+            q.style.borderColor = 'rgba(255,255,255,0.15)';
+            q.style.color = '#58a6ff';
+        } else {
+            q.style.background = 'rgba(0,58,89,0.06)';
+            q.style.borderColor = 'rgba(0,58,89,0.15)';
+            q.style.color = '#003A59';
+        }
+    });
+    obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+})();
+</script>
 </body>
 
 </html>
