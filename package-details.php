@@ -42,21 +42,21 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
     <meta property="og:site_name" content="VMS Go Vista">
     <meta name="twitter:card" content="summary_large_image">
     <base href="<?= rtrim(SITE_URL, '/') ?>/">
-    <link rel="stylesheet preload" href="assets/css/plugins/swiper.min.css" as="style">
-    <link rel="stylesheet preload" href="assets/fonts/custom-font.css" as="style">
+    <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
+    <link rel="stylesheet" href="assets/fonts/custom-font.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet preload" href="assets/css/plugins/magnific-popup.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/plugins/metismenu.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/vendor/bootstrap.min.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/vendor/animate.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/plugins/odometer.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/plugins/fontawesome.min.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/plugins/nice-select.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/style.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/bromo-theme.css" as="style">
-    <link rel="stylesheet preload" href="assets/css/plugins/aos.css" as="style">
+    <link rel="stylesheet" href="assets/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/plugins/metismenu.css">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/animate.css">
+    <link rel="stylesheet" href="assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=3.0">
+    <link rel="stylesheet" href="assets/css/bromo-theme.css?v=3.0">
+    <link rel="stylesheet" href="assets/css/plugins/aos.css">
     <link rel="preload" href="assets/hero4.webp" as="image">
     <style>
         /* Page-specific overrides */

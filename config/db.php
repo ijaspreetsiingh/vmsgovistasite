@@ -16,7 +16,7 @@ define('DB_CHARSET', 'utf8mb4');
 // ============================================================
 
 // Production domain
-$siteUrl = $_ENV['SITE_URL'] ?? getenv('SITE_URL') ?: 'https://vmsgovista.com';
+$siteUrl = $_ENV['SITE_URL'] ?? getenv('SITE_URL') ?: 'https://www.vmsgovista.com';
 
 define('SITE_URL', rtrim($siteUrl, '/'));
 
