@@ -41,7 +41,7 @@ function pkgField(array $pkg, string $key, string $fallback = ''): string {
     <meta property="og:url" content="https://vmsgovista.com/package-details/<?= $pkg ? e($pkg['slug']) : '' ?>">
     <meta property="og:site_name" content="VMS Go Vista">
     <meta name="twitter:card" content="summary_large_image">
-    <base href="<?= rtrim(SITE_URL, '/') ?>/">
+    <base href="/">
     <link rel="stylesheet" href="assets/css/plugins/swiper.min.css">
     <link rel="stylesheet" href="assets/fonts/custom-font.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
